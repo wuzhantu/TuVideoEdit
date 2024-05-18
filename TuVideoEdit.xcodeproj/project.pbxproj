@@ -39,7 +39,6 @@
 		43BEBE402BDFE75F00B3123E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BEBE3F2BDFE75F00B3123E /* AVFoundation.framework */; };
 		43BEBE422BDFE81700B3123E /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BEBE412BDFE81600B3123E /* CoreMotion.framework */; };
 		43BEBE442BDFE82300B3123E /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BEBE432BDFE82300B3123E /* GameController.framework */; };
-		43BEBE472BDFE9A400B3123E /* xiaolin.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = 43BEBE462BDFE9A400B3123E /* xiaolin.MP4 */; };
 		43BEBE4B2BDFEDAE00B3123E /* EditViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43BEBE4A2BDFEDAE00B3123E /* EditViewController.mm */; };
 		43BEBE4E2BDFF0EC00B3123E /* ThumbCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43BEBE4D2BDFF0EC00B3123E /* ThumbCell.mm */; };
 		43BEBE512BDFFF0F00B3123E /* DisplayView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43BEBE502BDFFF0F00B3123E /* DisplayView.mm */; };
@@ -47,187 +46,6 @@
 		43BEBE552BDFFFB600B3123E /* display.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 43BEBE532BDFFFB600B3123E /* display.vsh */; };
 		43BEBFF82BE0DDFD00B3123E /* sticker.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 43BEBFF62BE0DDFD00B3123E /* sticker.vsh */; };
 		43BEBFF92BE0DDFD00B3123E /* sticker.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 43BEBFF72BE0DDFD00B3123E /* sticker.fsh */; };
-		43BEC04C2BE0E16C00B3123E /* tiger_0075.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEBFFB2BE0E16C00B3123E /* tiger_0075.png */; };
-		43BEC04D2BE0E16C00B3123E /* tiger_0061.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEBFFC2BE0E16C00B3123E /* tiger_0061.png */; };
-		43BEC04E2BE0E16C00B3123E /* tiger_0049.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEBFFD2BE0E16C00B3123E /* tiger_0049.png */; };
-		43BEC04F2BE0E16C00B3123E /* tiger_0048.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEBFFE2BE0E16C00B3123E /* tiger_0048.png */; };
-		43BEC0502BE0E16C00B3123E /* tiger_0060.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEBFFF2BE0E16C00B3123E /* tiger_0060.png */; };
-		43BEC0512BE0E16C00B3123E /* tiger_0074.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0002BE0E16C00B3123E /* tiger_0074.png */; };
-		43BEC0522BE0E16C00B3123E /* tiger_0062.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0012BE0E16C00B3123E /* tiger_0062.png */; };
-		43BEC0532BE0E16C00B3123E /* tiger_0076.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0022BE0E16C00B3123E /* tiger_0076.png */; };
-		43BEC0542BE0E16C00B3123E /* tiger_0077.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0032BE0E16C00B3123E /* tiger_0077.png */; };
-		43BEC0552BE0E16C00B3123E /* tiger_0063.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0042BE0E16C00B3123E /* tiger_0063.png */; };
-		43BEC0562BE0E16C00B3123E /* tiger_0067.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0052BE0E16C00B3123E /* tiger_0067.png */; };
-		43BEC0572BE0E16C00B3123E /* tiger_0073.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0062BE0E16C00B3123E /* tiger_0073.png */; };
-		43BEC0582BE0E16C00B3123E /* tiger_0072.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0072BE0E16C00B3123E /* tiger_0072.png */; };
-		43BEC0592BE0E16C00B3123E /* tiger_0066.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0082BE0E16C00B3123E /* tiger_0066.png */; };
-		43BEC05A2BE0E16C00B3123E /* tiger_0058.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0092BE0E16C00B3123E /* tiger_0058.png */; };
-		43BEC05B2BE0E16C00B3123E /* tiger_0070.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC00A2BE0E16C00B3123E /* tiger_0070.png */; };
-		43BEC05C2BE0E16C00B3123E /* tiger_0064.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC00B2BE0E16C00B3123E /* tiger_0064.png */; };
-		43BEC05D2BE0E16C00B3123E /* tiger_0065.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC00C2BE0E16C00B3123E /* tiger_0065.png */; };
-		43BEC05E2BE0E16C00B3123E /* tiger_0071.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC00D2BE0E16C00B3123E /* tiger_0071.png */; };
-		43BEC05F2BE0E16C00B3123E /* tiger_0059.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC00E2BE0E16C00B3123E /* tiger_0059.png */; };
-		43BEC0602BE0E16C00B3123E /* tiger_0016.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC00F2BE0E16C00B3123E /* tiger_0016.png */; };
-		43BEC0612BE0E16C00B3123E /* tiger_0002.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0102BE0E16C00B3123E /* tiger_0002.png */; };
-		43BEC0622BE0E16C00B3123E /* tiger_0003.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0112BE0E16C00B3123E /* tiger_0003.png */; };
-		43BEC0632BE0E16C00B3123E /* tiger_0017.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0122BE0E16C00B3123E /* tiger_0017.png */; };
-		43BEC0642BE0E16C00B3123E /* tiger_0001.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0132BE0E16C00B3123E /* tiger_0001.png */; };
-		43BEC0652BE0E16C00B3123E /* tiger_0015.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0142BE0E16C00B3123E /* tiger_0015.png */; };
-		43BEC0662BE0E16C00B3123E /* tiger_0029.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0152BE0E16C00B3123E /* tiger_0029.png */; };
-		43BEC0672BE0E16C00B3123E /* tiger_0028.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0162BE0E16C00B3123E /* tiger_0028.png */; };
-		43BEC0682BE0E16C00B3123E /* tiger_0014.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0172BE0E16C00B3123E /* tiger_0014.png */; };
-		43BEC0692BE0E16C00B3123E /* tiger_0038.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0182BE0E16C00B3123E /* tiger_0038.png */; };
-		43BEC06A2BE0E16C00B3123E /* tiger_0004.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0192BE0E16C00B3123E /* tiger_0004.png */; };
-		43BEC06B2BE0E16C00B3123E /* tiger_0010.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC01A2BE0E16C00B3123E /* tiger_0010.png */; };
-		43BEC06C2BE0E16C00B3123E /* tiger_0011.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC01B2BE0E16C00B3123E /* tiger_0011.png */; };
-		43BEC06D2BE0E16C00B3123E /* tiger_0005.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC01C2BE0E16C00B3123E /* tiger_0005.png */; };
-		43BEC06E2BE0E16C00B3123E /* tiger_0039.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC01D2BE0E16C00B3123E /* tiger_0039.png */; };
-		43BEC06F2BE0E16C00B3123E /* tiger_0013.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC01E2BE0E16C00B3123E /* tiger_0013.png */; };
-		43BEC0702BE0E16C00B3123E /* tiger_0007.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC01F2BE0E16C00B3123E /* tiger_0007.png */; };
-		43BEC0712BE0E16C00B3123E /* tiger_0006.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0202BE0E16C00B3123E /* tiger_0006.png */; };
-		43BEC0722BE0E16C00B3123E /* tiger_0012.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0212BE0E16C00B3123E /* tiger_0012.png */; };
-		43BEC0732BE0E16C00B3123E /* tiger_0037.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0222BE0E16C00B3123E /* tiger_0037.png */; };
-		43BEC0742BE0E16C00B3123E /* tiger_0023.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0232BE0E16C00B3123E /* tiger_0023.png */; };
-		43BEC0752BE0E16C00B3123E /* tiger_0022.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0242BE0E16C00B3123E /* tiger_0022.png */; };
-		43BEC0762BE0E16C00B3123E /* tiger_0036.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0252BE0E16C00B3123E /* tiger_0036.png */; };
-		43BEC0772BE0E16C00B3123E /* tiger_0020.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0262BE0E16C00B3123E /* tiger_0020.png */; };
-		43BEC0782BE0E16C00B3123E /* tiger_0034.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0272BE0E16C00B3123E /* tiger_0034.png */; };
-		43BEC0792BE0E16C00B3123E /* tiger_0008.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0282BE0E16C00B3123E /* tiger_0008.png */; };
-		43BEC07A2BE0E16C00B3123E /* tiger_0009.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0292BE0E16C00B3123E /* tiger_0009.png */; };
-		43BEC07B2BE0E16C00B3123E /* tiger_0035.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC02A2BE0E16C00B3123E /* tiger_0035.png */; };
-		43BEC07C2BE0E16C00B3123E /* tiger_0021.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC02B2BE0E16C00B3123E /* tiger_0021.png */; };
-		43BEC07D2BE0E16C00B3123E /* tiger_0019.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC02C2BE0E16C00B3123E /* tiger_0019.png */; };
-		43BEC07E2BE0E16C00B3123E /* tiger_0025.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC02D2BE0E16C00B3123E /* tiger_0025.png */; };
-		43BEC07F2BE0E16C00B3123E /* tiger_0031.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC02E2BE0E16C00B3123E /* tiger_0031.png */; };
-		43BEC0802BE0E16C00B3123E /* tiger_0030.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC02F2BE0E16C00B3123E /* tiger_0030.png */; };
-		43BEC0812BE0E16C00B3123E /* tiger_0024.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0302BE0E16C00B3123E /* tiger_0024.png */; };
-		43BEC0822BE0E16C00B3123E /* tiger_0018.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0312BE0E16C00B3123E /* tiger_0018.png */; };
-		43BEC0832BE0E16C00B3123E /* tiger_0032.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0322BE0E16C00B3123E /* tiger_0032.png */; };
-		43BEC0842BE0E16C00B3123E /* tiger_0026.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0332BE0E16C00B3123E /* tiger_0026.png */; };
-		43BEC0852BE0E16C00B3123E /* tiger_0027.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0342BE0E16C00B3123E /* tiger_0027.png */; };
-		43BEC0862BE0E16C00B3123E /* tiger_0033.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0352BE0E16C00B3123E /* tiger_0033.png */; };
-		43BEC0872BE0E16C00B3123E /* tiger_0054.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0362BE0E16C00B3123E /* tiger_0054.png */; };
-		43BEC0882BE0E16C00B3123E /* tiger_0040.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0372BE0E16C00B3123E /* tiger_0040.png */; };
-		43BEC0892BE0E16C00B3123E /* tiger_0068.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0382BE0E16C00B3123E /* tiger_0068.png */; };
-		43BEC08A2BE0E16C00B3123E /* tiger_0069.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0392BE0E16C00B3123E /* tiger_0069.png */; };
-		43BEC08B2BE0E16C00B3123E /* tiger_0041.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC03A2BE0E16C00B3123E /* tiger_0041.png */; };
-		43BEC08C2BE0E16C00B3123E /* tiger_0055.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC03B2BE0E16C00B3123E /* tiger_0055.png */; };
-		43BEC08D2BE0E16C00B3123E /* tiger_0080.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC03C2BE0E16C00B3123E /* tiger_0080.png */; };
-		43BEC08E2BE0E16C00B3123E /* tiger_0043.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC03D2BE0E16C00B3123E /* tiger_0043.png */; };
-		43BEC08F2BE0E16C00B3123E /* tiger_0057.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC03E2BE0E16C00B3123E /* tiger_0057.png */; };
-		43BEC0902BE0E16C00B3123E /* tiger_0056.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC03F2BE0E16C00B3123E /* tiger_0056.png */; };
-		43BEC0912BE0E16C00B3123E /* tiger_0042.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0402BE0E16C00B3123E /* tiger_0042.png */; };
-		43BEC0922BE0E16C00B3123E /* tiger_0081.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0412BE0E16C00B3123E /* tiger_0081.png */; };
-		43BEC0932BE0E16C00B3123E /* tiger_0046.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0422BE0E16C00B3123E /* tiger_0046.png */; };
-		43BEC0942BE0E16C00B3123E /* tiger_0052.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0432BE0E16C00B3123E /* tiger_0052.png */; };
-		43BEC0952BE0E16C00B3123E /* tiger_0053.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0442BE0E16C00B3123E /* tiger_0053.png */; };
-		43BEC0962BE0E16C00B3123E /* tiger_0047.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0452BE0E16C00B3123E /* tiger_0047.png */; };
-		43BEC0972BE0E16C00B3123E /* tiger_0079.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0462BE0E16C00B3123E /* tiger_0079.png */; };
-		43BEC0982BE0E16C00B3123E /* tiger_0051.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0472BE0E16C00B3123E /* tiger_0051.png */; };
-		43BEC0992BE0E16C00B3123E /* tiger_0045.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0482BE0E16C00B3123E /* tiger_0045.png */; };
-		43BEC09A2BE0E16C00B3123E /* tiger_0044.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0492BE0E16C00B3123E /* tiger_0044.png */; };
-		43BEC09B2BE0E16C00B3123E /* tiger_0050.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC04A2BE0E16C00B3123E /* tiger_0050.png */; };
-		43BEC09C2BE0E16C00B3123E /* tiger_0078.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC04B2BE0E16C00B3123E /* tiger_0078.png */; };
-		43BEC1022BE0E3A400B3123E /* airplane_0016.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC09E2BE0E3A400B3123E /* airplane_0016.png */; };
-		43BEC1032BE0E3A400B3123E /* airplane_0002.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC09F2BE0E3A400B3123E /* airplane_0002.png */; };
-		43BEC1042BE0E3A400B3123E /* airplane_0003.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0A02BE0E3A400B3123E /* airplane_0003.png */; };
-		43BEC1052BE0E3A400B3123E /* airplane_0017.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0A12BE0E3A400B3123E /* airplane_0017.png */; };
-		43BEC1062BE0E3A400B3123E /* airplane_0001.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0A22BE0E3A400B3123E /* airplane_0001.png */; };
-		43BEC1072BE0E3A400B3123E /* airplane_0015.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0A32BE0E3A400B3123E /* airplane_0015.png */; };
-		43BEC1082BE0E3A400B3123E /* airplane_0029.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0A42BE0E3A400B3123E /* airplane_0029.png */; };
-		43BEC1092BE0E3A400B3123E /* airplane_0028.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0A52BE0E3A400B3123E /* airplane_0028.png */; };
-		43BEC10A2BE0E3A400B3123E /* airplane_0014.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0A62BE0E3A400B3123E /* airplane_0014.png */; };
-		43BEC10B2BE0E3A400B3123E /* airplane_0038.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0A72BE0E3A400B3123E /* airplane_0038.png */; };
-		43BEC10C2BE0E3A400B3123E /* airplane_0004.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0A82BE0E3A400B3123E /* airplane_0004.png */; };
-		43BEC10D2BE0E3A400B3123E /* airplane_0010.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0A92BE0E3A400B3123E /* airplane_0010.png */; };
-		43BEC10E2BE0E3A400B3123E /* airplane_0011.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0AA2BE0E3A400B3123E /* airplane_0011.png */; };
-		43BEC10F2BE0E3A400B3123E /* airplane_0005.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0AB2BE0E3A400B3123E /* airplane_0005.png */; };
-		43BEC1102BE0E3A400B3123E /* airplane_0039.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0AC2BE0E3A400B3123E /* airplane_0039.png */; };
-		43BEC1112BE0E3A400B3123E /* airplane_0013.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0AD2BE0E3A400B3123E /* airplane_0013.png */; };
-		43BEC1122BE0E3A400B3123E /* airplane_0007.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0AE2BE0E3A400B3123E /* airplane_0007.png */; };
-		43BEC1132BE0E3A400B3123E /* airplane_0006.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0AF2BE0E3A400B3123E /* airplane_0006.png */; };
-		43BEC1142BE0E3A400B3123E /* airplane_0012.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0B02BE0E3A400B3123E /* airplane_0012.png */; };
-		43BEC1152BE0E3A400B3123E /* airplane_0075.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0B12BE0E3A400B3123E /* airplane_0075.png */; };
-		43BEC1162BE0E3A400B3123E /* airplane_0061.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0B22BE0E3A400B3123E /* airplane_0061.png */; };
-		43BEC1172BE0E3A400B3123E /* airplane_0049.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0B32BE0E3A400B3123E /* airplane_0049.png */; };
-		43BEC1182BE0E3A400B3123E /* airplane_0048.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0B42BE0E3A400B3123E /* airplane_0048.png */; };
-		43BEC1192BE0E3A400B3123E /* airplane_0060.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0B52BE0E3A400B3123E /* airplane_0060.png */; };
-		43BEC11A2BE0E3A400B3123E /* airplane_0074.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0B62BE0E3A400B3123E /* airplane_0074.png */; };
-		43BEC11B2BE0E3A400B3123E /* airplane_0100.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0B72BE0E3A400B3123E /* airplane_0100.png */; };
-		43BEC11C2BE0E3A400B3123E /* airplane_0089.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0B82BE0E3A400B3123E /* airplane_0089.png */; };
-		43BEC11D2BE0E3A400B3123E /* airplane_0062.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0B92BE0E3A400B3123E /* airplane_0062.png */; };
-		43BEC11E2BE0E3A400B3123E /* airplane_0076.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0BA2BE0E3A400B3123E /* airplane_0076.png */; };
-		43BEC11F2BE0E3A400B3123E /* airplane_0077.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0BB2BE0E3A400B3123E /* airplane_0077.png */; };
-		43BEC1202BE0E3A400B3123E /* airplane_0063.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0BC2BE0E3A400B3123E /* airplane_0063.png */; };
-		43BEC1212BE0E3A400B3123E /* airplane_0088.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0BD2BE0E3A400B3123E /* airplane_0088.png */; };
-		43BEC1222BE0E3A400B3123E /* airplane_0098.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0BE2BE0E3A400B3123E /* airplane_0098.png */; };
-		43BEC1232BE0E3A400B3123E /* airplane_0067.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0BF2BE0E3A400B3123E /* airplane_0067.png */; };
-		43BEC1242BE0E3A400B3123E /* airplane_0073.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0C02BE0E3A400B3123E /* airplane_0073.png */; };
-		43BEC1252BE0E3A400B3123E /* airplane_0072.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0C12BE0E3A400B3123E /* airplane_0072.png */; };
-		43BEC1262BE0E3A400B3123E /* airplane_0066.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0C22BE0E3A400B3123E /* airplane_0066.png */; };
-		43BEC1272BE0E3A400B3123E /* airplane_0099.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0C32BE0E3A400B3123E /* airplane_0099.png */; };
-		43BEC1282BE0E3A400B3123E /* airplane_0058.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0C42BE0E3A400B3123E /* airplane_0058.png */; };
-		43BEC1292BE0E3A400B3123E /* airplane_0070.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0C52BE0E3A400B3123E /* airplane_0070.png */; };
-		43BEC12A2BE0E3A400B3123E /* airplane_0064.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0C62BE0E3A400B3123E /* airplane_0064.png */; };
-		43BEC12B2BE0E3A400B3123E /* airplane_0065.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0C72BE0E3A400B3123E /* airplane_0065.png */; };
-		43BEC12C2BE0E3A400B3123E /* airplane_0071.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0C82BE0E3A400B3123E /* airplane_0071.png */; };
-		43BEC12D2BE0E3A400B3123E /* airplane_0059.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0C92BE0E3A400B3123E /* airplane_0059.png */; };
-		43BEC12E2BE0E3A400B3123E /* airplane_0097.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0CA2BE0E3A400B3123E /* airplane_0097.png */; };
-		43BEC12F2BE0E3A400B3123E /* airplane_0083.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0CB2BE0E3A400B3123E /* airplane_0083.png */; };
-		43BEC1302BE0E3A400B3123E /* airplane_0054.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0CC2BE0E3A400B3123E /* airplane_0054.png */; };
-		43BEC1312BE0E3A400B3123E /* airplane_0040.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0CD2BE0E3A400B3123E /* airplane_0040.png */; };
-		43BEC1322BE0E3A400B3123E /* airplane_0068.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0CE2BE0E3A400B3123E /* airplane_0068.png */; };
-		43BEC1332BE0E3A400B3123E /* airplane_0069.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0CF2BE0E3A400B3123E /* airplane_0069.png */; };
-		43BEC1342BE0E3A400B3123E /* airplane_0041.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0D02BE0E3A400B3123E /* airplane_0041.png */; };
-		43BEC1352BE0E3A400B3123E /* airplane_0055.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0D12BE0E3A400B3123E /* airplane_0055.png */; };
-		43BEC1362BE0E3A400B3123E /* airplane_0082.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0D22BE0E3A400B3123E /* airplane_0082.png */; };
-		43BEC1372BE0E3A400B3123E /* airplane_0096.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0D32BE0E3A400B3123E /* airplane_0096.png */; };
-		43BEC1382BE0E3A400B3123E /* airplane_0080.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0D42BE0E3A400B3123E /* airplane_0080.png */; };
-		43BEC1392BE0E3A400B3123E /* airplane_0094.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0D52BE0E3A400B3123E /* airplane_0094.png */; };
-		43BEC13A2BE0E3A400B3123E /* airplane_0043.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0D62BE0E3A400B3123E /* airplane_0043.png */; };
-		43BEC13B2BE0E3A400B3123E /* airplane_0057.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0D72BE0E3A400B3123E /* airplane_0057.png */; };
-		43BEC13C2BE0E3A400B3123E /* airplane_0056.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0D82BE0E3A400B3123E /* airplane_0056.png */; };
-		43BEC13D2BE0E3A400B3123E /* airplane_0042.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0D92BE0E3A400B3123E /* airplane_0042.png */; };
-		43BEC13E2BE0E3A400B3123E /* airplane_0095.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0DA2BE0E3A400B3123E /* airplane_0095.png */; };
-		43BEC13F2BE0E3A400B3123E /* airplane_0081.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0DB2BE0E3A400B3123E /* airplane_0081.png */; };
-		43BEC1402BE0E3A400B3123E /* airplane_0085.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0DC2BE0E3A400B3123E /* airplane_0085.png */; };
-		43BEC1412BE0E3A400B3123E /* airplane_0091.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0DD2BE0E3A400B3123E /* airplane_0091.png */; };
-		43BEC1422BE0E3A400B3123E /* airplane_0046.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0DE2BE0E3A400B3123E /* airplane_0046.png */; };
-		43BEC1432BE0E3A400B3123E /* airplane_0052.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0DF2BE0E3A400B3123E /* airplane_0052.png */; };
-		43BEC1442BE0E3A400B3123E /* airplane_0053.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0E02BE0E3A400B3123E /* airplane_0053.png */; };
-		43BEC1452BE0E3A400B3123E /* airplane_0047.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0E12BE0E3A400B3123E /* airplane_0047.png */; };
-		43BEC1462BE0E3A400B3123E /* airplane_0090.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0E22BE0E3A400B3123E /* airplane_0090.png */; };
-		43BEC1472BE0E3A400B3123E /* airplane_0084.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0E32BE0E3A400B3123E /* airplane_0084.png */; };
-		43BEC1482BE0E3A400B3123E /* airplane_0092.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0E42BE0E3A400B3123E /* airplane_0092.png */; };
-		43BEC1492BE0E3A400B3123E /* airplane_0086.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0E52BE0E3A400B3123E /* airplane_0086.png */; };
-		43BEC14A2BE0E3A400B3123E /* airplane_0079.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0E62BE0E3A400B3123E /* airplane_0079.png */; };
-		43BEC14B2BE0E3A400B3123E /* airplane_0051.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0E72BE0E3A400B3123E /* airplane_0051.png */; };
-		43BEC14C2BE0E3A400B3123E /* airplane_0045.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0E82BE0E3A400B3123E /* airplane_0045.png */; };
-		43BEC14D2BE0E3A400B3123E /* airplane_0044.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0E92BE0E3A400B3123E /* airplane_0044.png */; };
-		43BEC14E2BE0E3A400B3123E /* airplane_0050.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0EA2BE0E3A400B3123E /* airplane_0050.png */; };
-		43BEC14F2BE0E3A400B3123E /* airplane_0078.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0EB2BE0E3A400B3123E /* airplane_0078.png */; };
-		43BEC1502BE0E3A400B3123E /* airplane_0087.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0EC2BE0E3A400B3123E /* airplane_0087.png */; };
-		43BEC1512BE0E3A400B3123E /* airplane_0093.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0ED2BE0E3A400B3123E /* airplane_0093.png */; };
-		43BEC1522BE0E3A400B3123E /* airplane_0037.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0EE2BE0E3A400B3123E /* airplane_0037.png */; };
-		43BEC1532BE0E3A400B3123E /* airplane_0023.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0EF2BE0E3A400B3123E /* airplane_0023.png */; };
-		43BEC1542BE0E3A400B3123E /* airplane_0022.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0F02BE0E3A400B3123E /* airplane_0022.png */; };
-		43BEC1552BE0E3A400B3123E /* airplane_0036.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0F12BE0E3A400B3123E /* airplane_0036.png */; };
-		43BEC1562BE0E3A400B3123E /* airplane_0020.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0F22BE0E3A400B3123E /* airplane_0020.png */; };
-		43BEC1572BE0E3A400B3123E /* airplane_0034.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0F32BE0E3A400B3123E /* airplane_0034.png */; };
-		43BEC1582BE0E3A400B3123E /* airplane_0008.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0F42BE0E3A400B3123E /* airplane_0008.png */; };
-		43BEC1592BE0E3A400B3123E /* airplane_0009.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0F52BE0E3A400B3123E /* airplane_0009.png */; };
-		43BEC15A2BE0E3A400B3123E /* airplane_0035.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0F62BE0E3A400B3123E /* airplane_0035.png */; };
-		43BEC15B2BE0E3A400B3123E /* airplane_0021.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0F72BE0E3A400B3123E /* airplane_0021.png */; };
-		43BEC15C2BE0E3A400B3123E /* airplane_0019.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0F82BE0E3A400B3123E /* airplane_0019.png */; };
-		43BEC15D2BE0E3A400B3123E /* airplane_0025.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0F92BE0E3A400B3123E /* airplane_0025.png */; };
-		43BEC15E2BE0E3A400B3123E /* airplane_0031.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0FA2BE0E3A400B3123E /* airplane_0031.png */; };
-		43BEC15F2BE0E3A400B3123E /* airplane_0030.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0FB2BE0E3A400B3123E /* airplane_0030.png */; };
-		43BEC1602BE0E3A400B3123E /* airplane_0024.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0FC2BE0E3A400B3123E /* airplane_0024.png */; };
-		43BEC1612BE0E3A400B3123E /* airplane_0018.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0FD2BE0E3A400B3123E /* airplane_0018.png */; };
-		43BEC1622BE0E3A400B3123E /* airplane_0032.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0FE2BE0E3A400B3123E /* airplane_0032.png */; };
-		43BEC1632BE0E3A400B3123E /* airplane_0026.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC0FF2BE0E3A400B3123E /* airplane_0026.png */; };
-		43BEC1642BE0E3A400B3123E /* airplane_0027.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC1002BE0E3A400B3123E /* airplane_0027.png */; };
-		43BEC1652BE0E3A400B3123E /* airplane_0033.png in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC1012BE0E3A400B3123E /* airplane_0033.png */; };
 		43BEC2072BEB8FDE00B3123E /* pic13.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC1F72BEB8FDD00B3123E /* pic13.jpg */; };
 		43BEC2082BEB8FDE00B3123E /* pic9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC1F82BEB8FDD00B3123E /* pic9.jpg */; };
 		43BEC2092BEB8FDE00B3123E /* pic8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC1F92BEB8FDD00B3123E /* pic8.jpg */; };
@@ -244,7 +62,6 @@
 		43BEC2142BEB8FDE00B3123E /* pic7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC2042BEB8FDE00B3123E /* pic7.jpg */; };
 		43BEC2152BEB8FDE00B3123E /* pic5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC2052BEB8FDE00B3123E /* pic5.jpg */; };
 		43BEC2162BEB8FDE00B3123E /* pic4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC2062BEB8FDE00B3123E /* pic4.jpg */; };
-		43BEC2222BF3605700B3123E /* xinwen.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC2202BF3605700B3123E /* xinwen.MP4 */; };
 		43BEC2232BF3605700B3123E /* snow.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC2212BF3605700B3123E /* snow.MP4 */; };
 		43BEC2262BF4DFEF00B3123E /* DecoderContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43BEC2242BF4DFEF00B3123E /* DecoderContext.cpp */; };
 		43BEC22C2BF5A2D300B3123E /* TimeLineDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43BEC22A2BF5A2D300B3123E /* TimeLineDecoder.cpp */; };
@@ -536,7 +353,6 @@
 		43BEBE3F2BDFE75F00B3123E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		43BEBE412BDFE81600B3123E /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		43BEBE432BDFE82300B3123E /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = System/Library/Frameworks/GameController.framework; sourceTree = SDKROOT; };
-		43BEBE462BDFE9A400B3123E /* xiaolin.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = xiaolin.MP4; sourceTree = "<group>"; };
 		43BEBE492BDFEDAD00B3123E /* EditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
 		43BEBE4A2BDFEDAE00B3123E /* EditViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = EditViewController.mm; sourceTree = "<group>"; };
 		43BEBE4C2BDFF0EC00B3123E /* ThumbCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThumbCell.h; sourceTree = "<group>"; };
@@ -547,187 +363,6 @@
 		43BEBE532BDFFFB600B3123E /* display.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = display.vsh; sourceTree = "<group>"; };
 		43BEBFF62BE0DDFD00B3123E /* sticker.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = sticker.vsh; sourceTree = "<group>"; };
 		43BEBFF72BE0DDFD00B3123E /* sticker.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = sticker.fsh; sourceTree = "<group>"; };
-		43BEBFFB2BE0E16C00B3123E /* tiger_0075.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0075.png; sourceTree = "<group>"; };
-		43BEBFFC2BE0E16C00B3123E /* tiger_0061.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0061.png; sourceTree = "<group>"; };
-		43BEBFFD2BE0E16C00B3123E /* tiger_0049.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0049.png; sourceTree = "<group>"; };
-		43BEBFFE2BE0E16C00B3123E /* tiger_0048.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0048.png; sourceTree = "<group>"; };
-		43BEBFFF2BE0E16C00B3123E /* tiger_0060.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0060.png; sourceTree = "<group>"; };
-		43BEC0002BE0E16C00B3123E /* tiger_0074.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0074.png; sourceTree = "<group>"; };
-		43BEC0012BE0E16C00B3123E /* tiger_0062.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0062.png; sourceTree = "<group>"; };
-		43BEC0022BE0E16C00B3123E /* tiger_0076.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0076.png; sourceTree = "<group>"; };
-		43BEC0032BE0E16C00B3123E /* tiger_0077.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0077.png; sourceTree = "<group>"; };
-		43BEC0042BE0E16C00B3123E /* tiger_0063.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0063.png; sourceTree = "<group>"; };
-		43BEC0052BE0E16C00B3123E /* tiger_0067.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0067.png; sourceTree = "<group>"; };
-		43BEC0062BE0E16C00B3123E /* tiger_0073.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0073.png; sourceTree = "<group>"; };
-		43BEC0072BE0E16C00B3123E /* tiger_0072.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0072.png; sourceTree = "<group>"; };
-		43BEC0082BE0E16C00B3123E /* tiger_0066.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0066.png; sourceTree = "<group>"; };
-		43BEC0092BE0E16C00B3123E /* tiger_0058.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0058.png; sourceTree = "<group>"; };
-		43BEC00A2BE0E16C00B3123E /* tiger_0070.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0070.png; sourceTree = "<group>"; };
-		43BEC00B2BE0E16C00B3123E /* tiger_0064.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0064.png; sourceTree = "<group>"; };
-		43BEC00C2BE0E16C00B3123E /* tiger_0065.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0065.png; sourceTree = "<group>"; };
-		43BEC00D2BE0E16C00B3123E /* tiger_0071.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0071.png; sourceTree = "<group>"; };
-		43BEC00E2BE0E16C00B3123E /* tiger_0059.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0059.png; sourceTree = "<group>"; };
-		43BEC00F2BE0E16C00B3123E /* tiger_0016.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0016.png; sourceTree = "<group>"; };
-		43BEC0102BE0E16C00B3123E /* tiger_0002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0002.png; sourceTree = "<group>"; };
-		43BEC0112BE0E16C00B3123E /* tiger_0003.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0003.png; sourceTree = "<group>"; };
-		43BEC0122BE0E16C00B3123E /* tiger_0017.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0017.png; sourceTree = "<group>"; };
-		43BEC0132BE0E16C00B3123E /* tiger_0001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0001.png; sourceTree = "<group>"; };
-		43BEC0142BE0E16C00B3123E /* tiger_0015.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0015.png; sourceTree = "<group>"; };
-		43BEC0152BE0E16C00B3123E /* tiger_0029.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0029.png; sourceTree = "<group>"; };
-		43BEC0162BE0E16C00B3123E /* tiger_0028.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0028.png; sourceTree = "<group>"; };
-		43BEC0172BE0E16C00B3123E /* tiger_0014.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0014.png; sourceTree = "<group>"; };
-		43BEC0182BE0E16C00B3123E /* tiger_0038.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0038.png; sourceTree = "<group>"; };
-		43BEC0192BE0E16C00B3123E /* tiger_0004.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0004.png; sourceTree = "<group>"; };
-		43BEC01A2BE0E16C00B3123E /* tiger_0010.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0010.png; sourceTree = "<group>"; };
-		43BEC01B2BE0E16C00B3123E /* tiger_0011.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0011.png; sourceTree = "<group>"; };
-		43BEC01C2BE0E16C00B3123E /* tiger_0005.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0005.png; sourceTree = "<group>"; };
-		43BEC01D2BE0E16C00B3123E /* tiger_0039.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0039.png; sourceTree = "<group>"; };
-		43BEC01E2BE0E16C00B3123E /* tiger_0013.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0013.png; sourceTree = "<group>"; };
-		43BEC01F2BE0E16C00B3123E /* tiger_0007.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0007.png; sourceTree = "<group>"; };
-		43BEC0202BE0E16C00B3123E /* tiger_0006.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0006.png; sourceTree = "<group>"; };
-		43BEC0212BE0E16C00B3123E /* tiger_0012.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0012.png; sourceTree = "<group>"; };
-		43BEC0222BE0E16C00B3123E /* tiger_0037.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0037.png; sourceTree = "<group>"; };
-		43BEC0232BE0E16C00B3123E /* tiger_0023.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0023.png; sourceTree = "<group>"; };
-		43BEC0242BE0E16C00B3123E /* tiger_0022.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0022.png; sourceTree = "<group>"; };
-		43BEC0252BE0E16C00B3123E /* tiger_0036.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0036.png; sourceTree = "<group>"; };
-		43BEC0262BE0E16C00B3123E /* tiger_0020.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0020.png; sourceTree = "<group>"; };
-		43BEC0272BE0E16C00B3123E /* tiger_0034.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0034.png; sourceTree = "<group>"; };
-		43BEC0282BE0E16C00B3123E /* tiger_0008.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0008.png; sourceTree = "<group>"; };
-		43BEC0292BE0E16C00B3123E /* tiger_0009.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0009.png; sourceTree = "<group>"; };
-		43BEC02A2BE0E16C00B3123E /* tiger_0035.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0035.png; sourceTree = "<group>"; };
-		43BEC02B2BE0E16C00B3123E /* tiger_0021.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0021.png; sourceTree = "<group>"; };
-		43BEC02C2BE0E16C00B3123E /* tiger_0019.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0019.png; sourceTree = "<group>"; };
-		43BEC02D2BE0E16C00B3123E /* tiger_0025.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0025.png; sourceTree = "<group>"; };
-		43BEC02E2BE0E16C00B3123E /* tiger_0031.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0031.png; sourceTree = "<group>"; };
-		43BEC02F2BE0E16C00B3123E /* tiger_0030.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0030.png; sourceTree = "<group>"; };
-		43BEC0302BE0E16C00B3123E /* tiger_0024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0024.png; sourceTree = "<group>"; };
-		43BEC0312BE0E16C00B3123E /* tiger_0018.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0018.png; sourceTree = "<group>"; };
-		43BEC0322BE0E16C00B3123E /* tiger_0032.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0032.png; sourceTree = "<group>"; };
-		43BEC0332BE0E16C00B3123E /* tiger_0026.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0026.png; sourceTree = "<group>"; };
-		43BEC0342BE0E16C00B3123E /* tiger_0027.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0027.png; sourceTree = "<group>"; };
-		43BEC0352BE0E16C00B3123E /* tiger_0033.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0033.png; sourceTree = "<group>"; };
-		43BEC0362BE0E16C00B3123E /* tiger_0054.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0054.png; sourceTree = "<group>"; };
-		43BEC0372BE0E16C00B3123E /* tiger_0040.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0040.png; sourceTree = "<group>"; };
-		43BEC0382BE0E16C00B3123E /* tiger_0068.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0068.png; sourceTree = "<group>"; };
-		43BEC0392BE0E16C00B3123E /* tiger_0069.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0069.png; sourceTree = "<group>"; };
-		43BEC03A2BE0E16C00B3123E /* tiger_0041.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0041.png; sourceTree = "<group>"; };
-		43BEC03B2BE0E16C00B3123E /* tiger_0055.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0055.png; sourceTree = "<group>"; };
-		43BEC03C2BE0E16C00B3123E /* tiger_0080.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0080.png; sourceTree = "<group>"; };
-		43BEC03D2BE0E16C00B3123E /* tiger_0043.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0043.png; sourceTree = "<group>"; };
-		43BEC03E2BE0E16C00B3123E /* tiger_0057.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0057.png; sourceTree = "<group>"; };
-		43BEC03F2BE0E16C00B3123E /* tiger_0056.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0056.png; sourceTree = "<group>"; };
-		43BEC0402BE0E16C00B3123E /* tiger_0042.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0042.png; sourceTree = "<group>"; };
-		43BEC0412BE0E16C00B3123E /* tiger_0081.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0081.png; sourceTree = "<group>"; };
-		43BEC0422BE0E16C00B3123E /* tiger_0046.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0046.png; sourceTree = "<group>"; };
-		43BEC0432BE0E16C00B3123E /* tiger_0052.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0052.png; sourceTree = "<group>"; };
-		43BEC0442BE0E16C00B3123E /* tiger_0053.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0053.png; sourceTree = "<group>"; };
-		43BEC0452BE0E16C00B3123E /* tiger_0047.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0047.png; sourceTree = "<group>"; };
-		43BEC0462BE0E16C00B3123E /* tiger_0079.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0079.png; sourceTree = "<group>"; };
-		43BEC0472BE0E16C00B3123E /* tiger_0051.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0051.png; sourceTree = "<group>"; };
-		43BEC0482BE0E16C00B3123E /* tiger_0045.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0045.png; sourceTree = "<group>"; };
-		43BEC0492BE0E16C00B3123E /* tiger_0044.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0044.png; sourceTree = "<group>"; };
-		43BEC04A2BE0E16C00B3123E /* tiger_0050.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0050.png; sourceTree = "<group>"; };
-		43BEC04B2BE0E16C00B3123E /* tiger_0078.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger_0078.png; sourceTree = "<group>"; };
-		43BEC09E2BE0E3A400B3123E /* airplane_0016.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0016.png; sourceTree = "<group>"; };
-		43BEC09F2BE0E3A400B3123E /* airplane_0002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0002.png; sourceTree = "<group>"; };
-		43BEC0A02BE0E3A400B3123E /* airplane_0003.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0003.png; sourceTree = "<group>"; };
-		43BEC0A12BE0E3A400B3123E /* airplane_0017.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0017.png; sourceTree = "<group>"; };
-		43BEC0A22BE0E3A400B3123E /* airplane_0001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0001.png; sourceTree = "<group>"; };
-		43BEC0A32BE0E3A400B3123E /* airplane_0015.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0015.png; sourceTree = "<group>"; };
-		43BEC0A42BE0E3A400B3123E /* airplane_0029.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0029.png; sourceTree = "<group>"; };
-		43BEC0A52BE0E3A400B3123E /* airplane_0028.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0028.png; sourceTree = "<group>"; };
-		43BEC0A62BE0E3A400B3123E /* airplane_0014.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0014.png; sourceTree = "<group>"; };
-		43BEC0A72BE0E3A400B3123E /* airplane_0038.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0038.png; sourceTree = "<group>"; };
-		43BEC0A82BE0E3A400B3123E /* airplane_0004.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0004.png; sourceTree = "<group>"; };
-		43BEC0A92BE0E3A400B3123E /* airplane_0010.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0010.png; sourceTree = "<group>"; };
-		43BEC0AA2BE0E3A400B3123E /* airplane_0011.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0011.png; sourceTree = "<group>"; };
-		43BEC0AB2BE0E3A400B3123E /* airplane_0005.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0005.png; sourceTree = "<group>"; };
-		43BEC0AC2BE0E3A400B3123E /* airplane_0039.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0039.png; sourceTree = "<group>"; };
-		43BEC0AD2BE0E3A400B3123E /* airplane_0013.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0013.png; sourceTree = "<group>"; };
-		43BEC0AE2BE0E3A400B3123E /* airplane_0007.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0007.png; sourceTree = "<group>"; };
-		43BEC0AF2BE0E3A400B3123E /* airplane_0006.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0006.png; sourceTree = "<group>"; };
-		43BEC0B02BE0E3A400B3123E /* airplane_0012.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0012.png; sourceTree = "<group>"; };
-		43BEC0B12BE0E3A400B3123E /* airplane_0075.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0075.png; sourceTree = "<group>"; };
-		43BEC0B22BE0E3A400B3123E /* airplane_0061.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0061.png; sourceTree = "<group>"; };
-		43BEC0B32BE0E3A400B3123E /* airplane_0049.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0049.png; sourceTree = "<group>"; };
-		43BEC0B42BE0E3A400B3123E /* airplane_0048.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0048.png; sourceTree = "<group>"; };
-		43BEC0B52BE0E3A400B3123E /* airplane_0060.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0060.png; sourceTree = "<group>"; };
-		43BEC0B62BE0E3A400B3123E /* airplane_0074.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0074.png; sourceTree = "<group>"; };
-		43BEC0B72BE0E3A400B3123E /* airplane_0100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0100.png; sourceTree = "<group>"; };
-		43BEC0B82BE0E3A400B3123E /* airplane_0089.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0089.png; sourceTree = "<group>"; };
-		43BEC0B92BE0E3A400B3123E /* airplane_0062.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0062.png; sourceTree = "<group>"; };
-		43BEC0BA2BE0E3A400B3123E /* airplane_0076.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0076.png; sourceTree = "<group>"; };
-		43BEC0BB2BE0E3A400B3123E /* airplane_0077.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0077.png; sourceTree = "<group>"; };
-		43BEC0BC2BE0E3A400B3123E /* airplane_0063.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0063.png; sourceTree = "<group>"; };
-		43BEC0BD2BE0E3A400B3123E /* airplane_0088.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0088.png; sourceTree = "<group>"; };
-		43BEC0BE2BE0E3A400B3123E /* airplane_0098.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0098.png; sourceTree = "<group>"; };
-		43BEC0BF2BE0E3A400B3123E /* airplane_0067.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0067.png; sourceTree = "<group>"; };
-		43BEC0C02BE0E3A400B3123E /* airplane_0073.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0073.png; sourceTree = "<group>"; };
-		43BEC0C12BE0E3A400B3123E /* airplane_0072.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0072.png; sourceTree = "<group>"; };
-		43BEC0C22BE0E3A400B3123E /* airplane_0066.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0066.png; sourceTree = "<group>"; };
-		43BEC0C32BE0E3A400B3123E /* airplane_0099.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0099.png; sourceTree = "<group>"; };
-		43BEC0C42BE0E3A400B3123E /* airplane_0058.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0058.png; sourceTree = "<group>"; };
-		43BEC0C52BE0E3A400B3123E /* airplane_0070.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0070.png; sourceTree = "<group>"; };
-		43BEC0C62BE0E3A400B3123E /* airplane_0064.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0064.png; sourceTree = "<group>"; };
-		43BEC0C72BE0E3A400B3123E /* airplane_0065.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0065.png; sourceTree = "<group>"; };
-		43BEC0C82BE0E3A400B3123E /* airplane_0071.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0071.png; sourceTree = "<group>"; };
-		43BEC0C92BE0E3A400B3123E /* airplane_0059.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0059.png; sourceTree = "<group>"; };
-		43BEC0CA2BE0E3A400B3123E /* airplane_0097.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0097.png; sourceTree = "<group>"; };
-		43BEC0CB2BE0E3A400B3123E /* airplane_0083.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0083.png; sourceTree = "<group>"; };
-		43BEC0CC2BE0E3A400B3123E /* airplane_0054.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0054.png; sourceTree = "<group>"; };
-		43BEC0CD2BE0E3A400B3123E /* airplane_0040.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0040.png; sourceTree = "<group>"; };
-		43BEC0CE2BE0E3A400B3123E /* airplane_0068.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0068.png; sourceTree = "<group>"; };
-		43BEC0CF2BE0E3A400B3123E /* airplane_0069.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0069.png; sourceTree = "<group>"; };
-		43BEC0D02BE0E3A400B3123E /* airplane_0041.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0041.png; sourceTree = "<group>"; };
-		43BEC0D12BE0E3A400B3123E /* airplane_0055.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0055.png; sourceTree = "<group>"; };
-		43BEC0D22BE0E3A400B3123E /* airplane_0082.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0082.png; sourceTree = "<group>"; };
-		43BEC0D32BE0E3A400B3123E /* airplane_0096.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0096.png; sourceTree = "<group>"; };
-		43BEC0D42BE0E3A400B3123E /* airplane_0080.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0080.png; sourceTree = "<group>"; };
-		43BEC0D52BE0E3A400B3123E /* airplane_0094.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0094.png; sourceTree = "<group>"; };
-		43BEC0D62BE0E3A400B3123E /* airplane_0043.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0043.png; sourceTree = "<group>"; };
-		43BEC0D72BE0E3A400B3123E /* airplane_0057.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0057.png; sourceTree = "<group>"; };
-		43BEC0D82BE0E3A400B3123E /* airplane_0056.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0056.png; sourceTree = "<group>"; };
-		43BEC0D92BE0E3A400B3123E /* airplane_0042.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0042.png; sourceTree = "<group>"; };
-		43BEC0DA2BE0E3A400B3123E /* airplane_0095.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0095.png; sourceTree = "<group>"; };
-		43BEC0DB2BE0E3A400B3123E /* airplane_0081.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0081.png; sourceTree = "<group>"; };
-		43BEC0DC2BE0E3A400B3123E /* airplane_0085.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0085.png; sourceTree = "<group>"; };
-		43BEC0DD2BE0E3A400B3123E /* airplane_0091.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0091.png; sourceTree = "<group>"; };
-		43BEC0DE2BE0E3A400B3123E /* airplane_0046.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0046.png; sourceTree = "<group>"; };
-		43BEC0DF2BE0E3A400B3123E /* airplane_0052.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0052.png; sourceTree = "<group>"; };
-		43BEC0E02BE0E3A400B3123E /* airplane_0053.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0053.png; sourceTree = "<group>"; };
-		43BEC0E12BE0E3A400B3123E /* airplane_0047.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0047.png; sourceTree = "<group>"; };
-		43BEC0E22BE0E3A400B3123E /* airplane_0090.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0090.png; sourceTree = "<group>"; };
-		43BEC0E32BE0E3A400B3123E /* airplane_0084.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0084.png; sourceTree = "<group>"; };
-		43BEC0E42BE0E3A400B3123E /* airplane_0092.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0092.png; sourceTree = "<group>"; };
-		43BEC0E52BE0E3A400B3123E /* airplane_0086.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0086.png; sourceTree = "<group>"; };
-		43BEC0E62BE0E3A400B3123E /* airplane_0079.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0079.png; sourceTree = "<group>"; };
-		43BEC0E72BE0E3A400B3123E /* airplane_0051.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0051.png; sourceTree = "<group>"; };
-		43BEC0E82BE0E3A400B3123E /* airplane_0045.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0045.png; sourceTree = "<group>"; };
-		43BEC0E92BE0E3A400B3123E /* airplane_0044.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0044.png; sourceTree = "<group>"; };
-		43BEC0EA2BE0E3A400B3123E /* airplane_0050.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0050.png; sourceTree = "<group>"; };
-		43BEC0EB2BE0E3A400B3123E /* airplane_0078.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0078.png; sourceTree = "<group>"; };
-		43BEC0EC2BE0E3A400B3123E /* airplane_0087.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0087.png; sourceTree = "<group>"; };
-		43BEC0ED2BE0E3A400B3123E /* airplane_0093.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0093.png; sourceTree = "<group>"; };
-		43BEC0EE2BE0E3A400B3123E /* airplane_0037.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0037.png; sourceTree = "<group>"; };
-		43BEC0EF2BE0E3A400B3123E /* airplane_0023.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0023.png; sourceTree = "<group>"; };
-		43BEC0F02BE0E3A400B3123E /* airplane_0022.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0022.png; sourceTree = "<group>"; };
-		43BEC0F12BE0E3A400B3123E /* airplane_0036.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0036.png; sourceTree = "<group>"; };
-		43BEC0F22BE0E3A400B3123E /* airplane_0020.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0020.png; sourceTree = "<group>"; };
-		43BEC0F32BE0E3A400B3123E /* airplane_0034.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0034.png; sourceTree = "<group>"; };
-		43BEC0F42BE0E3A400B3123E /* airplane_0008.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0008.png; sourceTree = "<group>"; };
-		43BEC0F52BE0E3A400B3123E /* airplane_0009.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0009.png; sourceTree = "<group>"; };
-		43BEC0F62BE0E3A400B3123E /* airplane_0035.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0035.png; sourceTree = "<group>"; };
-		43BEC0F72BE0E3A400B3123E /* airplane_0021.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0021.png; sourceTree = "<group>"; };
-		43BEC0F82BE0E3A400B3123E /* airplane_0019.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0019.png; sourceTree = "<group>"; };
-		43BEC0F92BE0E3A400B3123E /* airplane_0025.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0025.png; sourceTree = "<group>"; };
-		43BEC0FA2BE0E3A400B3123E /* airplane_0031.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0031.png; sourceTree = "<group>"; };
-		43BEC0FB2BE0E3A400B3123E /* airplane_0030.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0030.png; sourceTree = "<group>"; };
-		43BEC0FC2BE0E3A400B3123E /* airplane_0024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0024.png; sourceTree = "<group>"; };
-		43BEC0FD2BE0E3A400B3123E /* airplane_0018.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0018.png; sourceTree = "<group>"; };
-		43BEC0FE2BE0E3A400B3123E /* airplane_0032.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0032.png; sourceTree = "<group>"; };
-		43BEC0FF2BE0E3A400B3123E /* airplane_0026.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0026.png; sourceTree = "<group>"; };
-		43BEC1002BE0E3A400B3123E /* airplane_0027.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0027.png; sourceTree = "<group>"; };
-		43BEC1012BE0E3A400B3123E /* airplane_0033.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane_0033.png; sourceTree = "<group>"; };
 		43BEC1F72BEB8FDD00B3123E /* pic13.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pic13.jpg; sourceTree = "<group>"; };
 		43BEC1F82BEB8FDD00B3123E /* pic9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pic9.jpg; sourceTree = "<group>"; };
 		43BEC1F92BEB8FDD00B3123E /* pic8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pic8.jpg; sourceTree = "<group>"; };
@@ -744,7 +379,6 @@
 		43BEC2042BEB8FDE00B3123E /* pic7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pic7.jpg; sourceTree = "<group>"; };
 		43BEC2052BEB8FDE00B3123E /* pic5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pic5.jpg; sourceTree = "<group>"; };
 		43BEC2062BEB8FDE00B3123E /* pic4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pic4.jpg; sourceTree = "<group>"; };
-		43BEC2202BF3605700B3123E /* xinwen.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = xinwen.MP4; sourceTree = "<group>"; };
 		43BEC2212BF3605700B3123E /* snow.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = snow.MP4; sourceTree = "<group>"; };
 		43BEC2242BF4DFEF00B3123E /* DecoderContext.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DecoderContext.cpp; sourceTree = "<group>"; };
 		43BEC2252BF4DFEF00B3123E /* DecoderContext.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DecoderContext.hpp; sourceTree = "<group>"; };
@@ -1237,9 +871,7 @@
 				43BEC1F62BEB8FDD00B3123E /* testpic */,
 				43BEC09D2BE0E3A400B3123E /* sticker2 */,
 				43BEBFFA2BE0E16C00B3123E /* sticker1 */,
-				43BEBE462BDFE9A400B3123E /* xiaolin.MP4 */,
 				43BEC2212BF3605700B3123E /* snow.MP4 */,
-				43BEC2202BF3605700B3123E /* xinwen.MP4 */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -1260,87 +892,6 @@
 		43BEBFFA2BE0E16C00B3123E /* sticker1 */ = {
 			isa = PBXGroup;
 			children = (
-				43BEBFFB2BE0E16C00B3123E /* tiger_0075.png */,
-				43BEBFFC2BE0E16C00B3123E /* tiger_0061.png */,
-				43BEBFFD2BE0E16C00B3123E /* tiger_0049.png */,
-				43BEBFFE2BE0E16C00B3123E /* tiger_0048.png */,
-				43BEBFFF2BE0E16C00B3123E /* tiger_0060.png */,
-				43BEC0002BE0E16C00B3123E /* tiger_0074.png */,
-				43BEC0012BE0E16C00B3123E /* tiger_0062.png */,
-				43BEC0022BE0E16C00B3123E /* tiger_0076.png */,
-				43BEC0032BE0E16C00B3123E /* tiger_0077.png */,
-				43BEC0042BE0E16C00B3123E /* tiger_0063.png */,
-				43BEC0052BE0E16C00B3123E /* tiger_0067.png */,
-				43BEC0062BE0E16C00B3123E /* tiger_0073.png */,
-				43BEC0072BE0E16C00B3123E /* tiger_0072.png */,
-				43BEC0082BE0E16C00B3123E /* tiger_0066.png */,
-				43BEC0092BE0E16C00B3123E /* tiger_0058.png */,
-				43BEC00A2BE0E16C00B3123E /* tiger_0070.png */,
-				43BEC00B2BE0E16C00B3123E /* tiger_0064.png */,
-				43BEC00C2BE0E16C00B3123E /* tiger_0065.png */,
-				43BEC00D2BE0E16C00B3123E /* tiger_0071.png */,
-				43BEC00E2BE0E16C00B3123E /* tiger_0059.png */,
-				43BEC00F2BE0E16C00B3123E /* tiger_0016.png */,
-				43BEC0102BE0E16C00B3123E /* tiger_0002.png */,
-				43BEC0112BE0E16C00B3123E /* tiger_0003.png */,
-				43BEC0122BE0E16C00B3123E /* tiger_0017.png */,
-				43BEC0132BE0E16C00B3123E /* tiger_0001.png */,
-				43BEC0142BE0E16C00B3123E /* tiger_0015.png */,
-				43BEC0152BE0E16C00B3123E /* tiger_0029.png */,
-				43BEC0162BE0E16C00B3123E /* tiger_0028.png */,
-				43BEC0172BE0E16C00B3123E /* tiger_0014.png */,
-				43BEC0182BE0E16C00B3123E /* tiger_0038.png */,
-				43BEC0192BE0E16C00B3123E /* tiger_0004.png */,
-				43BEC01A2BE0E16C00B3123E /* tiger_0010.png */,
-				43BEC01B2BE0E16C00B3123E /* tiger_0011.png */,
-				43BEC01C2BE0E16C00B3123E /* tiger_0005.png */,
-				43BEC01D2BE0E16C00B3123E /* tiger_0039.png */,
-				43BEC01E2BE0E16C00B3123E /* tiger_0013.png */,
-				43BEC01F2BE0E16C00B3123E /* tiger_0007.png */,
-				43BEC0202BE0E16C00B3123E /* tiger_0006.png */,
-				43BEC0212BE0E16C00B3123E /* tiger_0012.png */,
-				43BEC0222BE0E16C00B3123E /* tiger_0037.png */,
-				43BEC0232BE0E16C00B3123E /* tiger_0023.png */,
-				43BEC0242BE0E16C00B3123E /* tiger_0022.png */,
-				43BEC0252BE0E16C00B3123E /* tiger_0036.png */,
-				43BEC0262BE0E16C00B3123E /* tiger_0020.png */,
-				43BEC0272BE0E16C00B3123E /* tiger_0034.png */,
-				43BEC0282BE0E16C00B3123E /* tiger_0008.png */,
-				43BEC0292BE0E16C00B3123E /* tiger_0009.png */,
-				43BEC02A2BE0E16C00B3123E /* tiger_0035.png */,
-				43BEC02B2BE0E16C00B3123E /* tiger_0021.png */,
-				43BEC02C2BE0E16C00B3123E /* tiger_0019.png */,
-				43BEC02D2BE0E16C00B3123E /* tiger_0025.png */,
-				43BEC02E2BE0E16C00B3123E /* tiger_0031.png */,
-				43BEC02F2BE0E16C00B3123E /* tiger_0030.png */,
-				43BEC0302BE0E16C00B3123E /* tiger_0024.png */,
-				43BEC0312BE0E16C00B3123E /* tiger_0018.png */,
-				43BEC0322BE0E16C00B3123E /* tiger_0032.png */,
-				43BEC0332BE0E16C00B3123E /* tiger_0026.png */,
-				43BEC0342BE0E16C00B3123E /* tiger_0027.png */,
-				43BEC0352BE0E16C00B3123E /* tiger_0033.png */,
-				43BEC0362BE0E16C00B3123E /* tiger_0054.png */,
-				43BEC0372BE0E16C00B3123E /* tiger_0040.png */,
-				43BEC0382BE0E16C00B3123E /* tiger_0068.png */,
-				43BEC0392BE0E16C00B3123E /* tiger_0069.png */,
-				43BEC03A2BE0E16C00B3123E /* tiger_0041.png */,
-				43BEC03B2BE0E16C00B3123E /* tiger_0055.png */,
-				43BEC03C2BE0E16C00B3123E /* tiger_0080.png */,
-				43BEC03D2BE0E16C00B3123E /* tiger_0043.png */,
-				43BEC03E2BE0E16C00B3123E /* tiger_0057.png */,
-				43BEC03F2BE0E16C00B3123E /* tiger_0056.png */,
-				43BEC0402BE0E16C00B3123E /* tiger_0042.png */,
-				43BEC0412BE0E16C00B3123E /* tiger_0081.png */,
-				43BEC0422BE0E16C00B3123E /* tiger_0046.png */,
-				43BEC0432BE0E16C00B3123E /* tiger_0052.png */,
-				43BEC0442BE0E16C00B3123E /* tiger_0053.png */,
-				43BEC0452BE0E16C00B3123E /* tiger_0047.png */,
-				43BEC0462BE0E16C00B3123E /* tiger_0079.png */,
-				43BEC0472BE0E16C00B3123E /* tiger_0051.png */,
-				43BEC0482BE0E16C00B3123E /* tiger_0045.png */,
-				43BEC0492BE0E16C00B3123E /* tiger_0044.png */,
-				43BEC04A2BE0E16C00B3123E /* tiger_0050.png */,
-				43BEC04B2BE0E16C00B3123E /* tiger_0078.png */,
 			);
 			path = sticker1;
 			sourceTree = "<group>";
@@ -1348,106 +899,6 @@
 		43BEC09D2BE0E3A400B3123E /* sticker2 */ = {
 			isa = PBXGroup;
 			children = (
-				43BEC09E2BE0E3A400B3123E /* airplane_0016.png */,
-				43BEC09F2BE0E3A400B3123E /* airplane_0002.png */,
-				43BEC0A02BE0E3A400B3123E /* airplane_0003.png */,
-				43BEC0A12BE0E3A400B3123E /* airplane_0017.png */,
-				43BEC0A22BE0E3A400B3123E /* airplane_0001.png */,
-				43BEC0A32BE0E3A400B3123E /* airplane_0015.png */,
-				43BEC0A42BE0E3A400B3123E /* airplane_0029.png */,
-				43BEC0A52BE0E3A400B3123E /* airplane_0028.png */,
-				43BEC0A62BE0E3A400B3123E /* airplane_0014.png */,
-				43BEC0A72BE0E3A400B3123E /* airplane_0038.png */,
-				43BEC0A82BE0E3A400B3123E /* airplane_0004.png */,
-				43BEC0A92BE0E3A400B3123E /* airplane_0010.png */,
-				43BEC0AA2BE0E3A400B3123E /* airplane_0011.png */,
-				43BEC0AB2BE0E3A400B3123E /* airplane_0005.png */,
-				43BEC0AC2BE0E3A400B3123E /* airplane_0039.png */,
-				43BEC0AD2BE0E3A400B3123E /* airplane_0013.png */,
-				43BEC0AE2BE0E3A400B3123E /* airplane_0007.png */,
-				43BEC0AF2BE0E3A400B3123E /* airplane_0006.png */,
-				43BEC0B02BE0E3A400B3123E /* airplane_0012.png */,
-				43BEC0B12BE0E3A400B3123E /* airplane_0075.png */,
-				43BEC0B22BE0E3A400B3123E /* airplane_0061.png */,
-				43BEC0B32BE0E3A400B3123E /* airplane_0049.png */,
-				43BEC0B42BE0E3A400B3123E /* airplane_0048.png */,
-				43BEC0B52BE0E3A400B3123E /* airplane_0060.png */,
-				43BEC0B62BE0E3A400B3123E /* airplane_0074.png */,
-				43BEC0B72BE0E3A400B3123E /* airplane_0100.png */,
-				43BEC0B82BE0E3A400B3123E /* airplane_0089.png */,
-				43BEC0B92BE0E3A400B3123E /* airplane_0062.png */,
-				43BEC0BA2BE0E3A400B3123E /* airplane_0076.png */,
-				43BEC0BB2BE0E3A400B3123E /* airplane_0077.png */,
-				43BEC0BC2BE0E3A400B3123E /* airplane_0063.png */,
-				43BEC0BD2BE0E3A400B3123E /* airplane_0088.png */,
-				43BEC0BE2BE0E3A400B3123E /* airplane_0098.png */,
-				43BEC0BF2BE0E3A400B3123E /* airplane_0067.png */,
-				43BEC0C02BE0E3A400B3123E /* airplane_0073.png */,
-				43BEC0C12BE0E3A400B3123E /* airplane_0072.png */,
-				43BEC0C22BE0E3A400B3123E /* airplane_0066.png */,
-				43BEC0C32BE0E3A400B3123E /* airplane_0099.png */,
-				43BEC0C42BE0E3A400B3123E /* airplane_0058.png */,
-				43BEC0C52BE0E3A400B3123E /* airplane_0070.png */,
-				43BEC0C62BE0E3A400B3123E /* airplane_0064.png */,
-				43BEC0C72BE0E3A400B3123E /* airplane_0065.png */,
-				43BEC0C82BE0E3A400B3123E /* airplane_0071.png */,
-				43BEC0C92BE0E3A400B3123E /* airplane_0059.png */,
-				43BEC0CA2BE0E3A400B3123E /* airplane_0097.png */,
-				43BEC0CB2BE0E3A400B3123E /* airplane_0083.png */,
-				43BEC0CC2BE0E3A400B3123E /* airplane_0054.png */,
-				43BEC0CD2BE0E3A400B3123E /* airplane_0040.png */,
-				43BEC0CE2BE0E3A400B3123E /* airplane_0068.png */,
-				43BEC0CF2BE0E3A400B3123E /* airplane_0069.png */,
-				43BEC0D02BE0E3A400B3123E /* airplane_0041.png */,
-				43BEC0D12BE0E3A400B3123E /* airplane_0055.png */,
-				43BEC0D22BE0E3A400B3123E /* airplane_0082.png */,
-				43BEC0D32BE0E3A400B3123E /* airplane_0096.png */,
-				43BEC0D42BE0E3A400B3123E /* airplane_0080.png */,
-				43BEC0D52BE0E3A400B3123E /* airplane_0094.png */,
-				43BEC0D62BE0E3A400B3123E /* airplane_0043.png */,
-				43BEC0D72BE0E3A400B3123E /* airplane_0057.png */,
-				43BEC0D82BE0E3A400B3123E /* airplane_0056.png */,
-				43BEC0D92BE0E3A400B3123E /* airplane_0042.png */,
-				43BEC0DA2BE0E3A400B3123E /* airplane_0095.png */,
-				43BEC0DB2BE0E3A400B3123E /* airplane_0081.png */,
-				43BEC0DC2BE0E3A400B3123E /* airplane_0085.png */,
-				43BEC0DD2BE0E3A400B3123E /* airplane_0091.png */,
-				43BEC0DE2BE0E3A400B3123E /* airplane_0046.png */,
-				43BEC0DF2BE0E3A400B3123E /* airplane_0052.png */,
-				43BEC0E02BE0E3A400B3123E /* airplane_0053.png */,
-				43BEC0E12BE0E3A400B3123E /* airplane_0047.png */,
-				43BEC0E22BE0E3A400B3123E /* airplane_0090.png */,
-				43BEC0E32BE0E3A400B3123E /* airplane_0084.png */,
-				43BEC0E42BE0E3A400B3123E /* airplane_0092.png */,
-				43BEC0E52BE0E3A400B3123E /* airplane_0086.png */,
-				43BEC0E62BE0E3A400B3123E /* airplane_0079.png */,
-				43BEC0E72BE0E3A400B3123E /* airplane_0051.png */,
-				43BEC0E82BE0E3A400B3123E /* airplane_0045.png */,
-				43BEC0E92BE0E3A400B3123E /* airplane_0044.png */,
-				43BEC0EA2BE0E3A400B3123E /* airplane_0050.png */,
-				43BEC0EB2BE0E3A400B3123E /* airplane_0078.png */,
-				43BEC0EC2BE0E3A400B3123E /* airplane_0087.png */,
-				43BEC0ED2BE0E3A400B3123E /* airplane_0093.png */,
-				43BEC0EE2BE0E3A400B3123E /* airplane_0037.png */,
-				43BEC0EF2BE0E3A400B3123E /* airplane_0023.png */,
-				43BEC0F02BE0E3A400B3123E /* airplane_0022.png */,
-				43BEC0F12BE0E3A400B3123E /* airplane_0036.png */,
-				43BEC0F22BE0E3A400B3123E /* airplane_0020.png */,
-				43BEC0F32BE0E3A400B3123E /* airplane_0034.png */,
-				43BEC0F42BE0E3A400B3123E /* airplane_0008.png */,
-				43BEC0F52BE0E3A400B3123E /* airplane_0009.png */,
-				43BEC0F62BE0E3A400B3123E /* airplane_0035.png */,
-				43BEC0F72BE0E3A400B3123E /* airplane_0021.png */,
-				43BEC0F82BE0E3A400B3123E /* airplane_0019.png */,
-				43BEC0F92BE0E3A400B3123E /* airplane_0025.png */,
-				43BEC0FA2BE0E3A400B3123E /* airplane_0031.png */,
-				43BEC0FB2BE0E3A400B3123E /* airplane_0030.png */,
-				43BEC0FC2BE0E3A400B3123E /* airplane_0024.png */,
-				43BEC0FD2BE0E3A400B3123E /* airplane_0018.png */,
-				43BEC0FE2BE0E3A400B3123E /* airplane_0032.png */,
-				43BEC0FF2BE0E3A400B3123E /* airplane_0026.png */,
-				43BEC1002BE0E3A400B3123E /* airplane_0027.png */,
-				43BEC1012BE0E3A400B3123E /* airplane_0033.png */,
 			);
 			path = sticker2;
 			sourceTree = "<group>";
@@ -1604,214 +1055,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				43BEBD022BDFE57000B3123E /* LaunchScreen.storyboard in Resources */,
-				43BEC1172BE0E3A400B3123E /* airplane_0049.png in Resources */,
-				43BEC0812BE0E16C00B3123E /* tiger_0024.png in Resources */,
-				43BEC1182BE0E3A400B3123E /* airplane_0048.png in Resources */,
-				43BEC0982BE0E16C00B3123E /* tiger_0051.png in Resources */,
-				43BEC08B2BE0E16C00B3123E /* tiger_0041.png in Resources */,
-				43BEC1332BE0E3A400B3123E /* airplane_0069.png in Resources */,
-				43BEC0712BE0E16C00B3123E /* tiger_0006.png in Resources */,
-				43BEC08C2BE0E16C00B3123E /* tiger_0055.png in Resources */,
-				43BEC1612BE0E3A400B3123E /* airplane_0018.png in Resources */,
-				43BEC1542BE0E3A400B3123E /* airplane_0022.png in Resources */,
-				43BEC1292BE0E3A400B3123E /* airplane_0070.png in Resources */,
-				43BEC1162BE0E3A400B3123E /* airplane_0061.png in Resources */,
-				43BEC10D2BE0E3A400B3123E /* airplane_0010.png in Resources */,
-				43BEC1282BE0E3A400B3123E /* airplane_0058.png in Resources */,
-				43BEC13B2BE0E3A400B3123E /* airplane_0057.png in Resources */,
-				43BEC11A2BE0E3A400B3123E /* airplane_0074.png in Resources */,
 				43BEBFF92BE0DDFD00B3123E /* sticker.fsh in Resources */,
-				43BEC1232BE0E3A400B3123E /* airplane_0067.png in Resources */,
-				43BEC05E2BE0E16C00B3123E /* tiger_0071.png in Resources */,
-				43BEC10E2BE0E3A400B3123E /* airplane_0011.png in Resources */,
-				43BEC0672BE0E16C00B3123E /* tiger_0028.png in Resources */,
-				43BEC15C2BE0E3A400B3123E /* airplane_0019.png in Resources */,
-				43BEC06A2BE0E16C00B3123E /* tiger_0004.png in Resources */,
 				43BEBCFF2BDFE57000B3123E /* Assets.xcassets in Resources */,
-				43BEC14D2BE0E3A400B3123E /* airplane_0044.png in Resources */,
-				43BEC1552BE0E3A400B3123E /* airplane_0036.png in Resources */,
-				43BEC0842BE0E16C00B3123E /* tiger_0026.png in Resources */,
-				43BEC1622BE0E3A400B3123E /* airplane_0032.png in Resources */,
 				43BEC20A2BEB8FDE00B3123E /* pic12.jpg in Resources */,
-				43BEC06C2BE0E16C00B3123E /* tiger_0011.png in Resources */,
-				43BEC1492BE0E3A400B3123E /* airplane_0086.png in Resources */,
-				43BEC05C2BE0E16C00B3123E /* tiger_0064.png in Resources */,
 				43BEC20E2BEB8FDE00B3123E /* pic14.jpg in Resources */,
-				43BEC1642BE0E3A400B3123E /* airplane_0027.png in Resources */,
-				43BEC07F2BE0E16C00B3123E /* tiger_0031.png in Resources */,
-				43BEC1652BE0E3A400B3123E /* airplane_0033.png in Resources */,
-				43BEC0732BE0E16C00B3123E /* tiger_0037.png in Resources */,
-				43BEC06D2BE0E16C00B3123E /* tiger_0005.png in Resources */,
-				43BEC1602BE0E3A400B3123E /* airplane_0024.png in Resources */,
-				43BEC1112BE0E3A400B3123E /* airplane_0013.png in Resources */,
-				43BEC0872BE0E16C00B3123E /* tiger_0054.png in Resources */,
-				43BEC0922BE0E16C00B3123E /* tiger_0081.png in Resources */,
-				43BEC0572BE0E16C00B3123E /* tiger_0073.png in Resources */,
-				43BEC0562BE0E16C00B3123E /* tiger_0067.png in Resources */,
-				43BEC0882BE0E16C00B3123E /* tiger_0040.png in Resources */,
 				43BEC20B2BEB8FDE00B3123E /* pic10.jpg in Resources */,
-				43BEC0632BE0E16C00B3123E /* tiger_0017.png in Resources */,
-				43BEC11B2BE0E3A400B3123E /* airplane_0100.png in Resources */,
 				43BEBCFD2BDFE56F00B3123E /* Main.storyboard in Resources */,
-				43BEC0752BE0E16C00B3123E /* tiger_0022.png in Resources */,
 				43BEC20F2BEB8FDE00B3123E /* pic0.jpg in Resources */,
-				43BEC0702BE0E16C00B3123E /* tiger_0007.png in Resources */,
-				43BEC06F2BE0E16C00B3123E /* tiger_0013.png in Resources */,
-				43BEC0652BE0E16C00B3123E /* tiger_0015.png in Resources */,
-				43BEC0862BE0E16C00B3123E /* tiger_0033.png in Resources */,
-				43BEC0782BE0E16C00B3123E /* tiger_0034.png in Resources */,
-				43BEC1242BE0E3A400B3123E /* airplane_0073.png in Resources */,
 				43BEC2112BEB8FDE00B3123E /* pic3.jpg in Resources */,
-				43BEC0742BE0E16C00B3123E /* tiger_0023.png in Resources */,
-				43BEC1562BE0E3A400B3123E /* airplane_0020.png in Resources */,
-				43BEC0552BE0E16C00B3123E /* tiger_0063.png in Resources */,
-				43BEC15A2BE0E3A400B3123E /* airplane_0035.png in Resources */,
-				43BEC1052BE0E3A400B3123E /* airplane_0017.png in Resources */,
-				43BEC10C2BE0E3A400B3123E /* airplane_0004.png in Resources */,
-				43BEC07A2BE0E16C00B3123E /* tiger_0009.png in Resources */,
-				43BEC1312BE0E3A400B3123E /* airplane_0040.png in Resources */,
-				43BEC15D2BE0E3A400B3123E /* airplane_0025.png in Resources */,
-				43BEC1432BE0E3A400B3123E /* airplane_0052.png in Resources */,
-				43BEC0722BE0E16C00B3123E /* tiger_0012.png in Resources */,
-				43BEC05F2BE0E16C00B3123E /* tiger_0059.png in Resources */,
 				43BEC20D2BEB8FDE00B3123E /* pic15.jpg in Resources */,
-				43BEC14B2BE0E3A400B3123E /* airplane_0051.png in Resources */,
-				43BEC1352BE0E3A400B3123E /* airplane_0055.png in Resources */,
-				43BEC0592BE0E16C00B3123E /* tiger_0066.png in Resources */,
-				43BEC1032BE0E3A400B3123E /* airplane_0002.png in Resources */,
-				43BEC1462BE0E3A400B3123E /* airplane_0090.png in Resources */,
-				43BEC14E2BE0E3A400B3123E /* airplane_0050.png in Resources */,
-				43BEC0692BE0E16C00B3123E /* tiger_0038.png in Resources */,
-				43BEC1222BE0E3A400B3123E /* airplane_0098.png in Resources */,
-				43BEC0802BE0E16C00B3123E /* tiger_0030.png in Resources */,
-				43BEC1022BE0E3A400B3123E /* airplane_0016.png in Resources */,
-				43BEC0502BE0E16C00B3123E /* tiger_0060.png in Resources */,
-				43BEC06E2BE0E16C00B3123E /* tiger_0039.png in Resources */,
-				43BEC0952BE0E16C00B3123E /* tiger_0053.png in Resources */,
 				43BEC2162BEB8FDE00B3123E /* pic4.jpg in Resources */,
-				43BEC1102BE0E3A400B3123E /* airplane_0039.png in Resources */,
 				43BEC2122BEB8FDE00B3123E /* pic2.jpg in Resources */,
-				43BEC13A2BE0E3A400B3123E /* airplane_0043.png in Resources */,
-				43BEC1202BE0E3A400B3123E /* airplane_0063.png in Resources */,
-				43BEC09A2BE0E16C00B3123E /* tiger_0044.png in Resources */,
-				43BEC1372BE0E3A400B3123E /* airplane_0096.png in Resources */,
-				43BEC07D2BE0E16C00B3123E /* tiger_0019.png in Resources */,
-				43BEC15B2BE0E3A400B3123E /* airplane_0021.png in Resources */,
-				43BEC1152BE0E3A400B3123E /* airplane_0075.png in Resources */,
-				43BEC05A2BE0E16C00B3123E /* tiger_0058.png in Resources */,
-				43BEC1252BE0E3A400B3123E /* airplane_0072.png in Resources */,
 				43BEC2082BEB8FDE00B3123E /* pic9.jpg in Resources */,
-				43BEC2222BF3605700B3123E /* xinwen.MP4 in Resources */,
-				43BEC1142BE0E3A400B3123E /* airplane_0012.png in Resources */,
-				43BEC1132BE0E3A400B3123E /* airplane_0006.png in Resources */,
-				43BEC0642BE0E16C00B3123E /* tiger_0001.png in Resources */,
-				43BEC14F2BE0E3A400B3123E /* airplane_0078.png in Resources */,
 				43BEC2142BEB8FDE00B3123E /* pic7.jpg in Resources */,
-				43BEC1062BE0E3A400B3123E /* airplane_0001.png in Resources */,
-				43BEC1122BE0E3A400B3123E /* airplane_0007.png in Resources */,
-				43BEC07B2BE0E16C00B3123E /* tiger_0035.png in Resources */,
-				43BEC1392BE0E3A400B3123E /* airplane_0094.png in Resources */,
-				43BEC1442BE0E3A400B3123E /* airplane_0053.png in Resources */,
-				43BEC1272BE0E3A400B3123E /* airplane_0099.png in Resources */,
-				43BEC0522BE0E16C00B3123E /* tiger_0062.png in Resources */,
 				43BEC2102BEB8FDE00B3123E /* pic1.jpg in Resources */,
-				43BEC04E2BE0E16C00B3123E /* tiger_0049.png in Resources */,
-				43BEC1342BE0E3A400B3123E /* airplane_0041.png in Resources */,
-				43BEC0832BE0E16C00B3123E /* tiger_0032.png in Resources */,
-				43BEC09C2BE0E16C00B3123E /* tiger_0078.png in Resources */,
-				43BEC1632BE0E3A400B3123E /* airplane_0026.png in Resources */,
-				43BEC13C2BE0E3A400B3123E /* airplane_0056.png in Resources */,
-				43BEC13D2BE0E3A400B3123E /* airplane_0042.png in Resources */,
-				43BEC11F2BE0E3A400B3123E /* airplane_0077.png in Resources */,
-				43BEC0512BE0E16C00B3123E /* tiger_0074.png in Resources */,
-				43BEC0622BE0E16C00B3123E /* tiger_0003.png in Resources */,
-				43BEC0532BE0E16C00B3123E /* tiger_0076.png in Resources */,
-				43BEC0792BE0E16C00B3123E /* tiger_0008.png in Resources */,
-				43BEC0912BE0E16C00B3123E /* tiger_0042.png in Resources */,
-				43BEC1192BE0E3A400B3123E /* airplane_0060.png in Resources */,
-				43BEC1522BE0E3A400B3123E /* airplane_0037.png in Resources */,
-				43BEC0542BE0E16C00B3123E /* tiger_0077.png in Resources */,
-				43BEC0972BE0E16C00B3123E /* tiger_0079.png in Resources */,
 				43BEC2232BF3605700B3123E /* snow.MP4 in Resources */,
-				43BEC1072BE0E3A400B3123E /* airplane_0015.png in Resources */,
-				43BEC0582BE0E16C00B3123E /* tiger_0072.png in Resources */,
-				43BEC12F2BE0E3A400B3123E /* airplane_0083.png in Resources */,
-				43BEC10F2BE0E3A400B3123E /* airplane_0005.png in Resources */,
-				43BEC13F2BE0E3A400B3123E /* airplane_0081.png in Resources */,
 				43BEC2092BEB8FDE00B3123E /* pic8.jpg in Resources */,
-				43BEC1452BE0E3A400B3123E /* airplane_0047.png in Resources */,
-				43BEC1472BE0E3A400B3123E /* airplane_0084.png in Resources */,
-				43BEC1572BE0E3A400B3123E /* airplane_0034.png in Resources */,
-				43BEC07E2BE0E16C00B3123E /* tiger_0025.png in Resources */,
-				43BEC06B2BE0E16C00B3123E /* tiger_0010.png in Resources */,
-				43BEC15F2BE0E3A400B3123E /* airplane_0030.png in Resources */,
 				43BEBE262BDFE61900B3123E /* SDL_config.h.cmake in Resources */,
-				43BEC07C2BE0E16C00B3123E /* tiger_0021.png in Resources */,
-				43BEC0682BE0E16C00B3123E /* tiger_0014.png in Resources */,
-				43BEC12D2BE0E3A400B3123E /* airplane_0059.png in Resources */,
-				43BEC11E2BE0E3A400B3123E /* airplane_0076.png in Resources */,
-				43BEC10A2BE0E3A400B3123E /* airplane_0014.png in Resources */,
-				43BEC0962BE0E16C00B3123E /* tiger_0047.png in Resources */,
-				43BEC11D2BE0E3A400B3123E /* airplane_0062.png in Resources */,
-				43BEC13E2BE0E3A400B3123E /* airplane_0095.png in Resources */,
-				43BEC05D2BE0E16C00B3123E /* tiger_0065.png in Resources */,
-				43BEBE472BDFE9A400B3123E /* xiaolin.MP4 in Resources */,
-				43BEC1362BE0E3A400B3123E /* airplane_0082.png in Resources */,
-				43BEC1042BE0E3A400B3123E /* airplane_0003.png in Resources */,
-				43BEC0602BE0E16C00B3123E /* tiger_0016.png in Resources */,
-				43BEC08F2BE0E16C00B3123E /* tiger_0057.png in Resources */,
-				43BEC12E2BE0E3A400B3123E /* airplane_0097.png in Resources */,
-				43BEC08D2BE0E16C00B3123E /* tiger_0080.png in Resources */,
 				43BEC2152BEB8FDE00B3123E /* pic5.jpg in Resources */,
-				43BEC1512BE0E3A400B3123E /* airplane_0093.png in Resources */,
-				43BEC04D2BE0E16C00B3123E /* tiger_0061.png in Resources */,
-				43BEC04C2BE0E16C00B3123E /* tiger_0075.png in Resources */,
-				43BEC12A2BE0E3A400B3123E /* airplane_0064.png in Resources */,
-				43BEC1502BE0E3A400B3123E /* airplane_0087.png in Resources */,
-				43BEC05B2BE0E16C00B3123E /* tiger_0070.png in Resources */,
-				43BEC0772BE0E16C00B3123E /* tiger_0020.png in Resources */,
 				43BEC2072BEB8FDE00B3123E /* pic13.jpg in Resources */,
-				43BEC11C2BE0E3A400B3123E /* airplane_0089.png in Resources */,
-				43BEC12B2BE0E3A400B3123E /* airplane_0065.png in Resources */,
 				43BEBE272BDFE61900B3123E /* SDL_config.h.in in Resources */,
-				43BEC14C2BE0E3A400B3123E /* airplane_0045.png in Resources */,
-				43BEC1482BE0E3A400B3123E /* airplane_0092.png in Resources */,
-				43BEC1212BE0E3A400B3123E /* airplane_0088.png in Resources */,
-				43BEC1592BE0E3A400B3123E /* airplane_0009.png in Resources */,
 				43BEBFF82BE0DDFD00B3123E /* sticker.vsh in Resources */,
-				43BEC0942BE0E16C00B3123E /* tiger_0052.png in Resources */,
-				43BEC0762BE0E16C00B3123E /* tiger_0036.png in Resources */,
-				43BEC0822BE0E16C00B3123E /* tiger_0018.png in Resources */,
-				43BEC0992BE0E16C00B3123E /* tiger_0045.png in Resources */,
-				43BEC0902BE0E16C00B3123E /* tiger_0056.png in Resources */,
-				43BEC0892BE0E16C00B3123E /* tiger_0068.png in Resources */,
-				43BEC12C2BE0E3A400B3123E /* airplane_0071.png in Resources */,
-				43BEC1382BE0E3A400B3123E /* airplane_0080.png in Resources */,
-				43BEC1092BE0E3A400B3123E /* airplane_0028.png in Resources */,
-				43BEC1322BE0E3A400B3123E /* airplane_0068.png in Resources */,
-				43BEC0932BE0E16C00B3123E /* tiger_0046.png in Resources */,
-				43BEC04F2BE0E16C00B3123E /* tiger_0048.png in Resources */,
-				43BEC1422BE0E3A400B3123E /* airplane_0046.png in Resources */,
-				43BEC08A2BE0E16C00B3123E /* tiger_0069.png in Resources */,
-				43BEC1532BE0E3A400B3123E /* airplane_0023.png in Resources */,
-				43BEC1402BE0E3A400B3123E /* airplane_0085.png in Resources */,
-				43BEC14A2BE0E3A400B3123E /* airplane_0079.png in Resources */,
-				43BEC1082BE0E3A400B3123E /* airplane_0029.png in Resources */,
-				43BEC0612BE0E16C00B3123E /* tiger_0002.png in Resources */,
-				43BEC09B2BE0E16C00B3123E /* tiger_0050.png in Resources */,
-				43BEC0852BE0E16C00B3123E /* tiger_0027.png in Resources */,
-				43BEC08E2BE0E16C00B3123E /* tiger_0043.png in Resources */,
 				43BEC2132BEB8FDE00B3123E /* pic6.jpg in Resources */,
-				43BEC1302BE0E3A400B3123E /* airplane_0054.png in Resources */,
 				43BEC20C2BEB8FDE00B3123E /* pic11.jpg in Resources */,
-				43BEC1262BE0E3A400B3123E /* airplane_0066.png in Resources */,
-				43BEC0662BE0E16C00B3123E /* tiger_0029.png in Resources */,
 				43BEBE542BDFFFB600B3123E /* display.fsh in Resources */,
-				43BEC15E2BE0E3A400B3123E /* airplane_0031.png in Resources */,
-				43BEC10B2BE0E3A400B3123E /* airplane_0038.png in Resources */,
-				43BEC1582BE0E3A400B3123E /* airplane_0008.png in Resources */,
 				43BEBE552BDFFFB600B3123E /* display.vsh in Resources */,
-				43BEC1412BE0E3A400B3123E /* airplane_0091.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
