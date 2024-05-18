@@ -30,7 +30,7 @@
 
 - (void)startBtnAction {
     EditViewController *editVC = [EditViewController new];
-    editVC.inputFileName = [[NSBundle mainBundle] pathForResource:@"snow.MP4" ofType:nil]; // xiaolin.MP4(1172x720) snow.MP4(720*1280) xinwen.MP4(720*1280)
+    editVC.inputFileName = [[NSBundle mainBundle] pathForResource:@"xiaolin.MP4" ofType:nil]; // xiaolin.MP4(1172x720) snow.MP4(720*1280) xinwen.MP4(720*1280)
     editVC.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:editVC animated:YES completion:nil];
 }
