@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "4D80D10C-3C30-493A-A1E2-12A3C43A499C"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B7CB973A-1562-435E-8DC3-C156F3B00635"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TuVideoEdit/Core/EditViewController.mm"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "783"
+            endingLineNumber = "783">
+            <Locations>
+               <Location
+                  uuid = "B7CB973A-1562-435E-8DC3-C156F3B00635 - 3106cd6f273a721b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[EditViewController updateFrame]"
+                  moduleName = "TuVideoEdit"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wangjiali/Desktop/TuVideoEdit/TuVideoEdit/Core/EditViewController.mm"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "746"
+                  endingLineNumber = "746"
+                  offsetFromSymbolStart = "24">
+               </Location>
+               <Location
+                  uuid = "B7CB973A-1562-435E-8DC3-C156F3B00635 - 3106cd6f273a75d9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[EditViewController updateFrame]"
+                  moduleName = "TuVideoEdit"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wangjiali/Desktop/TuVideoEdit/TuVideoEdit/Core/EditViewController.mm"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "748"
+                  endingLineNumber = "748"
+                  offsetFromSymbolStart = "24">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
