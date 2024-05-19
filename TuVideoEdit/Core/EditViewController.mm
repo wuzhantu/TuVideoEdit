@@ -227,6 +227,10 @@ using namespace std;
     self.playBtn.selected = !self.playBtn.isSelected;
     previewDecoder->setPause(self.playBtn.isSelected);
 
+    if (self.playBtn.selected) {
+        return;
+    }
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0), ^{
         self->previewDecoder->videoPlayDecode();
     });
@@ -314,7 +318,7 @@ using namespace std;
             return;
         }
         
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0), ^{
             self->timeLineDecoder->videoDecode(start, end, [weakSelf](int startRow, int endRow) -> void {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     NSLog(@"backward %d %d", startRow, endRow);
@@ -337,7 +341,7 @@ using namespace std;
             return;
         }
         
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0), ^{
             self->timeLineDecoder->videoDecode(start, end, [weakSelf](int startRow, int endRow) -> void {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     NSLog(@"forward %d %d", startRow, endRow);
@@ -360,7 +364,7 @@ using namespace std;
     }
     
     if (seekRow != lastSeekRow) {
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0), ^{
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
             self->previewDecoder->videoPreviewDecode(seekRow);
         });
     }

@@ -126,7 +126,13 @@ void PreviewDecoder::videoPreviewDecode(int previewRow) {
     av_packet_unref(videoPkt);
     avcodec_flush_buffers(videodec_ctx);
     
-    int ret = av_seek_frame(videoifmt, -1, previewRow * AV_TIME_BASE, AVSEEK_FLAG_BACKWARD);
+    int ret;
+    
+    if (seekRow != previewRow) {
+        goto end;
+    }
+    
+    ret = av_seek_frame(videoifmt, -1, previewRow * AV_TIME_BASE, AVSEEK_FLAG_BACKWARD);
     if (ret < 0) {
         cout << "seek frame failed" << endl;
         goto end;
@@ -171,7 +177,7 @@ void PreviewDecoder::videoPreviewDecode(int previewRow) {
         av_packet_unref(videoPkt);
     }
     
-    cout << "display videoDecode end" << endl;
+    cout << "preview videoDecode end" << endl;
     
 end:
     videoLock.unlock();
