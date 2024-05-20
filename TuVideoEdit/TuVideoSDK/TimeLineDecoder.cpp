@@ -6,6 +6,7 @@
 //
 
 #include "TimeLineDecoder.hpp"
+#include "DecoderContextPool.hpp"
 
 TimeLineDecoder::TimeLineDecoder(const char *inputFileName) {
     this->inputFileName = inputFileName;
@@ -13,18 +14,7 @@ TimeLineDecoder::TimeLineDecoder(const char *inputFileName) {
 
 void TimeLineDecoder::videoDecode(int startRow, int endRow, std::function<void(int, int)>reloadBlock) {
     
-    DecoderContext *decoderCtx;
-    decoderMtx.lock();
-    if (!decoderCtxQueue.empty()) {
-        cout << "reusedecoderCtx" << endl;
-        decoderCtx = decoderCtxQueue.front();
-        decoderCtxQueue.pop();
-        decoderMtx.unlock();
-    } else {
-        decoderMtx.unlock();
-        decoderCtx = new DecoderContext(inputFileName);
-        cout << "createdecoderCtx" << endl;
-    }
+    DecoderContext *decoderCtx = DecoderContextPool::shareInstance()->getDecoderCtx(inputFileName);
     
     int videoIndex = decoderCtx->videoIndex;
     AVCodecContext *forwardVideodecCtx = decoderCtx->forwardVideodecCtx;
@@ -105,9 +95,7 @@ void TimeLineDecoder::videoDecode(int startRow, int endRow, std::function<void(i
     cout << "timeline forward videoDecode end" << endl;
     
 end:
-    decoderMtx.lock();
-    decoderCtxQueue.push(decoderCtx);
-    decoderMtx.unlock();
+    DecoderContextPool::shareInstance()->push(decoderCtx);
 }
 
 AVFrame * TimeLineDecoder::frameForIndex(int index) {

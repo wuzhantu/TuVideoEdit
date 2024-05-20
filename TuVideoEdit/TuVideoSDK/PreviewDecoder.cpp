@@ -6,6 +6,7 @@
 //
 
 #include "PreviewDecoder.hpp"
+#include "DecoderContextPool.hpp"
 
 PreviewDecoder::PreviewDecoder(const char *inputFileName, std::function<void(AVFrame *)>renderVideoBlock) {
     this->inputFileName = inputFileName;
@@ -74,17 +75,8 @@ void PreviewDecoder::setupAudioFFmpeg() {
 }
 
 void PreviewDecoder::videoPreviewDecode(int previewRow) {
-        
-    DecoderContext *decoderCtx;
-    decoderMtx.lock();
-    if (!decoderCtxQueue.empty()) {
-        decoderCtx = decoderCtxQueue.front();
-        decoderCtxQueue.pop();
-        decoderMtx.unlock();
-    } else {
-        decoderMtx.unlock();
-        decoderCtx = new DecoderContext(inputFileName);
-    }
+    
+    DecoderContext *decoderCtx = DecoderContextPool::shareInstance()->getDecoderCtx(inputFileName);
     
     int videoIndex = decoderCtx->videoIndex;
     AVCodecContext *previewVideodecCtx = decoderCtx->forwardVideodecCtx;
@@ -147,23 +139,12 @@ void PreviewDecoder::videoPreviewDecode(int previewRow) {
     }
     
 end:
-    decoderMtx.lock();
-    decoderCtxQueue.push(decoderCtx);
-    decoderMtx.unlock();
+    DecoderContextPool::shareInstance()->push(decoderCtx);
 }
 
 void PreviewDecoder::videoPlayDecode() {
     
-    DecoderContext *decoderCtx;
-    decoderMtx.lock();
-    if (!decoderCtxQueue.empty()) {
-        decoderCtx = decoderCtxQueue.front();
-        decoderCtxQueue.pop();
-        decoderMtx.unlock();
-    } else {
-        decoderMtx.unlock();
-        decoderCtx = new DecoderContext(inputFileName);
-    }
+    DecoderContext *decoderCtx = DecoderContextPool::shareInstance()->getDecoderCtx(inputFileName);
     
     int videoIndex = decoderCtx->videoIndex;
     AVCodecContext *playVideodecCtx = decoderCtx->forwardVideodecCtx;
@@ -229,9 +210,7 @@ void PreviewDecoder::videoPlayDecode() {
     }
     
 end:
-    decoderMtx.lock();
-    decoderCtxQueue.push(decoderCtx);
-    decoderMtx.unlock();
+    DecoderContextPool::shareInstance()->push(decoderCtx);
 }
 
 void PreviewDecoder::audioPlayDecode() {
@@ -513,17 +492,7 @@ void PreviewDecoder::setPause(bool pause) {
         isAudioPause = false;
 
         if (isFirstPlay) {
-            DecoderContext *decoderCtx;
-            decoderMtx.lock();
-            if (!decoderCtxQueue.empty()) {
-                decoderCtx = decoderCtxQueue.front();
-                decoderCtxQueue.pop();
-                decoderMtx.unlock();
-            } else {
-                decoderMtx.unlock();
-                decoderCtx = new DecoderContext(inputFileName);
-            }
-            
+            DecoderContext *decoderCtx = DecoderContextPool::shareInstance()->getDecoderCtx(inputFileName);
             int fps = decoderCtx->videoStram->r_frame_rate.num / decoderCtx->videoStram->r_frame_rate.den;
             mDispalyLink.setInterval(1000 / fps);
             isFirstPlay = false;

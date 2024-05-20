@@ -54,6 +54,7 @@
 		43CB6B882BF7650B001ACC60 /* PreviewDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43CB6B852BF7650B001ACC60 /* PreviewDecoder.cpp */; };
 		43CB6B892BF7650B001ACC60 /* TuTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43CB6B862BF7650B001ACC60 /* TuTimer.cpp */; };
 		43CB6B8C2BF77A14001ACC60 /* TuSemaphore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43CB6B8A2BF77A14001ACC60 /* TuSemaphore.cpp */; };
+		43CB6B8F2BFB405A001ACC60 /* DecoderContextPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43CB6B8D2BFB405A001ACC60 /* DecoderContextPool.cpp */; };
 		F1C3AAE82BF8A4CF00A10825 /* xiaolin.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = F1C3AAE72BF8A4CF00A10825 /* xiaolin.MP4 */; };
 /* End PBXBuildFile section */
 
@@ -363,6 +364,8 @@
 		43CB6B872BF7650B001ACC60 /* TuTimer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TuTimer.hpp; sourceTree = "<group>"; };
 		43CB6B8A2BF77A14001ACC60 /* TuSemaphore.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TuSemaphore.cpp; sourceTree = "<group>"; };
 		43CB6B8B2BF77A14001ACC60 /* TuSemaphore.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TuSemaphore.hpp; sourceTree = "<group>"; };
+		43CB6B8D2BFB405A001ACC60 /* DecoderContextPool.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DecoderContextPool.cpp; sourceTree = "<group>"; };
+		43CB6B8E2BFB405A001ACC60 /* DecoderContextPool.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DecoderContextPool.hpp; sourceTree = "<group>"; };
 		F1C3AAE72BF8A4CF00A10825 /* xiaolin.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = xiaolin.MP4; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -882,6 +885,8 @@
 				43BEC22A2BF5A2D300B3123E /* TimeLineDecoder.cpp */,
 				43BEC2252BF4DFEF00B3123E /* DecoderContext.hpp */,
 				43BEC2242BF4DFEF00B3123E /* DecoderContext.cpp */,
+				43CB6B8E2BFB405A001ACC60 /* DecoderContextPool.hpp */,
+				43CB6B8D2BFB405A001ACC60 /* DecoderContextPool.cpp */,
 				43CB6B662BF6526A001ACC60 /* VideoRender.hpp */,
 				43CB6B652BF6526A001ACC60 /* VideoRender.cpp */,
 				43CB6B622BF6344F001ACC60 /* ExportVideo.hpp */,
@@ -1046,6 +1051,7 @@
 				43CB6B8C2BF77A14001ACC60 /* TuSemaphore.cpp in Sources */,
 				43CB6B892BF7650B001ACC60 /* TuTimer.cpp in Sources */,
 				43BEBD052BDFE57100B3123E /* main.m in Sources */,
+				43CB6B8F2BFB405A001ACC60 /* DecoderContextPool.cpp in Sources */,
 				43BEBE4B2BDFEDAE00B3123E /* EditViewController.mm in Sources */,
 				43CB6B642BF6344F001ACC60 /* ExportVideo.cpp in Sources */,
 				43BEBCF72BDFE56F00B3123E /* SceneDelegate.m in Sources */,

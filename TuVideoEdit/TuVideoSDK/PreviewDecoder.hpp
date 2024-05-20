@@ -41,8 +41,6 @@ class PreviewDecoder {
     
     
 public:
-    queue<DecoderContext *> decoderCtxQueue;
-    mutex decoderMtx;
     bool isVideoPause;
     bool isAudioPause;
     TuSemaphore audioSemap;

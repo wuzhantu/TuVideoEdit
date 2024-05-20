@@ -29,10 +29,8 @@ class TimeLineDecoder {
 
 public:
     mutex frameMapMtx;
-    mutex decoderMtx;
     unordered_map<int, AVFrame *> frameMap;
     int videoFrameDuration;
-    queue<DecoderContext *> decoderCtxQueue;
     const char *inputFileName;
     
     TimeLineDecoder(const char *inputFileName);
