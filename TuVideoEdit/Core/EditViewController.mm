@@ -118,7 +118,7 @@ using namespace std;
     self.playBtn = playBtn;
     
     int num = 8;
-    CGFloat itemWidth = screenWidth / (CGFloat)num;
+    CGFloat itemWidth = ceil(screenWidth / (CGFloat)num);
     CGFloat itemHeight = itemWidth;
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.itemSize = CGSizeMake(itemWidth, itemHeight);

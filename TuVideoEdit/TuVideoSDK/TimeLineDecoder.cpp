@@ -14,6 +14,10 @@ TimeLineDecoder::TimeLineDecoder(const char *inputFileName) {
 
 void TimeLineDecoder::videoDecode(int startRow, int endRow, std::function<void(int, int)>reloadBlock) {
     
+    if (startRow > endRow) {
+        return;
+    }
+    
     DecoderContext *decoderCtx = DecoderContextPool::shareInstance()->getDecoderCtx(inputFileName);
     
     int videoIndex = decoderCtx->videoIndex;
