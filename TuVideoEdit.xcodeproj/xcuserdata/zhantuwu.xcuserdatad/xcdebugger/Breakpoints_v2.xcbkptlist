@@ -7,80 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "59C95C52-90D9-49E3-A78C-6CD94F8108B2"
+            uuid = "DC00D440-5B91-4797-B0BF-BF7059E1414F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TuVideoEdit/TuVideoSDK/PreviewDecoder.cpp"
+            filePath = "TuVideoEdit/TuVideoSDK/VideoRender.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "131"
-            endingLineNumber = "131"
-            landmarkName = "PreviewDecoder::videoPreviewDecode(previewRow)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "95931F80-429C-4128-A9DB-6DB217CA4A47"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TuVideoEdit/TuVideoSDK/PreviewDecoder.cpp"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
-            landmarkName = "PreviewDecoder::videoPlayDecode()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "83FBC2EF-F6E4-4077-B33C-23F4C4C1BABA"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TuVideoEdit/TuVideoSDK/PreviewDecoder.cpp"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "260"
-            endingLineNumber = "260"
-            landmarkName = "PreviewDecoder::audioPlayDecode()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "51AAC516-4EA7-441E-A181-6A3E10A9438C"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TuVideoEdit/TuVideoSDK/TimeLineDecoder.cpp"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "TimeLineDecoder::videoDecode(startRow, endRow, reloadBlock)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "E8B05213-9FF4-4C0F-81CE-44E246A14684"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TuVideoEdit/TuVideoSDK/PreviewDecoder.cpp"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "527"
-            endingLineNumber = "527"
-            landmarkName = "PreviewDecoder::setPause(pause)"
+            startingLineNumber = "378"
+            endingLineNumber = "378"
+            landmarkName = "VideoRender::applyFilterToFrame(frame)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -154,13 +154,13 @@ using namespace std;
     [grayscaleBtn addTarget:self action:@selector(grayscaleBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:grayscaleBtn];
     
-    UIButton *originalBtn = [[UIButton alloc] initWithFrame:CGRectMake(260, 500, 100, 40)];
-    originalBtn.layer.cornerRadius = 10;
-    originalBtn.clipsToBounds = YES;
-    originalBtn.backgroundColor = UIColor.purpleColor;
-    [originalBtn setTitle:@"原图" forState:UIControlStateNormal];
-    [originalBtn addTarget:self action:@selector(originalBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:originalBtn];
+    UIButton *noFilterBtn = [[UIButton alloc] initWithFrame:CGRectMake(260, 500, 100, 40)];
+    noFilterBtn.layer.cornerRadius = 10;
+    noFilterBtn.clipsToBounds = YES;
+    noFilterBtn.backgroundColor = UIColor.purpleColor;
+    [noFilterBtn setTitle:@"还原" forState:UIControlStateNormal];
+    [noFilterBtn addTarget:self action:@selector(noFilterBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:noFilterBtn];
     
     UIButton *stick1Btn = [[UIButton alloc] initWithFrame:CGRectMake(20, 580, 100, 40)];
     stick1Btn.layer.cornerRadius = 10;
@@ -182,7 +182,7 @@ using namespace std;
     effect1Btn.layer.cornerRadius = 10;
     effect1Btn.clipsToBounds = YES;
     effect1Btn.backgroundColor = UIColor.purpleColor;
-    [effect1Btn setTitle:@"浮雕效果" forState:UIControlStateNormal];
+    [effect1Btn setTitle:@"二分特效" forState:UIControlStateNormal];
     [effect1Btn addTarget:self action:@selector(effect1BtnAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:effect1Btn];
     
@@ -190,17 +190,17 @@ using namespace std;
     effect2Btn.layer.cornerRadius = 10;
     effect2Btn.clipsToBounds = YES;
     effect2Btn.backgroundColor = UIColor.purpleColor;
-    [effect2Btn setTitle:@"二分特效" forState:UIControlStateNormal];
+    [effect2Btn setTitle:@"四分特效" forState:UIControlStateNormal];
     [effect2Btn addTarget:self action:@selector(effect2BtnAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:effect2Btn];
     
-    UIButton *effect3Btn = [[UIButton alloc] initWithFrame:CGRectMake(260, 660, 100, 40)];
-    effect3Btn.layer.cornerRadius = 10;
-    effect3Btn.clipsToBounds = YES;
-    effect3Btn.backgroundColor = UIColor.purpleColor;
-    [effect3Btn setTitle:@"四分特效" forState:UIControlStateNormal];
-    [effect3Btn addTarget:self action:@selector(effect3BtnAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:effect3Btn];
+    UIButton *noEffectBtn = [[UIButton alloc] initWithFrame:CGRectMake(260, 660, 100, 40)];
+    noEffectBtn.layer.cornerRadius = 10;
+    noEffectBtn.clipsToBounds = YES;
+    noEffectBtn.backgroundColor = UIColor.purpleColor;
+    [noEffectBtn setTitle:@"还原" forState:UIControlStateNormal];
+    [noEffectBtn addTarget:self action:@selector(noEffectBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:noEffectBtn];
 }
 
 - (void)closeBtnAction {
@@ -241,16 +241,16 @@ using namespace std;
 }
 
 - (void)inversionBtnAction {
-    self.displayView.applyInversionFilter = !self.displayView.applyInversionFilter;
+    self.displayView.applyInversionFilter = YES;
     self.displayView.applyGrayscaleFilter = NO;
 }
 
 - (void)grayscaleBtnAction {
-    self.displayView.applyGrayscaleFilter = !self.displayView.applyGrayscaleFilter;
+    self.displayView.applyGrayscaleFilter = YES;
     self.displayView.applyInversionFilter = NO;
 }
 
-- (void)originalBtnAction {
+- (void)noFilterBtnAction {
     self.displayView.applyGrayscaleFilter = NO;
     self.displayView.applyInversionFilter = NO;
 }
@@ -268,19 +268,16 @@ using namespace std;
 - (void)effect1BtnAction {
     self.displayView.applyEffect1 = YES;
     self.displayView.applyEffect2 = NO;
-    self.displayView.applyEffect3 = NO;
 }
 
 - (void)effect2BtnAction {
     self.displayView.applyEffect1 = NO;
     self.displayView.applyEffect2 = YES;
-    self.displayView.applyEffect3 = NO;
 }
 
-- (void)effect3BtnAction {
+- (void)noEffectBtnAction {
     self.displayView.applyEffect1 = NO;
     self.displayView.applyEffect2 = NO;
-    self.displayView.applyEffect3 = YES;
 }
 
 #pragma mark - delegate

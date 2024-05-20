@@ -36,7 +36,7 @@ class VideoRender {
 public:
     GLuint myColorRenderBuffer;
     GLuint myColorFrameBuffer;
-    GLubyte *pixelData;
+    GLubyte *pixelData = nullptr;
     GLuint VAO, stickerVAO;
     GLuint VBO;
     GLuint myProgram;
@@ -44,13 +44,12 @@ public:
     GLint _backingWidth;
     GLint _backingHeight;
     
-    bool applyInversionFilter;
-    bool applyGrayscaleFilter = true;
+    bool applyInversionFilter = false;
+    bool applyGrayscaleFilter = false;
     bool applySticker1 = false;
     bool applySticker2 = false;
     bool applyEffect1 = false;
     bool applyEffect2 = false;
-    bool applyEffect3 = false;
     
     const char *displayVertexPath;
     const char *displayFragPath;

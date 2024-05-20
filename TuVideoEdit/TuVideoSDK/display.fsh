@@ -13,7 +13,6 @@ uniform bool applyGrayscaleFilter;
 
 uniform bool applyEffect1;
 uniform bool applyEffect2;
-uniform bool applyEffect3;
 
 void main()
 {
@@ -27,9 +26,7 @@ void main()
 
     vec4 color = vec4(r, g, b, 1.0);
 
-    if (applyEffect1) { // 浮雕效果
-
-    } else if (applyEffect2) { // 二分特效
+    if (applyEffect1) { // 二分特效
         vec2 ypos = yTextureCoord;
         if (ypos.x > 0.5) {
             ypos.x = 1.0 - ypos.x;
@@ -51,7 +48,7 @@ void main()
         float b = y + 1.772 * u;
 
         color = vec4(r, g, b, 1.0);
-    } else if (applyEffect3) {
+    } else if (applyEffect2) {
         vec2 ypos = yTextureCoord;
         if (ypos.x <= 0.5) {
             ypos.x *= 2.0;

@@ -30,7 +30,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL applyEffect1;
 @property (nonatomic, assign) BOOL applyEffect2;
-@property (nonatomic, assign) BOOL applyEffect3;
 
 - (instancetype)initWithFrame:(CGRect)frame videoScale:(CGFloat)scale;
 - (void)displayFrame:(AVFrame *)frame;

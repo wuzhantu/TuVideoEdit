@@ -210,7 +210,6 @@ void VideoRender::displayFrame(AVFrame *frame) {
     glUniform1i(glGetUniformLocation(myProgram, "applyGrayscaleFilter"), applyGrayscaleFilter);
     glUniform1i(glGetUniformLocation(myProgram, "applyEffect1"), applyEffect1);
     glUniform1i(glGetUniformLocation(myProgram, "applyEffect2"), applyEffect2);
-    glUniform1i(glGetUniformLocation(myProgram, "applyEffect3"), applyEffect3);
     glBindTexture(GL_TEXTURE_2D, yuvTexture);
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
@@ -325,7 +324,6 @@ AVFrame * VideoRender::applyFilterToFrame(AVFrame *frame) {
     glUniform1i(glGetUniformLocation(myProgram, "applyGrayscaleFilter"), applyGrayscaleFilter);
     glUniform1i(glGetUniformLocation(myProgram, "applyEffect1"), applyEffect1);
     glUniform1i(glGetUniformLocation(myProgram, "applyEffect2"), applyEffect2);
-    glUniform1i(glGetUniformLocation(myProgram, "applyEffect3"), applyEffect3);
     glBindTexture(GL_TEXTURE_2D, yuvTexture);
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
