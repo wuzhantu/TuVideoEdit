@@ -25,13 +25,11 @@ DecoderContext::DecoderContext(const char *inputFileName) {
     }
     
     forwardVideodecCtx = avcodec_alloc_context3(forwardVideoDec);
-    forwardVideodecCtx->width = 100;
-    forwardVideodecCtx->height = 720.0 / 1172.0 * 100;
     if (!forwardVideodecCtx) {
         cout << "videodec_ctx alloc failed" << endl;
     }
     
-    AVStream *videoStram = forwardVideoifmt->streams[videoIndex];
+    videoStram = forwardVideoifmt->streams[videoIndex];
     AVCodecParameters *videoCodecpar = videoStram->codecpar;
     videoFrameDuration = videoStram->time_base.den / videoStram->time_base.num;
     

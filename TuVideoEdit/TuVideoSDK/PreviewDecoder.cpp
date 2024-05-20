@@ -15,53 +15,7 @@ PreviewDecoder::PreviewDecoder(const char *inputFileName, std::function<void(AVF
 }
 
 void PreviewDecoder::setupVideoFFmpeg() {
-    
-    videoIndex = -1;
     currentVideoPts = 0;
-    
-    videoifmt = NULL;
-    
-    int ret = avformat_open_input(&videoifmt, inputFileName, NULL, NULL);
-    if (ret < 0) {
-        cout << "open inputfile failed" << endl;
-    }
-    
-    ret = avformat_find_stream_info(videoifmt, NULL);
-    if (ret < 0) {
-        cout << "find input stream failed" << endl;
-    }
-    
-    videoIndex = av_find_best_stream(videoifmt, AVMEDIA_TYPE_VIDEO, -1, -1, &videoDec, 0);
-    if (videoIndex < 0) {
-        cout << "not find input video stream" << endl;
-    }
-    
-    videodec_ctx = avcodec_alloc_context3(videoDec);
-    if (!videodec_ctx) {
-        cout << "videodec_ctx alloc failed" << endl;
-    }
-    
-    AVStream *videoStram = videoifmt->streams[videoIndex];
-    AVCodecParameters *videoCodecpar = videoStram->codecpar;
-    videoFrameDuration = videoStram->time_base.den / videoStram->time_base.num;
-    
-    avcodec_parameters_to_context(videodec_ctx, videoCodecpar);
-    
-    ret = avcodec_open2(videodec_ctx, videoDec, NULL);
-    if (ret < 0) {
-        cout << "videodecoder open failed" << endl;
-    }
-    
-    videoPkt = av_packet_alloc();
-    if (!videoPkt) {
-        cout << "create video packet failed" << endl;
-    }
-    
-    int fps = videoStram->r_frame_rate.num / videoStram->r_frame_rate.den;
-    mDispalyLink.setInterval(1000 / fps);
-    mDispalyLink.start([this]() {
-        this->updateFrame();
-    });
 }
 
 void PreviewDecoder::setupAudioFFmpeg() {
@@ -120,11 +74,26 @@ void PreviewDecoder::setupAudioFFmpeg() {
 }
 
 void PreviewDecoder::videoPreviewDecode(int previewRow) {
+        
+    DecoderContext *decoderCtx;
+    decoderMtx.lock();
+    if (!decoderCtxQueue.empty()) {
+        decoderCtx = decoderCtxQueue.front();
+        decoderCtxQueue.pop();
+        decoderMtx.unlock();
+    } else {
+        decoderMtx.unlock();
+        decoderCtx = new DecoderContext(inputFileName);
+    }
     
-    videoLock.lock();
+    int videoIndex = decoderCtx->videoIndex;
+    AVCodecContext *previewVideodecCtx = decoderCtx->forwardVideodecCtx;
+    AVFormatContext *previewVideoifmt = decoderCtx->forwardVideoifmt;
+    AVPacket *previewVideoPkt = decoderCtx->forwardVideoPkt;
+    int videoFrameDuration = decoderCtx->videoFrameDuration;
     
-    av_packet_unref(videoPkt);
-    avcodec_flush_buffers(videodec_ctx);
+    av_packet_unref(previewVideoPkt);
+    avcodec_flush_buffers(previewVideodecCtx);
     
     int ret;
     
@@ -132,7 +101,7 @@ void PreviewDecoder::videoPreviewDecode(int previewRow) {
         goto end;
     }
     
-    ret = av_seek_frame(videoifmt, -1, previewRow * AV_TIME_BASE, AVSEEK_FLAG_BACKWARD);
+    ret = av_seek_frame(previewVideoifmt, -1, previewRow * AV_TIME_BASE, AVSEEK_FLAG_BACKWARD);
     if (ret < 0) {
         cout << "seek frame failed" << endl;
         goto end;
@@ -140,13 +109,13 @@ void PreviewDecoder::videoPreviewDecode(int previewRow) {
     
     while (seekRow == previewRow) {
         
-        ret = av_read_frame(videoifmt, videoPkt);
+        ret = av_read_frame(previewVideoifmt, previewVideoPkt);
         if (ret < 0) {
             break;
         }
         
-        if (videoPkt->stream_index == videoIndex) {
-            ret = avcodec_send_packet(videodec_ctx, videoPkt);
+        if (previewVideoPkt->stream_index == videoIndex && seekRow == previewRow) {
+            ret = avcodec_send_packet(previewVideodecCtx, previewVideoPkt);
             if (ret < 0) {
                 cout << "video decode failed" << endl;
                 goto end;
@@ -155,7 +124,7 @@ void PreviewDecoder::videoPreviewDecode(int previewRow) {
             while (ret >= 0 && seekRow == previewRow) {
                 
                 AVFrame *videodec_frame = av_frame_alloc();
-                ret = avcodec_receive_frame(videodec_ctx, videodec_frame);
+                ret = avcodec_receive_frame(previewVideodecCtx, videodec_frame);
                 if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF) {
                     av_frame_free(&videodec_frame);
                     break;
@@ -174,23 +143,38 @@ void PreviewDecoder::videoPreviewDecode(int previewRow) {
             }
         }
         
-        av_packet_unref(videoPkt);
+        av_packet_unref(previewVideoPkt);
     }
     
-    cout << "preview videoDecode end" << endl;
-    
 end:
-    videoLock.unlock();
+    decoderMtx.lock();
+    decoderCtxQueue.push(decoderCtx);
+    decoderMtx.unlock();
 }
 
 void PreviewDecoder::videoPlayDecode() {
     
-    videoLock.lock();
+    DecoderContext *decoderCtx;
+    decoderMtx.lock();
+    if (!decoderCtxQueue.empty()) {
+        decoderCtx = decoderCtxQueue.front();
+        decoderCtxQueue.pop();
+        decoderMtx.unlock();
+    } else {
+        decoderMtx.unlock();
+        decoderCtx = new DecoderContext(inputFileName);
+    }
     
-    av_packet_unref(videoPkt);
-    avcodec_flush_buffers(videodec_ctx);
+    int videoIndex = decoderCtx->videoIndex;
+    AVCodecContext *playVideodecCtx = decoderCtx->forwardVideodecCtx;
+    AVFormatContext *playVideoifmt = decoderCtx->forwardVideoifmt;
+    AVPacket *playVideoPkt = decoderCtx->forwardVideoPkt;
+    int videoFrameDuration = decoderCtx->videoFrameDuration;
     
-    int ret = av_seek_frame(videoifmt, -1, seekRow * AV_TIME_BASE, AVSEEK_FLAG_BACKWARD);
+    av_packet_unref(playVideoPkt);
+    avcodec_flush_buffers(playVideodecCtx);
+    
+    int ret = av_seek_frame(playVideoifmt, -1, seekRow * AV_TIME_BASE, AVSEEK_FLAG_BACKWARD);
     if (ret < 0) {
         cout << "seek frame failed" << endl;
         goto end;
@@ -198,13 +182,13 @@ void PreviewDecoder::videoPlayDecode() {
     
     while (!isVideoPause) {
         
-        ret = av_read_frame(videoifmt, videoPkt);
+        ret = av_read_frame(playVideoifmt, playVideoPkt);
         if (ret < 0) {
             break;
         }
         
-        if (videoPkt->stream_index == videoIndex) {
-            ret = avcodec_send_packet(videodec_ctx, videoPkt);
+        if (playVideoPkt->stream_index == videoIndex) {
+            ret = avcodec_send_packet(playVideodecCtx, playVideoPkt);
             if (ret < 0) {
                 cout << "video decode failed" << endl;
                 goto end;
@@ -216,7 +200,7 @@ void PreviewDecoder::videoPlayDecode() {
                 }
                 
                 AVFrame *videodec_frame = av_frame_alloc();
-                ret = avcodec_receive_frame(videodec_ctx, videodec_frame);
+                ret = avcodec_receive_frame(playVideodecCtx, videodec_frame);
                 if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF) {
                     av_frame_free(&videodec_frame);
                     break;
@@ -241,13 +225,13 @@ void PreviewDecoder::videoPlayDecode() {
             }
         }
         
-        av_packet_unref(videoPkt);
+        av_packet_unref(playVideoPkt);
     }
     
-    cout << "display videoDecode end" << endl;
-    
 end:
-    videoLock.unlock();
+    decoderMtx.lock();
+    decoderCtxQueue.push(decoderCtx);
+    decoderMtx.unlock();
 }
 
 void PreviewDecoder::audioPlayDecode() {
@@ -321,8 +305,6 @@ void PreviewDecoder::audioPlayDecode() {
         
         av_packet_unref(audioPkt);
     }
-    
-    cout << "display audioDecode end" << endl;
     
 end:
     audioLock.unlock();
@@ -519,7 +501,6 @@ void PreviewDecoder::setPause(bool pause) {
         
         isAudioPause = true;
         audioSemap.notify();
-//        audioSemap = dispatch_semaphore_create(0);
         
         seekAudioPts = -1;
         alSourcePause(sourceId);
@@ -531,6 +512,22 @@ void PreviewDecoder::setPause(bool pause) {
         isVideoPause = false;
         isAudioPause = false;
 
+        if (isFirstPlay) {
+            DecoderContext *decoderCtx;
+            decoderMtx.lock();
+            if (!decoderCtxQueue.empty()) {
+                decoderCtx = decoderCtxQueue.front();
+                decoderCtxQueue.pop();
+                decoderMtx.unlock();
+            } else {
+                decoderMtx.unlock();
+                decoderCtx = new DecoderContext(inputFileName);
+            }
+            
+            int fps = decoderCtx->videoStram->r_frame_rate.num / decoderCtx->videoStram->r_frame_rate.den;
+            mDispalyLink.setInterval(1000 / fps);
+            isFirstPlay = false;
+        }
         mDispalyLink.start([this]() {
             this->updateFrame();
         });

@@ -29,6 +29,7 @@ public:
     int videoIndex = -1;
     AVCodecContext *forwardVideodecCtx = NULL;
     AVFormatContext *forwardVideoifmt = NULL;
+    AVStream *videoStram;
     AVPacket *forwardVideoPkt;
     int videoFrameDuration;
     

@@ -55,20 +55,13 @@ using namespace std;
         });
     });
     
-    dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0), ^{
-        self->previewDecoder->videoPlayDecode();
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
+        self->previewDecoder->videoPreviewDecode(0);
     });
-    
-    dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0), ^{
-        self->previewDecoder->audioPlayDecode();
-    });
-    
     
     timeLineDecoder = new TimeLineDecoder(inputFileName);
-    
     decodedStartRow = 0;
     decodedEndRow = 10;
-
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
         self->timeLineDecoder->videoDecode(0, 10, [weakSelf](int startRow, int endRow) -> void {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -121,6 +114,7 @@ using namespace std;
     [playBtn setTitle:@"播放" forState:UIControlStateSelected];
     [playBtn addTarget:self action:@selector(playBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:playBtn];
+    playBtn.selected = YES;
     self.playBtn = playBtn;
     
     int num = 8;
@@ -306,6 +300,18 @@ using namespace std;
     int seekRow = (int)offsetX / itemWidth;
     previewDecoder->seekRow = seekRow;
     
+    if (!self.playBtn.selected) {
+        self.playBtn.selected = YES;
+        previewDecoder->setPause(true);
+    }
+    
+    if (seekRow != lastSeekRow) {
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
+            self->previewDecoder->videoPreviewDecode(seekRow);
+        });
+    }
+    lastSeekRow = seekRow;
+    
     __weak EditViewController *weakSelf = self;
     
     if (decodedStartRow + 30 > seekRow && decodedStartRow > 0) {
@@ -314,7 +320,7 @@ using namespace std;
         if (start > end) {
             return;
         }
-        
+
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0), ^{
             self->timeLineDecoder->videoDecode(start, end, [weakSelf](int startRow, int endRow) -> void {
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -327,17 +333,17 @@ using namespace std;
                 });
             });
         });
-        
+
         decodedStartRow = MAX(self->decodedStartRow - 30, 0);
     }
-    
+
     if (seekRow + 30 > decodedEndRow && decodedEndRow < 241) {
         int start = self->decodedEndRow + 1;
         int end = MIN(self->decodedEndRow + 30, 241);
         if (start > end) {
             return;
         }
-        
+
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0), ^{
             self->timeLineDecoder->videoDecode(start, end, [weakSelf](int startRow, int endRow) -> void {
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -350,22 +356,9 @@ using namespace std;
                 });
             });
         });
-        
+
         decodedEndRow = MIN(self->decodedEndRow + 30, 241);
     }
-    
-    
-    if (!self.playBtn.selected) {
-        self.playBtn.selected = YES;
-        previewDecoder->setPause(true);
-    }
-    
-    if (seekRow != lastSeekRow) {
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
-            self->previewDecoder->videoPreviewDecode(seekRow);
-        });
-    }
-    lastSeekRow = seekRow;
 }
 
 - (UIImage *)imageFromAVFrame:(AVFrame *)frame {

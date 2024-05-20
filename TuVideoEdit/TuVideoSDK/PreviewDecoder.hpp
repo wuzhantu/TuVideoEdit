@@ -15,6 +15,7 @@
 #include <mutex>
 #include <condition_variable>
 #include <semaphore>
+#include <mutex>
 
 #ifdef __ANDROID__
 
@@ -32,6 +33,7 @@ extern "C" {
 
 #include "TuTimer.hpp"
 #include "TuSemaphore.hpp"
+#include "DecoderContext.hpp"
 
 using namespace std;
 
@@ -39,6 +41,8 @@ class PreviewDecoder {
     
     
 public:
+    queue<DecoderContext *> decoderCtxQueue;
+    mutex decoderMtx;
     bool isVideoPause;
     bool isAudioPause;
     TuSemaphore audioSemap;
@@ -52,12 +56,10 @@ public:
     const char *inputFileName;
     int seekRow = 0;
     bool pause;
-    int videoIndex;
-    AVCodecContext *videodec_ctx;
+    bool isFirstPlay = true;
+    
     mutex videoLock;
-    AVFormatContext *videoifmt;
-    const AVCodec *videoDec;
-    AVPacket *videoPkt;
+    
     int64_t currentVideoPts;
     queue<AVFrame *> videoQueue;
     int videoFrameDuration;
