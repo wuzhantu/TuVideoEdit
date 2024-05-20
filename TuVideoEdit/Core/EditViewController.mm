@@ -64,13 +64,7 @@ using namespace std;
     decodedEndRow = 10;
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
         self->timeLineDecoder->videoDecode(0, 10, [weakSelf](int startRow, int endRow) -> void {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                NSMutableArray *arr = [NSMutableArray array];
-                for(int k = startRow; k <= endRow; k++) {
-                    [arr addObject:[NSIndexPath indexPathForRow:k inSection:0]];
-                }
-                [weakSelf.thumbCollectionView reloadItemsAtIndexPaths:arr];
-            });
+            [weakSelf refreshCellsWithStart:startRow end:endRow];
         });
     });
     
@@ -314,7 +308,7 @@ using namespace std;
     
     __weak EditViewController *weakSelf = self;
     
-    if (decodedStartRow + 30 > seekRow && decodedStartRow > 0) {
+    if (decodedStartRow + 60 > seekRow && decodedStartRow > 0) {
         int start = MAX(self->decodedStartRow - 30, 0);
         int end = decodedStartRow - 1;
         if (start > end) {
@@ -323,21 +317,14 @@ using namespace std;
 
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0), ^{
             self->timeLineDecoder->videoDecode(start, end, [weakSelf](int startRow, int endRow) -> void {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    NSLog(@"backward %d %d", startRow, endRow);
-                    NSMutableArray *arr = [NSMutableArray array];
-                    for(int k = startRow; k <= endRow; k++) {
-                        [arr addObject:[NSIndexPath indexPathForRow:k inSection:0]];
-                    }
-                    [weakSelf.thumbCollectionView reloadItemsAtIndexPaths:arr];
-                });
+                [weakSelf refreshCellsWithStart:startRow end:endRow];
             });
         });
 
         decodedStartRow = MAX(self->decodedStartRow - 30, 0);
     }
 
-    if (seekRow + 30 > decodedEndRow && decodedEndRow < 241) {
+    if (seekRow + 60 > decodedEndRow && decodedEndRow < 241) {
         int start = self->decodedEndRow + 1;
         int end = MIN(self->decodedEndRow + 30, 241);
         if (start > end) {
@@ -346,14 +333,7 @@ using namespace std;
 
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0), ^{
             self->timeLineDecoder->videoDecode(start, end, [weakSelf](int startRow, int endRow) -> void {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    NSLog(@"forward %d %d", startRow, endRow);
-                    NSMutableArray *arr = [NSMutableArray array];
-                    for(int k = startRow; k <= endRow; k++) {
-                        [arr addObject:[NSIndexPath indexPathForRow:k inSection:0]];
-                    }
-                    [weakSelf.thumbCollectionView reloadItemsAtIndexPaths:arr];
-                });
+                [weakSelf refreshCellsWithStart:startRow end:endRow];
             });
         });
 
@@ -431,6 +411,16 @@ using namespace std;
     avformat_close_input(&videoifmt);
     
     return size;
+}
+
+- (void)refreshCellsWithStart:(int)startRow end:(int)endRow {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSMutableArray *arr = [NSMutableArray array];
+        for(int k = startRow; k <= endRow; k++) {
+            [arr addObject:[NSIndexPath indexPathForRow:k inSection:0]];
+        }
+        [self.thumbCollectionView reloadItemsAtIndexPaths:arr];
+    });
 }
 
 @end
