@@ -11,7 +11,7 @@
 @implementation EffectSelectView
 
 - (void)setupData {
-    self.iconImageNameArr = @[@"toolbar_cut", @"toolbar_text"];
+    self.iconImageNameArr = @[@"effect_mirror", @"effect_fourSplit"];
     self.titleArr = @[@"二分", @"四分"];
 }
 

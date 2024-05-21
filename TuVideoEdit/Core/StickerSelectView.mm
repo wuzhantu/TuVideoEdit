@@ -11,7 +11,7 @@
 @implementation StickerSelectView
 
 - (void)setupData {
-    self.iconImageNameArr = @[@"toolbar_cut", @"toolbar_text"];
+    self.iconImageNameArr = @[@"sticker_tiger", @"sticker_airplane"];
     self.titleArr = @[@"老虎", @"无人机"];
 }
 

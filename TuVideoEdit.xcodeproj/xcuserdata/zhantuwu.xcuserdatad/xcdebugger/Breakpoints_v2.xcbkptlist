@@ -18,6 +18,54 @@
             endingLineNumber = "362"
             landmarkName = "VideoRender::applyFilterToFrame(frame)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "DC00D440-5B91-4797-B0BF-BF7059E1414F - d6076f83796f4bd2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "VideoRender::applyFilterToFrame(AVFrame*)"
+                  moduleName = "TuVideoEdit"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zhantuwu/Desktop/%E6%AF%8F%E6%97%A5%E5%9D%9A%E6%8C%81/%E9%9F%B3%E8%A7%86%E9%A2%91/TuVideoEdit/TuVideoEdit/TuVideoSDK/VideoRender.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "378"
+                  endingLineNumber = "378"
+                  offsetFromSymbolStart = "1692">
+               </Location>
+               <Location
+                  uuid = "DC00D440-5B91-4797-B0BF-BF7059E1414F - d6076f83796f49e2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "VideoRender::applyFilterToFrame(AVFrame*)"
+                  moduleName = "TuVideoEdit"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zhantuwu/Desktop/%E6%AF%8F%E6%97%A5%E5%9D%9A%E6%8C%81/%E9%9F%B3%E8%A7%86%E9%A2%91/TuVideoEdit/TuVideoEdit/TuVideoSDK/VideoRender.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "362"
+                  endingLineNumber = "362"
+                  offsetFromSymbolStart = "1740">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "91D9B6FE-64B2-4EB8-A6A9-034FE6F7D4FA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TuVideoEdit/Core/EditSelectView.mm"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "-setupView"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

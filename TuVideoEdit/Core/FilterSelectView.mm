@@ -11,7 +11,7 @@
 @implementation FilterSelectView
 
 - (void)setupData {
-    self.iconImageNameArr = @[@"toolbar_cut", @"toolbar_text"];
+    self.iconImageNameArr = @[@"filter_inversion", @"filter_gray"];
     self.titleArr = @[@"反相", @"灰度"];
 }
 

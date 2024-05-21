@@ -75,6 +75,8 @@ using namespace std;
 - (void)setupView {
     self.view.backgroundColor = [UIColor colorWithRed:27.0/255.0 green:37.0/255.0 blue:44.0/255.0 alpha:1];
     
+    CGFloat screenWidth = UIScreen.mainScreen.bounds.size.width;
+    
     UIButton *closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, 70, 60, 40)];
     [closeBtn setImage:[UIImage imageNamed:@"nav_close"] forState:UIControlStateNormal];
     closeBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -82,7 +84,7 @@ using namespace std;
     [closeBtn addTarget:self action:@selector(closeBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:closeBtn];
     
-    UIButton *exportBtn = [[UIButton alloc] initWithFrame:CGRectMake(320, 70, 80, 40)];
+    UIButton *exportBtn = [[UIButton alloc] initWithFrame:CGRectMake(screenWidth - 80 - 15, 70, 80, 40)];
     exportBtn.layer.cornerRadius = 10;
     exportBtn.clipsToBounds = YES;
     exportBtn.backgroundColor = [UIColor colorWithRed:0 green:247.0/255.0 blue:176.0/255.0 alpha:1];
@@ -92,7 +94,6 @@ using namespace std;
     [exportBtn addTarget:self action:@selector(exportBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:exportBtn];
     
-    CGFloat screenWidth = UIScreen.mainScreen.bounds.size.width;
     CGSize videosize = [self getVideoSize];
     CGFloat videoPixelWidth = videosize.width;
     CGFloat videoPixelHeight = videosize.height;

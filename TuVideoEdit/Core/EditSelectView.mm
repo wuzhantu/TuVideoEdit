@@ -32,7 +32,7 @@
 - (void)setupView {
     self.backgroundColor = [UIColor colorWithRed:27.0/255.0 green:37.0/255.0 blue:44.0/255.0 alpha:1];
     
-    UIButton *confirmBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.bounds.size.width - 80, 10, 60, 40)];
+    UIButton *confirmBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.bounds.size.width - 75, 10, 60, 40)];
     confirmBtn.layer.cornerRadius = 10;
     confirmBtn.clipsToBounds = YES;
     [confirmBtn setImage:[UIImage imageNamed:@"selected"] forState:UIControlStateNormal];
@@ -42,13 +42,15 @@
     
     CGFloat screenWidth = UIScreen.mainScreen.bounds.size.width;
     int num = 4;
-    CGFloat spacing = 10;
-    CGFloat itemWidth = floor((screenWidth - (num - 1) * spacing) / (CGFloat)num);
-    CGFloat itemHeight = itemWidth;
+    CGFloat interitemSpacing = 40;
+    UIEdgeInsets sectionInset = UIEdgeInsetsMake(0, 15, 0, 15);
+    CGFloat itemWidth = floor((screenWidth - (num - 1) * interitemSpacing - sectionInset.left - sectionInset.right) / (CGFloat)num);
+    CGFloat itemHeight = itemWidth + 30;
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.itemSize = CGSizeMake(itemWidth, itemHeight);
-    layout.minimumLineSpacing = spacing;
-    layout.minimumInteritemSpacing = 0;
+    layout.minimumLineSpacing = 0;
+    layout.minimumInteritemSpacing = interitemSpacing;
+    layout.sectionInset = sectionInset;
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 60, self.bounds.size.width, self.bounds.size.height - 50) collectionViewLayout:layout];
     self.collectionView.delegate = self;
