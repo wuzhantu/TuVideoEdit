@@ -79,7 +79,6 @@ using namespace std;
     [closeBtn setImage:[UIImage imageNamed:@"nav_close"] forState:UIControlStateNormal];
     closeBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
     [closeBtn setTitle:@"关闭" forState:UIControlStateNormal];
-    
     [closeBtn addTarget:self action:@selector(closeBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:closeBtn];
     
