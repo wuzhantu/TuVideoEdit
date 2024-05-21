@@ -124,6 +124,7 @@ using namespace std;
     self.thumbCollectionView.dataSource = self;
     self.thumbCollectionView.alwaysBounceHorizontal = YES;
     [self.thumbCollectionView registerClass:ThumbCell.class forCellWithReuseIdentifier:@"thumbCell"];
+    self.thumbCollectionView.prefetchingEnabled = NO;
     [self.view addSubview:self.thumbCollectionView];
     
     UIButton *inversionBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, 500, 100, 40)];
