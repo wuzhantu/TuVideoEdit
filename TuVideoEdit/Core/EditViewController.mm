@@ -75,19 +75,21 @@ using namespace std;
 - (void)setupView {
     self.view.backgroundColor = [UIColor colorWithRed:27.0/255.0 green:37.0/255.0 blue:44.0/255.0 alpha:1];
     
-    UIButton *closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, 40, 60, 40)];
-    closeBtn.layer.cornerRadius = 10;
-    closeBtn.clipsToBounds = YES;
-    closeBtn.backgroundColor = UIColor.purpleColor;
+    UIButton *closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, 70, 60, 40)];
+    [closeBtn setImage:[UIImage imageNamed:@"nav_close"] forState:UIControlStateNormal];
+    closeBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
     [closeBtn setTitle:@"关闭" forState:UIControlStateNormal];
+    
     [closeBtn addTarget:self action:@selector(closeBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:closeBtn];
     
-    UIButton *exportBtn = [[UIButton alloc] initWithFrame:CGRectMake(320, 40, 60, 40)];
+    UIButton *exportBtn = [[UIButton alloc] initWithFrame:CGRectMake(320, 70, 80, 40)];
     exportBtn.layer.cornerRadius = 10;
     exportBtn.clipsToBounds = YES;
-    exportBtn.backgroundColor = UIColor.purpleColor;
-    [exportBtn setTitle:@"导出" forState:UIControlStateNormal];
+    exportBtn.backgroundColor = [UIColor colorWithRed:0 green:247.0/255.0 blue:176.0/255.0 alpha:1];
+    [exportBtn setTitle:@"导出视频" forState:UIControlStateNormal];
+    [exportBtn setTitleColor:UIColor.blackColor forState:UIControlStateNormal];
+    exportBtn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
     [exportBtn addTarget:self action:@selector(exportBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:exportBtn];
     
@@ -97,16 +99,14 @@ using namespace std;
     CGFloat videoPixelHeight = videosize.height;
     CGFloat videoHeight = 240;
     CGFloat videoWidth = videoPixelWidth / videoPixelHeight * videoHeight;
-    self.displayView = [[DisplayView alloc] initWithFrame:CGRectMake((screenWidth - videoWidth) * 0.5, 100, videoWidth, videoHeight) videoScale:videoPixelHeight / videoHeight];
+    self.displayView = [[DisplayView alloc] initWithFrame:CGRectMake((screenWidth - videoWidth) * 0.5, 140, videoWidth, videoHeight) videoScale:videoPixelHeight / videoHeight];
     self.displayView.backgroundColor = UIColor.whiteColor;
     [self.view addSubview:self.displayView];
     
-    UIButton *playBtn = [[UIButton alloc] initWithFrame:CGRectMake((screenWidth - 80) * 0.5, 350, 80, 40)];
-    playBtn.layer.cornerRadius = 10;
-    playBtn.clipsToBounds = YES;
-    playBtn.backgroundColor = UIColor.blueColor;
-    [playBtn setTitle:@"暂停" forState:UIControlStateNormal];
-    [playBtn setTitle:@"播放" forState:UIControlStateSelected];
+    UIButton *playBtn = [[UIButton alloc] initWithFrame:CGRectMake((screenWidth - 80) * 0.5, 430, 80, 40)];
+    [playBtn setImage:[UIImage imageNamed:@"video_pause"] forState:UIControlStateNormal];
+    [playBtn setImage:[UIImage imageNamed:@"video_play"] forState:UIControlStateSelected];
+    playBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
     [playBtn addTarget:self action:@selector(playBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:playBtn];
     playBtn.selected = YES;
@@ -120,7 +120,8 @@ using namespace std;
     layout.minimumLineSpacing = 0;
     layout.minimumInteritemSpacing = 0;
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    self.thumbCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 400, screenWidth, itemHeight) collectionViewLayout:layout];
+    self.thumbCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 500, screenWidth, itemHeight) collectionViewLayout:layout];
+    self.thumbCollectionView.backgroundColor = [UIColor colorWithRed:27.0/255.0 green:37.0/255.0 blue:44.0/255.0 alpha:1];
     self.thumbCollectionView.delegate = self;
     self.thumbCollectionView.dataSource = self;
     self.thumbCollectionView.alwaysBounceHorizontal = YES;

@@ -27,7 +27,7 @@
     self.thumbImgView = [[UIImageView alloc] initWithFrame:self.contentView.bounds];
     self.thumbImgView.contentMode = UIViewContentModeScaleAspectFill;
     self.thumbImgView.clipsToBounds = YES;
-    self.thumbImgView.backgroundColor = UIColor.purpleColor;
+    self.thumbImgView.backgroundColor = [UIColor colorWithRed:27.0/255.0 green:37.0/255.0 blue:44.0/255.0 alpha:1];
     [self.contentView addSubview:self.thumbImgView];
 }
 
