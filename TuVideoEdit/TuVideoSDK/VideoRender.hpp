@@ -44,13 +44,6 @@ public:
     GLint _backingWidth;
     GLint _backingHeight;
     
-    bool applyInversionFilter = false;
-    bool applyGrayscaleFilter = false;
-    bool applySticker1 = false;
-    bool applySticker2 = false;
-    bool applyEffect1 = false;
-    bool applyEffect2 = false;
-    
     const char *displayVertexPath;
     const char *displayFragPath;
     const char *stickerVertexPath;

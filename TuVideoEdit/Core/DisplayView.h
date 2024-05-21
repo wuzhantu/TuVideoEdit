@@ -22,15 +22,6 @@ NS_ASSUME_NONNULL_BEGIN
     @public VideoRender *videoRender;
 }
 
-@property (nonatomic, assign) BOOL applyInversionFilter;
-@property (nonatomic, assign) BOOL applyGrayscaleFilter;
-
-@property (nonatomic, assign) BOOL applySticker1;
-@property (nonatomic, assign) BOOL applySticker2;
-
-@property (nonatomic, assign) BOOL applyEffect1;
-@property (nonatomic, assign) BOOL applyEffect2;
-
 - (instancetype)initWithFrame:(CGRect)frame videoScale:(CGFloat)scale;
 - (void)displayFrame:(AVFrame *)frame;
 - (AVFrame *)applyFilterToFrame:(AVFrame *)frame;

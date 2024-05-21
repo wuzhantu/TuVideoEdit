@@ -9,6 +9,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "DisplayView.h"
 #import "ThumbCell.h"
+#import "EditToolBar.h"
 
 extern "C" {
 #include <libavformat/avformat.h>
@@ -27,7 +28,7 @@ using namespace std;
 @property (nonatomic, strong) UICollectionView *thumbCollectionView;
 @property (nonatomic, strong) DisplayView *displayView;
 @property (nonatomic, weak) UIButton *playBtn;
-
+@property (nonatomic, strong) EditToolBar *editToolBar;
 @end
 
 @implementation EditViewController
@@ -72,7 +73,7 @@ using namespace std;
 }
 
 - (void)setupView {
-    self.view.backgroundColor = UIColor.cyanColor;
+    self.view.backgroundColor = [UIColor colorWithRed:27.0/255.0 green:37.0/255.0 blue:44.0/255.0 alpha:1];
     
     UIButton *closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, 40, 60, 40)];
     closeBtn.layer.cornerRadius = 10;
@@ -127,69 +128,9 @@ using namespace std;
     self.thumbCollectionView.prefetchingEnabled = NO;
     [self.view addSubview:self.thumbCollectionView];
     
-    UIButton *inversionBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, 500, 100, 40)];
-    inversionBtn.layer.cornerRadius = 10;
-    inversionBtn.clipsToBounds = YES;
-    inversionBtn.backgroundColor = UIColor.purpleColor;
-    [inversionBtn setTitle:@"反相" forState:UIControlStateNormal];
-    [inversionBtn addTarget:self action:@selector(inversionBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:inversionBtn];
-    
-    UIButton *grayscaleBtn = [[UIButton alloc] initWithFrame:CGRectMake(140, 500, 100, 40)];
-    grayscaleBtn.layer.cornerRadius = 10;
-    grayscaleBtn.clipsToBounds = YES;
-    grayscaleBtn.backgroundColor = UIColor.purpleColor;
-    [grayscaleBtn setTitle:@"灰度" forState:UIControlStateNormal];
-    [grayscaleBtn addTarget:self action:@selector(grayscaleBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:grayscaleBtn];
-    
-    UIButton *noFilterBtn = [[UIButton alloc] initWithFrame:CGRectMake(260, 500, 100, 40)];
-    noFilterBtn.layer.cornerRadius = 10;
-    noFilterBtn.clipsToBounds = YES;
-    noFilterBtn.backgroundColor = UIColor.purpleColor;
-    [noFilterBtn setTitle:@"还原" forState:UIControlStateNormal];
-    [noFilterBtn addTarget:self action:@selector(noFilterBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:noFilterBtn];
-    
-    UIButton *stick1Btn = [[UIButton alloc] initWithFrame:CGRectMake(20, 580, 100, 40)];
-    stick1Btn.layer.cornerRadius = 10;
-    stick1Btn.clipsToBounds = YES;
-    stick1Btn.backgroundColor = UIColor.purpleColor;
-    [stick1Btn setTitle:@"老虎贴纸" forState:UIControlStateNormal];
-    [stick1Btn addTarget:self action:@selector(stick1BtnAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:stick1Btn];
-    
-    UIButton *stick2Btn = [[UIButton alloc] initWithFrame:CGRectMake(140, 580, 100, 40)];
-    stick2Btn.layer.cornerRadius = 10;
-    stick2Btn.clipsToBounds = YES;
-    stick2Btn.backgroundColor = UIColor.purpleColor;
-    [stick2Btn setTitle:@"无人机贴纸" forState:UIControlStateNormal];
-    [stick2Btn addTarget:self action:@selector(stick2BtnAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:stick2Btn];
-    
-    UIButton *effect1Btn = [[UIButton alloc] initWithFrame:CGRectMake(20, 660, 100, 40)];
-    effect1Btn.layer.cornerRadius = 10;
-    effect1Btn.clipsToBounds = YES;
-    effect1Btn.backgroundColor = UIColor.purpleColor;
-    [effect1Btn setTitle:@"二分特效" forState:UIControlStateNormal];
-    [effect1Btn addTarget:self action:@selector(effect1BtnAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:effect1Btn];
-    
-    UIButton *effect2Btn = [[UIButton alloc] initWithFrame:CGRectMake(140, 660, 100, 40)];
-    effect2Btn.layer.cornerRadius = 10;
-    effect2Btn.clipsToBounds = YES;
-    effect2Btn.backgroundColor = UIColor.purpleColor;
-    [effect2Btn setTitle:@"四分特效" forState:UIControlStateNormal];
-    [effect2Btn addTarget:self action:@selector(effect2BtnAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:effect2Btn];
-    
-    UIButton *noEffectBtn = [[UIButton alloc] initWithFrame:CGRectMake(260, 660, 100, 40)];
-    noEffectBtn.layer.cornerRadius = 10;
-    noEffectBtn.clipsToBounds = YES;
-    noEffectBtn.backgroundColor = UIColor.purpleColor;
-    [noEffectBtn setTitle:@"还原" forState:UIControlStateNormal];
-    [noEffectBtn addTarget:self action:@selector(noEffectBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:noEffectBtn];
+    self.editToolBar = [[EditToolBar alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-40-34, self.view.frame.size.width, 40)];
+    self.editToolBar.backgroundColor = [UIColor colorWithRed:27.0/255.0 green:37.0/255.0 blue:44.0/255.0 alpha:1];
+    [self.view addSubview:self.editToolBar];
 }
 
 - (void)closeBtnAction {
@@ -227,46 +168,6 @@ using namespace std;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0), ^{
         self->previewDecoder->audioPlayDecode();
     });
-}
-
-- (void)inversionBtnAction {
-    self.displayView.applyInversionFilter = YES;
-    self.displayView.applyGrayscaleFilter = NO;
-}
-
-- (void)grayscaleBtnAction {
-    self.displayView.applyGrayscaleFilter = YES;
-    self.displayView.applyInversionFilter = NO;
-}
-
-- (void)noFilterBtnAction {
-    self.displayView.applyGrayscaleFilter = NO;
-    self.displayView.applyInversionFilter = NO;
-}
-
-- (void)stick1BtnAction {
-    self.displayView.applySticker1 = YES;
-    self.displayView.applySticker2 = NO;
-}
-
-- (void)stick2BtnAction {
-    self.displayView.applySticker2 = YES;
-    self.displayView.applySticker1 = NO;
-}
-
-- (void)effect1BtnAction {
-    self.displayView.applyEffect1 = YES;
-    self.displayView.applyEffect2 = NO;
-}
-
-- (void)effect2BtnAction {
-    self.displayView.applyEffect1 = NO;
-    self.displayView.applyEffect2 = YES;
-}
-
-- (void)noEffectBtnAction {
-    self.displayView.applyEffect1 = NO;
-    self.displayView.applyEffect2 = NO;
 }
 
 #pragma mark - delegate

@@ -6,6 +6,7 @@
 //
 
 #include "VideoRender.hpp"
+#include "VideoRenderConfig.hpp"
 
 VideoRender::VideoRender(const char *displayVertexPath, const char *displayFragPath, const char *stickerVertexPath, const char *stickerFragPath) {
     this->displayVertexPath = displayVertexPath;
@@ -206,18 +207,18 @@ void VideoRender::displayFrame(AVFrame *frame) {
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
     
-    glUniform1i(glGetUniformLocation(myProgram, "applyInversionFilter"), applyInversionFilter);
-    glUniform1i(glGetUniformLocation(myProgram, "applyGrayscaleFilter"), applyGrayscaleFilter);
-    glUniform1i(glGetUniformLocation(myProgram, "applyEffect1"), applyEffect1);
-    glUniform1i(glGetUniformLocation(myProgram, "applyEffect2"), applyEffect2);
+    glUniform1i(glGetUniformLocation(myProgram, "applyInversionFilter"), VideoRenderConfig::shareInstance()->applyInversionFilter);
+    glUniform1i(glGetUniformLocation(myProgram, "applyGrayscaleFilter"), VideoRenderConfig::shareInstance()->applyGrayscaleFilter);
+    glUniform1i(glGetUniformLocation(myProgram, "applyEffect1"), VideoRenderConfig::shareInstance()->applyEffect1);
+    glUniform1i(glGetUniformLocation(myProgram, "applyEffect2"), VideoRenderConfig::shareInstance()->applyEffect2);
     glBindTexture(GL_TEXTURE_2D, yuvTexture);
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
-    if (applySticker1) {
+    if (VideoRenderConfig::shareInstance()->applySticker1) {
         static int frameCount1 = 1;
         if (frameCount1 > 81) {
             frameCount1 = 1;
-            applySticker1 = false;
+            VideoRenderConfig::shareInstance()->applySticker1 = false;
         } else {
             GLuint stickerTexture;
             glGenTextures(1, &stickerTexture);
@@ -236,11 +237,11 @@ void VideoRender::displayFrame(AVFrame *frame) {
             glBindTexture(GL_TEXTURE_2D, stickerTexture);
             glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
         }
-    } else if (applySticker2) {
+    } else if (VideoRenderConfig::shareInstance()->applySticker2) {
         static int frameCount2 = 1;
         if (frameCount2 > 100) {
             frameCount2 = 1;
-            applySticker2 = false;
+            VideoRenderConfig::shareInstance()->applySticker2 = false;
         } else {
             GLuint stickerTexture;
             glGenTextures(1, &stickerTexture);
@@ -260,23 +261,6 @@ void VideoRender::displayFrame(AVFrame *frame) {
             glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
         }
     }
-    
-//    // Set up the quad vertices with respect to the orientation and aspect ratio of the video.
-//    CGRect vertexSamplingRect = AVMakeRectWithAspectRatioInsideRect(CGSizeMake(_backingWidth, _backingHeight), self.layer.bounds);
-//
-//    // Compute normalized quad coordinates to draw the frame into.
-//    CGSize normalizedSamplingSize = CGSizeMake(0.0, 0.0);
-//    CGSize cropScaleAmount = CGSizeMake(vertexSamplingRect.size.width/self.layer.bounds.size.width, vertexSamplingRect.size.height/self.layer.bounds.size.height);
-//
-//    // Normalize the quad vertices.
-//    if (cropScaleAmount.width > cropScaleAmount.height) {
-//        normalizedSamplingSize.width = 1.0;
-//        normalizedSamplingSize.height = cropScaleAmount.height/cropScaleAmount.width;
-//    }
-//    else {
-//        normalizedSamplingSize.width = 1.0;
-//        normalizedSamplingSize.height = cropScaleAmount.width/cropScaleAmount.height;
-//    }
     
     glDeleteTextures(1, &yuvTexture);
     av_frame_unref(frame);
@@ -320,18 +304,18 @@ AVFrame * VideoRender::applyFilterToFrame(AVFrame *frame) {
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
     
-    glUniform1i(glGetUniformLocation(myProgram, "applyInversionFilter"), applyInversionFilter);
-    glUniform1i(glGetUniformLocation(myProgram, "applyGrayscaleFilter"), applyGrayscaleFilter);
-    glUniform1i(glGetUniformLocation(myProgram, "applyEffect1"), applyEffect1);
-    glUniform1i(glGetUniformLocation(myProgram, "applyEffect2"), applyEffect2);
+    glUniform1i(glGetUniformLocation(myProgram, "applyInversionFilter"), VideoRenderConfig::shareInstance()->applyInversionFilter);
+    glUniform1i(glGetUniformLocation(myProgram, "applyGrayscaleFilter"), VideoRenderConfig::shareInstance()->applyGrayscaleFilter);
+    glUniform1i(glGetUniformLocation(myProgram, "applyEffect1"), VideoRenderConfig::shareInstance()->applyEffect1);
+    glUniform1i(glGetUniformLocation(myProgram, "applyEffect2"), VideoRenderConfig::shareInstance()->applyEffect2);
     glBindTexture(GL_TEXTURE_2D, yuvTexture);
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
-    if (applySticker1) {
+    if (VideoRenderConfig::shareInstance()->applySticker1) {
         static int exportframeCount1 = 1;
         if (exportframeCount1 > 81) {
             exportframeCount1 = 1;
-            applySticker1 = false;
+            VideoRenderConfig::shareInstance()->applySticker1 = false;
         } else {
             GLuint stickerTexture;
             glGenTextures(1, &stickerTexture);
@@ -350,11 +334,11 @@ AVFrame * VideoRender::applyFilterToFrame(AVFrame *frame) {
             glBindTexture(GL_TEXTURE_2D, stickerTexture);
             glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
         }
-    } else if (applySticker2) {
+    } else if (VideoRenderConfig::shareInstance()->applySticker2) {
         static int exportframeCount2 = 1;
         if (exportframeCount2 > 100) {
             exportframeCount2 = 1;
-            applySticker2 = false;
+            VideoRenderConfig::shareInstance()->applySticker2 = false;
         } else {
             GLuint stickerTexture;
             glGenTextures(1, &stickerTexture);

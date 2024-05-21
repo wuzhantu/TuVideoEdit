@@ -40,7 +40,7 @@
 		43BEBE422BDFE81700B3123E /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BEBE412BDFE81600B3123E /* CoreMotion.framework */; };
 		43BEBE442BDFE82300B3123E /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BEBE432BDFE82300B3123E /* GameController.framework */; };
 		43BEBE4B2BDFEDAE00B3123E /* EditViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43BEBE4A2BDFEDAE00B3123E /* EditViewController.mm */; };
-		43BEBE4E2BDFF0EC00B3123E /* ThumbCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43BEBE4D2BDFF0EC00B3123E /* ThumbCell.mm */; };
+		43BEBE4E2BDFF0EC00B3123E /* ThumbCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43BEBE4D2BDFF0EC00B3123E /* ThumbCell.m */; };
 		43BEBE512BDFFF0F00B3123E /* DisplayView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43BEBE502BDFFF0F00B3123E /* DisplayView.mm */; };
 		43BEBE542BDFFFB600B3123E /* display.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 43BEBE522BDFFFB600B3123E /* display.fsh */; };
 		43BEBE552BDFFFB600B3123E /* display.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 43BEBE532BDFFFB600B3123E /* display.vsh */; };
@@ -55,6 +55,14 @@
 		43CB6B892BF7650B001ACC60 /* TuTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43CB6B862BF7650B001ACC60 /* TuTimer.cpp */; };
 		43CB6B8C2BF77A14001ACC60 /* TuSemaphore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43CB6B8A2BF77A14001ACC60 /* TuSemaphore.cpp */; };
 		43CB6B8F2BFB405A001ACC60 /* DecoderContextPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43CB6B8D2BFB405A001ACC60 /* DecoderContextPool.cpp */; };
+		43CB6B922BFC82D9001ACC60 /* EditToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CB6B912BFC82D9001ACC60 /* EditToolBar.m */; };
+		43CB6B952BFC8388001ACC60 /* EditToolCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CB6B942BFC8388001ACC60 /* EditToolCell.m */; };
+		43CB6B982BFCA823001ACC60 /* EditSelectView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43CB6B972BFCA823001ACC60 /* EditSelectView.mm */; };
+		43CB6B9B2BFCA915001ACC60 /* EditSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CB6B9A2BFCA915001ACC60 /* EditSelectCell.m */; };
+		43CB6B9E2BFCB55C001ACC60 /* StickerSelectView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43CB6B9D2BFCB55C001ACC60 /* StickerSelectView.mm */; };
+		43CB6BA12BFCB56A001ACC60 /* FilterSelectView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43CB6BA02BFCB56A001ACC60 /* FilterSelectView.mm */; };
+		43CB6BA42BFCB6D5001ACC60 /* EffectSelectView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43CB6BA32BFCB6D5001ACC60 /* EffectSelectView.mm */; };
+		43CB6BA72BFCBF90001ACC60 /* VideoRenderConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43CB6BA52BFCBF90001ACC60 /* VideoRenderConfig.cpp */; };
 		F1C3AAE82BF8A4CF00A10825 /* xiaolin.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = F1C3AAE72BF8A4CF00A10825 /* xiaolin.MP4 */; };
 /* End PBXBuildFile section */
 
@@ -342,7 +350,7 @@
 		43BEBE492BDFEDAD00B3123E /* EditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
 		43BEBE4A2BDFEDAE00B3123E /* EditViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = EditViewController.mm; sourceTree = "<group>"; };
 		43BEBE4C2BDFF0EC00B3123E /* ThumbCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThumbCell.h; sourceTree = "<group>"; };
-		43BEBE4D2BDFF0EC00B3123E /* ThumbCell.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ThumbCell.mm; sourceTree = "<group>"; };
+		43BEBE4D2BDFF0EC00B3123E /* ThumbCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThumbCell.m; sourceTree = "<group>"; };
 		43BEBE4F2BDFFF0F00B3123E /* DisplayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayView.h; sourceTree = "<group>"; };
 		43BEBE502BDFFF0F00B3123E /* DisplayView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DisplayView.mm; sourceTree = "<group>"; };
 		43BEBE522BDFFFB600B3123E /* display.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = display.fsh; sourceTree = "<group>"; };
@@ -366,6 +374,22 @@
 		43CB6B8B2BF77A14001ACC60 /* TuSemaphore.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TuSemaphore.hpp; sourceTree = "<group>"; };
 		43CB6B8D2BFB405A001ACC60 /* DecoderContextPool.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DecoderContextPool.cpp; sourceTree = "<group>"; };
 		43CB6B8E2BFB405A001ACC60 /* DecoderContextPool.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DecoderContextPool.hpp; sourceTree = "<group>"; };
+		43CB6B902BFC82D9001ACC60 /* EditToolBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditToolBar.h; sourceTree = "<group>"; };
+		43CB6B912BFC82D9001ACC60 /* EditToolBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditToolBar.m; sourceTree = "<group>"; };
+		43CB6B932BFC8388001ACC60 /* EditToolCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditToolCell.h; sourceTree = "<group>"; };
+		43CB6B942BFC8388001ACC60 /* EditToolCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditToolCell.m; sourceTree = "<group>"; };
+		43CB6B962BFCA823001ACC60 /* EditSelectView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditSelectView.h; sourceTree = "<group>"; };
+		43CB6B972BFCA823001ACC60 /* EditSelectView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = EditSelectView.mm; sourceTree = "<group>"; };
+		43CB6B992BFCA915001ACC60 /* EditSelectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditSelectCell.h; sourceTree = "<group>"; };
+		43CB6B9A2BFCA915001ACC60 /* EditSelectCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditSelectCell.m; sourceTree = "<group>"; };
+		43CB6B9C2BFCB55C001ACC60 /* StickerSelectView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StickerSelectView.h; sourceTree = "<group>"; };
+		43CB6B9D2BFCB55C001ACC60 /* StickerSelectView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = StickerSelectView.mm; sourceTree = "<group>"; };
+		43CB6B9F2BFCB56A001ACC60 /* FilterSelectView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterSelectView.h; sourceTree = "<group>"; };
+		43CB6BA02BFCB56A001ACC60 /* FilterSelectView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = FilterSelectView.mm; sourceTree = "<group>"; };
+		43CB6BA22BFCB6D5001ACC60 /* EffectSelectView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EffectSelectView.h; sourceTree = "<group>"; };
+		43CB6BA32BFCB6D5001ACC60 /* EffectSelectView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = EffectSelectView.mm; sourceTree = "<group>"; };
+		43CB6BA52BFCBF90001ACC60 /* VideoRenderConfig.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = VideoRenderConfig.cpp; sourceTree = "<group>"; };
+		43CB6BA62BFCBF90001ACC60 /* VideoRenderConfig.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VideoRenderConfig.hpp; sourceTree = "<group>"; };
 		F1C3AAE72BF8A4CF00A10825 /* xiaolin.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = xiaolin.MP4; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -855,9 +879,23 @@
 				43BEBE492BDFEDAD00B3123E /* EditViewController.h */,
 				43BEBE4A2BDFEDAE00B3123E /* EditViewController.mm */,
 				43BEBE4C2BDFF0EC00B3123E /* ThumbCell.h */,
-				43BEBE4D2BDFF0EC00B3123E /* ThumbCell.mm */,
+				43BEBE4D2BDFF0EC00B3123E /* ThumbCell.m */,
 				43BEBE4F2BDFFF0F00B3123E /* DisplayView.h */,
 				43BEBE502BDFFF0F00B3123E /* DisplayView.mm */,
+				43CB6B902BFC82D9001ACC60 /* EditToolBar.h */,
+				43CB6B912BFC82D9001ACC60 /* EditToolBar.m */,
+				43CB6B932BFC8388001ACC60 /* EditToolCell.h */,
+				43CB6B942BFC8388001ACC60 /* EditToolCell.m */,
+				43CB6B962BFCA823001ACC60 /* EditSelectView.h */,
+				43CB6B972BFCA823001ACC60 /* EditSelectView.mm */,
+				43CB6B9C2BFCB55C001ACC60 /* StickerSelectView.h */,
+				43CB6B9D2BFCB55C001ACC60 /* StickerSelectView.mm */,
+				43CB6B9F2BFCB56A001ACC60 /* FilterSelectView.h */,
+				43CB6BA02BFCB56A001ACC60 /* FilterSelectView.mm */,
+				43CB6BA22BFCB6D5001ACC60 /* EffectSelectView.h */,
+				43CB6BA32BFCB6D5001ACC60 /* EffectSelectView.mm */,
+				43CB6B992BFCA915001ACC60 /* EditSelectCell.h */,
+				43CB6B9A2BFCA915001ACC60 /* EditSelectCell.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -889,6 +927,8 @@
 				43CB6B8D2BFB405A001ACC60 /* DecoderContextPool.cpp */,
 				43CB6B662BF6526A001ACC60 /* VideoRender.hpp */,
 				43CB6B652BF6526A001ACC60 /* VideoRender.cpp */,
+				43CB6BA62BFCBF90001ACC60 /* VideoRenderConfig.hpp */,
+				43CB6BA52BFCBF90001ACC60 /* VideoRenderConfig.cpp */,
 				43CB6B622BF6344F001ACC60 /* ExportVideo.hpp */,
 				43CB6B632BF6344F001ACC60 /* ExportVideo.cpp */,
 				43CB6B872BF7650B001ACC60 /* TuTimer.hpp */,
@@ -1041,16 +1081,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43BEBE4E2BDFF0EC00B3123E /* ThumbCell.mm in Sources */,
+				43BEBE4E2BDFF0EC00B3123E /* ThumbCell.m in Sources */,
+				43CB6BA42BFCB6D5001ACC60 /* EffectSelectView.mm in Sources */,
+				43CB6B952BFC8388001ACC60 /* EditToolCell.m in Sources */,
+				43CB6B982BFCA823001ACC60 /* EditSelectView.mm in Sources */,
+				43CB6B922BFC82D9001ACC60 /* EditToolBar.m in Sources */,
 				43CB6B672BF6526A001ACC60 /* VideoRender.cpp in Sources */,
 				43BEBE512BDFFF0F00B3123E /* DisplayView.mm in Sources */,
+				43CB6B9E2BFCB55C001ACC60 /* StickerSelectView.mm in Sources */,
 				43BEC2262BF4DFEF00B3123E /* DecoderContext.cpp in Sources */,
 				43BEC22C2BF5A2D300B3123E /* TimeLineDecoder.cpp in Sources */,
 				43BEBCFA2BDFE56F00B3123E /* ViewController.m in Sources */,
 				43BEBCF42BDFE56F00B3123E /* AppDelegate.m in Sources */,
 				43CB6B8C2BF77A14001ACC60 /* TuSemaphore.cpp in Sources */,
+				43CB6BA72BFCBF90001ACC60 /* VideoRenderConfig.cpp in Sources */,
+				43CB6BA12BFCB56A001ACC60 /* FilterSelectView.mm in Sources */,
 				43CB6B892BF7650B001ACC60 /* TuTimer.cpp in Sources */,
 				43BEBD052BDFE57100B3123E /* main.m in Sources */,
+				43CB6B9B2BFCA915001ACC60 /* EditSelectCell.m in Sources */,
 				43CB6B8F2BFB405A001ACC60 /* DecoderContextPool.cpp in Sources */,
 				43BEBE4B2BDFEDAE00B3123E /* EditViewController.mm in Sources */,
 				43CB6B642BF6344F001ACC60 /* ExportVideo.cpp in Sources */,

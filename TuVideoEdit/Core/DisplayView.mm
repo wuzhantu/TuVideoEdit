@@ -9,6 +9,7 @@
 #import <OpenGLES/ES3/gl.h>
 #import <OpenGLES/ES3/glext.h>
 #import <AVFoundation/AVUtilities.h>
+#include "VideoRenderConfig.hpp"
 
 @interface DisplayView ()
 @property (nonatomic, strong) EAGLContext *myContext;
@@ -40,12 +41,6 @@
         const char *stickerFragPathCstr = [stickerFragPath cStringUsingEncoding:NSUTF8StringEncoding];
         
         videoRender = new VideoRender(displayVertexPathCstr, displayFragPathCstr, stickerVertexPathCstr, stickerFragPathCstr);
-        videoRender->applyInversionFilter = self.applyInversionFilter;
-        videoRender->applyGrayscaleFilter = self.applyGrayscaleFilter;
-        videoRender->applySticker1 = self.applySticker1;
-        videoRender->applySticker2 = self.applySticker2;
-        videoRender->applyEffect1 = self.applyEffect1;
-        videoRender->applyEffect2 = self.applyEffect2;
         [self.myContext renderbufferStorage:GL_RENDERBUFFER fromDrawable:self.myEagLayer];
         videoRender->setupViewport();
     }
@@ -96,35 +91,35 @@
     
     return spriteData;
 }
-
-- (void)setApplyInversionFilter:(BOOL)applyInversionFilter {
-    _applyInversionFilter = applyInversionFilter;
-    videoRender->applyInversionFilter = _applyInversionFilter;
-}
-
-- (void)setApplyGrayscaleFilter:(BOOL)applyGrayscaleFilter {
-    _applyGrayscaleFilter = applyGrayscaleFilter;
-    videoRender->applyGrayscaleFilter = _applyGrayscaleFilter;
-}
-
-- (void)setApplySticker1:(BOOL)applySticker1 {
-    _applySticker1 = applySticker1;
-    videoRender->applySticker1 = _applySticker1;
-}
-
-- (void)setApplySticker2:(BOOL)applySticker2 {
-    _applySticker2 = applySticker2;
-    videoRender->applySticker2 = _applySticker2;
-}
-
-- (void)setApplyEffect1:(BOOL)applyEffect1 {
-    _applyEffect1 = applyEffect1;
-    videoRender->applyEffect1 = _applyEffect1;
-}
-
-- (void)setApplyEffect2:(BOOL)applyEffect2 {
-    _applyEffect2 = applyEffect2;
-    videoRender->applyEffect2 = _applyEffect2;
-}
+//
+//- (void)setApplyInversionFilter:(BOOL)applyInversionFilter {
+//    _applyInversionFilter = applyInversionFilter;
+//    videoRender->applyInversionFilter = _applyInversionFilter;
+//}
+//
+//- (void)setApplyGrayscaleFilter:(BOOL)applyGrayscaleFilter {
+//    _applyGrayscaleFilter = applyGrayscaleFilter;
+//    videoRender->applyGrayscaleFilter = _applyGrayscaleFilter;
+//}
+//
+//- (void)setApplySticker1:(BOOL)applySticker1 {
+//    _applySticker1 = applySticker1;
+//    videoRender->applySticker1 = _applySticker1;
+//}
+//
+//- (void)setApplySticker2:(BOOL)applySticker2 {
+//    _applySticker2 = applySticker2;
+//    videoRender->applySticker2 = _applySticker2;
+//}
+//
+//- (void)setApplyEffect1:(BOOL)applyEffect1 {
+//    _applyEffect1 = applyEffect1;
+//    videoRender->applyEffect1 = _applyEffect1;
+//}
+//
+//- (void)setApplyEffect2:(BOOL)applyEffect2 {
+//    _applyEffect2 = applyEffect2;
+//    videoRender->applyEffect2 = _applyEffect2;
+//}
 
 @end

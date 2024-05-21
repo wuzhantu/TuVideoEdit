@@ -14,8 +14,8 @@
             filePath = "TuVideoEdit/TuVideoSDK/VideoRender.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "378"
-            endingLineNumber = "378"
+            startingLineNumber = "362"
+            endingLineNumber = "362"
             landmarkName = "VideoRender::applyFilterToFrame(frame)"
             landmarkType = "7">
          </BreakpointContent>
