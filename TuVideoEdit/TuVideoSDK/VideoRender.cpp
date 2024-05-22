@@ -195,24 +195,67 @@ void VideoRender::displayFrame(AVFrame *frame) {
     glTexSubImage2D(GL_TEXTURE_2D, 0, 0, frameHeight, frame->linesize[0], frameHeight, GL_LUMINANCE, GL_UNSIGNED_BYTE, frame->data[0]);
     
     glUseProgram(myProgram);
-    glBindVertexArray(VAO);
-    
-    GLfloat ratio = 1.0 * frame->width / frame->linesize[0];
-    GLfloat vertices[] = {
-        -1.0f, 1.0f, 0.0f,   0.0f,       0.5f,       0.0f,       0.0f,       0.0f,       0.25f,
-        1.0f, 1.0f, 0.0f,    1.0f*ratio, 0.5f,       0.5f*ratio, 0.0f,       0.5f*ratio, 0.25f,
-        -1.0f,  -1.0f, 0.0f, 0.0f,       1.0f,       0.0f,       0.25f,      0.0f,       0.5f,
-        1.0f,  -1.0f, 0.0f,  1.0f*ratio, 1.0f,       0.5f*ratio, 0.25f,      0.5f*ratio, 0.5f,
-    };
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
     
     glUniform1i(glGetUniformLocation(myProgram, "applyInversionFilter"), VideoRenderConfig::shareInstance()->applyInversionFilter);
     glUniform1i(glGetUniformLocation(myProgram, "applyGrayscaleFilter"), VideoRenderConfig::shareInstance()->applyGrayscaleFilter);
     glUniform1i(glGetUniformLocation(myProgram, "applyEffect1"), VideoRenderConfig::shareInstance()->applyEffect1);
-    glUniform1i(glGetUniformLocation(myProgram, "applyEffect2"), VideoRenderConfig::shareInstance()->applyEffect2);
+    
     glBindTexture(GL_TEXTURE_2D, yuvTexture);
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    
+    glBindVertexArray(VAO);
+    
+    GLfloat ratio = 1.0 * frame->width / frame->linesize[0];
+    if (VideoRenderConfig::shareInstance()->applyEffect2) {
+        GLfloat vertices1[] = {
+            -1.0f, 1.0f, 0.0f,   0.0f,       0.5f,       0.0f,       0.0f,       0.0f,       0.25f,
+            0.0f, 1.0f, 0.0f,    1.0f*ratio, 0.5f,       0.5f*ratio, 0.0f,       0.5f*ratio, 0.25f,
+            -1.0f,  0.0f, 0.0f, 0.0f,       1.0f,       0.0f,       0.25f,      0.0f,       0.5f,
+            0.0f,  0.0f, 0.0f,  1.0f*ratio, 1.0f,       0.5f*ratio, 0.25f,      0.5f*ratio, 0.5f,
+        };
+        glBindBuffer(GL_ARRAY_BUFFER, VBO);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices1), vertices1, GL_STATIC_DRAW);
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+        
+        GLfloat vertices2[] = {
+            0.0f, 1.0f, 0.0f,   0.0f,       0.5f,       0.0f,       0.0f,       0.0f,       0.25f,
+            1.0f, 1.0f, 0.0f,    1.0f*ratio, 0.5f,       0.5f*ratio, 0.0f,       0.5f*ratio, 0.25f,
+            0.0f,  0.0f, 0.0f, 0.0f,       1.0f,       0.0f,       0.25f,      0.0f,       0.5f,
+            1.0f,  0.0f, 0.0f,  1.0f*ratio, 1.0f,       0.5f*ratio, 0.25f,      0.5f*ratio, 0.5f,
+        };
+        glBindBuffer(GL_ARRAY_BUFFER, VBO);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices2), vertices2, GL_STATIC_DRAW);
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+        
+        GLfloat vertices3[] = {
+            -1.0f, 0.0f, 0.0f,   0.0f,       0.5f,       0.0f,       0.0f,       0.0f,       0.25f,
+            0.0f, 0.0f, 0.0f,    1.0f*ratio, 0.5f,       0.5f*ratio, 0.0f,       0.5f*ratio, 0.25f,
+            -1.0f,  -1.0f, 0.0f, 0.0f,       1.0f,       0.0f,       0.25f,      0.0f,       0.5f,
+            0.0f,  -1.0f, 0.0f,  1.0f*ratio, 1.0f,       0.5f*ratio, 0.25f,      0.5f*ratio, 0.5f,
+        };
+        glBindBuffer(GL_ARRAY_BUFFER, VBO);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices3), vertices3, GL_STATIC_DRAW);
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+        
+        GLfloat vertices4[] = {
+            0.0f, 0.0f, 0.0f,   0.0f,       0.5f,       0.0f,       0.0f,       0.0f,       0.25f,
+            1.0f, 0.0f, 0.0f,    1.0f*ratio, 0.5f,       0.5f*ratio, 0.0f,       0.5f*ratio, 0.25f,
+            0.0f,  -1.0f, 0.0f, 0.0f,       1.0f,       0.0f,       0.25f,      0.0f,       0.5f,
+            1.0f,  -1.0f, 0.0f,  1.0f*ratio, 1.0f,       0.5f*ratio, 0.25f,      0.5f*ratio, 0.5f,
+        };
+        glBindBuffer(GL_ARRAY_BUFFER, VBO);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices4), vertices4, GL_STATIC_DRAW);
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    } else {
+        GLfloat vertices[] = {
+            -1.0f, 1.0f, 0.0f,   0.0f,       0.5f,       0.0f,       0.0f,       0.0f,       0.25f,
+            1.0f, 1.0f, 0.0f,    1.0f*ratio, 0.5f,       0.5f*ratio, 0.0f,       0.5f*ratio, 0.25f,
+            -1.0f,  -1.0f, 0.0f, 0.0f,       1.0f,       0.0f,       0.25f,      0.0f,       0.5f,
+            1.0f,  -1.0f, 0.0f,  1.0f*ratio, 1.0f,       0.5f*ratio, 0.25f,      0.5f*ratio, 0.5f,
+        };
+        glBindBuffer(GL_ARRAY_BUFFER, VBO);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    }
 
     if (VideoRenderConfig::shareInstance()->applySticker1) {
         static int frameCount1 = 1;
@@ -292,24 +335,67 @@ AVFrame * VideoRender::applyFilterToFrame(AVFrame *frame) {
     glTexSubImage2D(GL_TEXTURE_2D, 0, 0, frameHeight, frame->linesize[0], frameHeight, GL_LUMINANCE, GL_UNSIGNED_BYTE, frame->data[0]);
     
     glUseProgram(myProgram);
-    glBindVertexArray(VAO);
-    
-    GLfloat ratio = 1.0 * frame->width / frame->linesize[0];
-    GLfloat vertices[] = {
-        -1.0f, 1.0f, 0.0f,   0.0f,       0.5f,       0.0f,       0.0f,       0.0f,       0.25f,
-        1.0f, 1.0f, 0.0f,    1.0f*ratio, 0.5f,       0.5f*ratio, 0.0f,       0.5f*ratio, 0.25f,
-        -1.0f,  -1.0f, 0.0f, 0.0f,       1.0f,       0.0f,       0.25f,      0.0f,       0.5f,
-        1.0f,  -1.0f, 0.0f,  1.0f*ratio, 1.0f,       0.5f*ratio, 0.25f,      0.5f*ratio, 0.5f,
-    };
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
     
     glUniform1i(glGetUniformLocation(myProgram, "applyInversionFilter"), VideoRenderConfig::shareInstance()->applyInversionFilter);
     glUniform1i(glGetUniformLocation(myProgram, "applyGrayscaleFilter"), VideoRenderConfig::shareInstance()->applyGrayscaleFilter);
     glUniform1i(glGetUniformLocation(myProgram, "applyEffect1"), VideoRenderConfig::shareInstance()->applyEffect1);
-    glUniform1i(glGetUniformLocation(myProgram, "applyEffect2"), VideoRenderConfig::shareInstance()->applyEffect2);
+    
     glBindTexture(GL_TEXTURE_2D, yuvTexture);
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    
+    glBindVertexArray(VAO);
+    
+    GLfloat ratio = 1.0 * frame->width / frame->linesize[0];
+    if (VideoRenderConfig::shareInstance()->applyEffect2) {
+        GLfloat vertices1[] = {
+            -1.0f, 1.0f, 0.0f,   0.0f,       0.5f,       0.0f,       0.0f,       0.0f,       0.25f,
+            0.0f, 1.0f, 0.0f,    1.0f*ratio, 0.5f,       0.5f*ratio, 0.0f,       0.5f*ratio, 0.25f,
+            -1.0f,  0.0f, 0.0f, 0.0f,       1.0f,       0.0f,       0.25f,      0.0f,       0.5f,
+            0.0f,  0.0f, 0.0f,  1.0f*ratio, 1.0f,       0.5f*ratio, 0.25f,      0.5f*ratio, 0.5f,
+        };
+        glBindBuffer(GL_ARRAY_BUFFER, VBO);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices1), vertices1, GL_STATIC_DRAW);
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+        
+        GLfloat vertices2[] = {
+            0.0f, 1.0f, 0.0f,   0.0f,       0.5f,       0.0f,       0.0f,       0.0f,       0.25f,
+            1.0f, 1.0f, 0.0f,    1.0f*ratio, 0.5f,       0.5f*ratio, 0.0f,       0.5f*ratio, 0.25f,
+            0.0f,  0.0f, 0.0f, 0.0f,       1.0f,       0.0f,       0.25f,      0.0f,       0.5f,
+            1.0f,  0.0f, 0.0f,  1.0f*ratio, 1.0f,       0.5f*ratio, 0.25f,      0.5f*ratio, 0.5f,
+        };
+        glBindBuffer(GL_ARRAY_BUFFER, VBO);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices2), vertices2, GL_STATIC_DRAW);
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+        
+        GLfloat vertices3[] = {
+            -1.0f, 0.0f, 0.0f,   0.0f,       0.5f,       0.0f,       0.0f,       0.0f,       0.25f,
+            0.0f, 0.0f, 0.0f,    1.0f*ratio, 0.5f,       0.5f*ratio, 0.0f,       0.5f*ratio, 0.25f,
+            -1.0f,  -1.0f, 0.0f, 0.0f,       1.0f,       0.0f,       0.25f,      0.0f,       0.5f,
+            0.0f,  -1.0f, 0.0f,  1.0f*ratio, 1.0f,       0.5f*ratio, 0.25f,      0.5f*ratio, 0.5f,
+        };
+        glBindBuffer(GL_ARRAY_BUFFER, VBO);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices3), vertices3, GL_STATIC_DRAW);
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+        
+        GLfloat vertices4[] = {
+            0.0f, 0.0f, 0.0f,   0.0f,       0.5f,       0.0f,       0.0f,       0.0f,       0.25f,
+            1.0f, 0.0f, 0.0f,    1.0f*ratio, 0.5f,       0.5f*ratio, 0.0f,       0.5f*ratio, 0.25f,
+            0.0f,  -1.0f, 0.0f, 0.0f,       1.0f,       0.0f,       0.25f,      0.0f,       0.5f,
+            1.0f,  -1.0f, 0.0f,  1.0f*ratio, 1.0f,       0.5f*ratio, 0.25f,      0.5f*ratio, 0.5f,
+        };
+        glBindBuffer(GL_ARRAY_BUFFER, VBO);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices4), vertices4, GL_STATIC_DRAW);
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    } else {
+        GLfloat vertices[] = {
+            -1.0f, 1.0f, 0.0f,   0.0f,       0.5f,       0.0f,       0.0f,       0.0f,       0.25f,
+            1.0f, 1.0f, 0.0f,    1.0f*ratio, 0.5f,       0.5f*ratio, 0.0f,       0.5f*ratio, 0.25f,
+            -1.0f,  -1.0f, 0.0f, 0.0f,       1.0f,       0.0f,       0.25f,      0.0f,       0.5f,
+            1.0f,  -1.0f, 0.0f,  1.0f*ratio, 1.0f,       0.5f*ratio, 0.25f,      0.5f*ratio, 0.5f,
+        };
+        glBindBuffer(GL_ARRAY_BUFFER, VBO);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    }
 
     if (VideoRenderConfig::shareInstance()->applySticker1) {
         static int exportframeCount1 = 1;
