@@ -71,8 +71,8 @@ void VideoRender::setupProgram() {
     glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 9, (void *)(sizeof(GLfloat) * 7));
     glEnableVertexAttribArray(3);
     
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
     
     stickerProgram = createProgram(stickerVertexPath, stickerFragPath);
     
@@ -96,8 +96,8 @@ void VideoRender::setupProgram() {
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 5, (void *)(sizeof(GLfloat) * 3));
     glEnableVertexAttribArray(1);
     
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 GLuint VideoRender::createProgram(const char *vertexFileName, const char *fragmentFileName) {
@@ -169,18 +169,73 @@ GLuint VideoRender::createProgram(const char *vertexFileName, const char *fragme
 }
 
 void VideoRender::displayFrame(AVFrame *frame) {
+    draw(frame);
+    av_frame_unref(frame);
+    av_frame_free(&frame);
+}
+
+AVFrame * VideoRender::applyFilterToFrame(AVFrame *frame) {
+    draw(frame);
+    
+    if (!pixelData) {
+        pixelData = (GLubyte *)malloc(_backingWidth * _backingHeight * 4); // RGBA每个像素4个字节
+    }
+    memset(pixelData, 0, _backingWidth * _backingHeight * 4);
+    glReadPixels(0, 0, _backingWidth, _backingHeight, GL_RGBA, GL_UNSIGNED_BYTE, pixelData);
+
+    // 创建临时缓冲区，并将像素数据写入其中
+    GLubyte *tempBuffer = (GLubyte *)malloc(_backingWidth * _backingHeight * 4);
+    memcpy(tempBuffer, pixelData, _backingWidth * _backingHeight * 4);
+
+    // 垂直翻转像素数据
+    for (int y = 0; y < _backingHeight / 2; ++y) {
+        for (int x = 0; x < _backingWidth * 4; ++x) {
+            GLubyte temp = tempBuffer[y * _backingWidth * 4 + x];
+            tempBuffer[y * _backingWidth * 4 + x] = tempBuffer[(_backingHeight - y - 1) * _backingWidth * 4 + x];
+            tempBuffer[(_backingHeight - y - 1) * _backingWidth * 4 + x] = temp;
+        }
+    }
+    
+    // 设置转换参数
+    struct SwsContext *sws_ctx = sws_getContext(_backingWidth, _backingHeight, AV_PIX_FMT_RGBA,
+                                                _backingWidth, _backingHeight, AV_PIX_FMT_YUV420P,
+                                                 SWS_BILINEAR, NULL, NULL, NULL);
+    if (!sws_ctx) {
+        // 创建转换上下文失败，处理错误
+    }
+
+    int dstStride[AV_NUM_DATA_POINTERS] = {0};
+    dstStride[0] = _backingWidth * 4;
+
+    AVFrame *retFrame = av_frame_alloc();
+    retFrame->format = AV_PIX_FMT_YUV420P;
+    retFrame->width = frame->width;
+    retFrame->height = frame->height;
+    int ret = av_frame_get_buffer(retFrame, 0);
+    av_frame_copy_props(retFrame, frame);
+
+    // 执行转换
+    sws_scale(sws_ctx, &tempBuffer, dstStride, 0, _backingHeight,
+              retFrame->data, retFrame->linesize);
+    
+    free(tempBuffer);
+    sws_freeContext(sws_ctx);
+    
+    return retFrame;
+}
+
+void VideoRender::draw(AVFrame *frame) {
     if (!frame) return;
     
-    glClearColor(1.0, 0.0, 0.0, 1.0);
-    glClear(GL_COLOR_BUFFER_BIT);
-
     int frameWidth = frame->width;
     int frameHeight = frame->height;
     if (frameWidth == 0 || frameHeight == 0) {
-        av_frame_unref(frame);
-        av_frame_free(&frame);
         return;
     }
+    
+    glClearColor(1.0, 0.0, 0.0, 1.0);
+    glClear(GL_COLOR_BUFFER_BIT);
+    
     GLuint yuvTexture;
     glGenTextures(1, &yuvTexture);
     glBindTexture(GL_TEXTURE_2D, yuvTexture);
@@ -190,69 +245,65 @@ void VideoRender::displayFrame(AVFrame *frame) {
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     
     glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, frame->linesize[0], frameHeight * 2, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, NULL);
-    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, frame->linesize[1], frameHeight / 2, GL_LUMINANCE, GL_UNSIGNED_BYTE, frame->data[1]);
-    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, frameHeight / 2, frame->linesize[2], frameHeight / 2, GL_LUMINANCE, GL_UNSIGNED_BYTE, frame->data[2]);
     glTexSubImage2D(GL_TEXTURE_2D, 0, 0, frameHeight, frame->linesize[0], frameHeight, GL_LUMINANCE, GL_UNSIGNED_BYTE, frame->data[0]);
+    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, frameHeight / 2, frame->linesize[1], frameHeight / 2, GL_LUMINANCE, GL_UNSIGNED_BYTE, frame->data[1]);
+    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, frame->linesize[2], frameHeight / 2, GL_LUMINANCE, GL_UNSIGNED_BYTE, frame->data[2]);
     
     glUseProgram(myProgram);
+    
+    glBindTexture(GL_TEXTURE_2D, yuvTexture);
     
     glUniform1i(glGetUniformLocation(myProgram, "applyInversionFilter"), VideoRenderConfig::shareInstance()->applyInversionFilter);
     glUniform1i(glGetUniformLocation(myProgram, "applyGrayscaleFilter"), VideoRenderConfig::shareInstance()->applyGrayscaleFilter);
     glUniform1i(glGetUniformLocation(myProgram, "applyEffect1"), VideoRenderConfig::shareInstance()->applyEffect1);
     
-    glBindTexture(GL_TEXTURE_2D, yuvTexture);
-    
     glBindVertexArray(VAO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
     
     GLfloat ratio = 1.0 * frame->width / frame->linesize[0];
     if (VideoRenderConfig::shareInstance()->applyEffect2) {
         GLfloat vertices1[] = {
-            -1.0f, 1.0f, 0.0f,   0.0f,       0.5f,       0.0f,       0.0f,       0.0f,       0.25f,
-            0.0f, 1.0f, 0.0f,    1.0f*ratio, 0.5f,       0.5f*ratio, 0.0f,       0.5f*ratio, 0.25f,
-            -1.0f,  0.0f, 0.0f, 0.0f,       1.0f,       0.0f,       0.25f,      0.0f,       0.5f,
-            0.0f,  0.0f, 0.0f,  1.0f*ratio, 1.0f,       0.5f*ratio, 0.25f,      0.5f*ratio, 0.5f,
+            -1.0f, 0.0f, 0.0f, 0.0f,       1.0f, 0.0f,       0.5f,  0.0f,       0.25f,
+             0.0f, 0.0f, 0.0f, 1.0f*ratio, 1.0f, 0.5f*ratio, 0.5f,  0.5f*ratio, 0.25f,
+            -1.0f, 1.0f, 0.0f, 0.0f,       0.5f, 0.0f,       0.25f, 0.0f,       0.0f,
+             0.0f, 1.0f, 0.0f, 1.0f*ratio, 0.5f, 0.5f*ratio, 0.25f, 0.5f*ratio, 0.0f,
         };
-        glBindBuffer(GL_ARRAY_BUFFER, VBO);
         glBufferData(GL_ARRAY_BUFFER, sizeof(vertices1), vertices1, GL_STATIC_DRAW);
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
         
         GLfloat vertices2[] = {
-            0.0f, 1.0f, 0.0f,   0.0f,       0.5f,       0.0f,       0.0f,       0.0f,       0.25f,
-            1.0f, 1.0f, 0.0f,    1.0f*ratio, 0.5f,       0.5f*ratio, 0.0f,       0.5f*ratio, 0.25f,
-            0.0f,  0.0f, 0.0f, 0.0f,       1.0f,       0.0f,       0.25f,      0.0f,       0.5f,
-            1.0f,  0.0f, 0.0f,  1.0f*ratio, 1.0f,       0.5f*ratio, 0.25f,      0.5f*ratio, 0.5f,
+            0.0f, 0.0f, 0.0f, 0.0f,       1.0f, 0.0f,       0.5f,  0.0f,       0.25f,
+            1.0f, 0.0f, 0.0f, 1.0f*ratio, 1.0f, 0.5f*ratio, 0.5f,  0.5f*ratio, 0.25f,
+            0.0f, 1.0f, 0.0f, 0.0f,       0.5f, 0.0f,       0.25f, 0.0f,       0.0f,
+            1.0f, 1.0f, 0.0f, 1.0f*ratio, 0.5f, 0.5f*ratio, 0.25f, 0.5f*ratio, 0.0f,
         };
-        glBindBuffer(GL_ARRAY_BUFFER, VBO);
         glBufferData(GL_ARRAY_BUFFER, sizeof(vertices2), vertices2, GL_STATIC_DRAW);
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
         
         GLfloat vertices3[] = {
-            -1.0f, 0.0f, 0.0f,   0.0f,       0.5f,       0.0f,       0.0f,       0.0f,       0.25f,
-            0.0f, 0.0f, 0.0f,    1.0f*ratio, 0.5f,       0.5f*ratio, 0.0f,       0.5f*ratio, 0.25f,
-            -1.0f,  -1.0f, 0.0f, 0.0f,       1.0f,       0.0f,       0.25f,      0.0f,       0.5f,
-            0.0f,  -1.0f, 0.0f,  1.0f*ratio, 1.0f,       0.5f*ratio, 0.25f,      0.5f*ratio, 0.5f,
+            -1.0f, -1.0f, 0.0f, 0.0f,       1.0f, 0.0f,       0.5f,  0.0f,       0.25f,
+             0.0f, -1.0f, 0.0f, 1.0f*ratio, 1.0f, 0.5f*ratio, 0.5f,  0.5f*ratio, 0.25f,
+            -1.0f,  0.0f, 0.0f, 0.0f,       0.5f, 0.0f,       0.25f, 0.0f,       0.0f,
+             0.0f,  0.0f, 0.0f, 1.0f*ratio, 0.5f, 0.5f*ratio, 0.25f, 0.5f*ratio, 0.0f,
         };
-        glBindBuffer(GL_ARRAY_BUFFER, VBO);
         glBufferData(GL_ARRAY_BUFFER, sizeof(vertices3), vertices3, GL_STATIC_DRAW);
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
         
         GLfloat vertices4[] = {
-            0.0f, 0.0f, 0.0f,   0.0f,       0.5f,       0.0f,       0.0f,       0.0f,       0.25f,
-            1.0f, 0.0f, 0.0f,    1.0f*ratio, 0.5f,       0.5f*ratio, 0.0f,       0.5f*ratio, 0.25f,
-            0.0f,  -1.0f, 0.0f, 0.0f,       1.0f,       0.0f,       0.25f,      0.0f,       0.5f,
-            1.0f,  -1.0f, 0.0f,  1.0f*ratio, 1.0f,       0.5f*ratio, 0.25f,      0.5f*ratio, 0.5f,
+            0.0f, -1.0f, 0.0f, 0.0f,       1.0f, 0.0f,       0.5f,  0.0f,       0.25f,
+            1.0f, -1.0f, 0.0f, 1.0f*ratio, 1.0f, 0.5f*ratio, 0.5f,  0.5f*ratio, 0.25f,
+            0.0f,  0.0f, 0.0f, 0.0f,       0.5f, 0.0f,       0.25f, 0.0f,       0.0f,
+            1.0f,  0.0f, 0.0f, 1.0f*ratio, 0.5f, 0.5f*ratio, 0.25f, 0.5f*ratio, 0.0f,
         };
-        glBindBuffer(GL_ARRAY_BUFFER, VBO);
         glBufferData(GL_ARRAY_BUFFER, sizeof(vertices4), vertices4, GL_STATIC_DRAW);
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     } else {
         GLfloat vertices[] = {
-            -1.0f, 1.0f, 0.0f,   0.0f,       0.5f,       0.0f,       0.0f,       0.0f,       0.25f,
-            1.0f, 1.0f, 0.0f,    1.0f*ratio, 0.5f,       0.5f*ratio, 0.0f,       0.5f*ratio, 0.25f,
-            -1.0f,  -1.0f, 0.0f, 0.0f,       1.0f,       0.0f,       0.25f,      0.0f,       0.5f,
-            1.0f,  -1.0f, 0.0f,  1.0f*ratio, 1.0f,       0.5f*ratio, 0.25f,      0.5f*ratio, 0.5f,
+            -1.0f, -1.0f, 0.0f, 0.0f,       1.0f, 0.0f,       0.5f,  0.0f,       0.25f,
+             1.0f, -1.0f, 0.0f, 1.0f*ratio, 1.0f, 0.5f*ratio, 0.5f,  0.5f*ratio, 0.25f,
+            -1.0f,  1.0f, 0.0f, 0.0f,       0.5f, 0.0f,       0.25f, 0.0f,       0.0f,
+             1.0f,  1.0f, 0.0f, 1.0f*ratio, 0.5f, 0.5f*ratio, 0.25f, 0.5f*ratio, 0.0f,
         };
-        glBindBuffer(GL_ARRAY_BUFFER, VBO);
         glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     }
@@ -306,190 +357,4 @@ void VideoRender::displayFrame(AVFrame *frame) {
     }
     
     glDeleteTextures(1, &yuvTexture);
-    av_frame_unref(frame);
-    av_frame_free(&frame);
-}
-
-AVFrame * VideoRender::applyFilterToFrame(AVFrame *frame) {
-    if (!frame) return NULL;
-    
-    glClearColor(1.0, 0.0, 0.0, 1.0);
-    glClear(GL_COLOR_BUFFER_BIT);
-
-    int frameWidth = frame->width;
-    int frameHeight = frame->height;
-    if (frameWidth == 0 || frameHeight == 0) {
-        return NULL;
-    }
-    GLuint yuvTexture;
-    glGenTextures(1, &yuvTexture);
-    glBindTexture(GL_TEXTURE_2D, yuvTexture);
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, frame->linesize[0], frameHeight * 2, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, NULL);
-    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, frame->linesize[1], frameHeight / 2, GL_LUMINANCE, GL_UNSIGNED_BYTE, frame->data[1]);
-    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, frameHeight / 2, frame->linesize[2], frameHeight / 2, GL_LUMINANCE, GL_UNSIGNED_BYTE, frame->data[2]);
-    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, frameHeight, frame->linesize[0], frameHeight, GL_LUMINANCE, GL_UNSIGNED_BYTE, frame->data[0]);
-    
-    glUseProgram(myProgram);
-    
-    glUniform1i(glGetUniformLocation(myProgram, "applyInversionFilter"), VideoRenderConfig::shareInstance()->applyInversionFilter);
-    glUniform1i(glGetUniformLocation(myProgram, "applyGrayscaleFilter"), VideoRenderConfig::shareInstance()->applyGrayscaleFilter);
-    glUniform1i(glGetUniformLocation(myProgram, "applyEffect1"), VideoRenderConfig::shareInstance()->applyEffect1);
-    
-    glBindTexture(GL_TEXTURE_2D, yuvTexture);
-    
-    glBindVertexArray(VAO);
-    
-    GLfloat ratio = 1.0 * frame->width / frame->linesize[0];
-    if (VideoRenderConfig::shareInstance()->applyEffect2) {
-        GLfloat vertices1[] = {
-            -1.0f, 1.0f, 0.0f,   0.0f,       0.5f,       0.0f,       0.0f,       0.0f,       0.25f,
-            0.0f, 1.0f, 0.0f,    1.0f*ratio, 0.5f,       0.5f*ratio, 0.0f,       0.5f*ratio, 0.25f,
-            -1.0f,  0.0f, 0.0f, 0.0f,       1.0f,       0.0f,       0.25f,      0.0f,       0.5f,
-            0.0f,  0.0f, 0.0f,  1.0f*ratio, 1.0f,       0.5f*ratio, 0.25f,      0.5f*ratio, 0.5f,
-        };
-        glBindBuffer(GL_ARRAY_BUFFER, VBO);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices1), vertices1, GL_STATIC_DRAW);
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-        
-        GLfloat vertices2[] = {
-            0.0f, 1.0f, 0.0f,   0.0f,       0.5f,       0.0f,       0.0f,       0.0f,       0.25f,
-            1.0f, 1.0f, 0.0f,    1.0f*ratio, 0.5f,       0.5f*ratio, 0.0f,       0.5f*ratio, 0.25f,
-            0.0f,  0.0f, 0.0f, 0.0f,       1.0f,       0.0f,       0.25f,      0.0f,       0.5f,
-            1.0f,  0.0f, 0.0f,  1.0f*ratio, 1.0f,       0.5f*ratio, 0.25f,      0.5f*ratio, 0.5f,
-        };
-        glBindBuffer(GL_ARRAY_BUFFER, VBO);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices2), vertices2, GL_STATIC_DRAW);
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-        
-        GLfloat vertices3[] = {
-            -1.0f, 0.0f, 0.0f,   0.0f,       0.5f,       0.0f,       0.0f,       0.0f,       0.25f,
-            0.0f, 0.0f, 0.0f,    1.0f*ratio, 0.5f,       0.5f*ratio, 0.0f,       0.5f*ratio, 0.25f,
-            -1.0f,  -1.0f, 0.0f, 0.0f,       1.0f,       0.0f,       0.25f,      0.0f,       0.5f,
-            0.0f,  -1.0f, 0.0f,  1.0f*ratio, 1.0f,       0.5f*ratio, 0.25f,      0.5f*ratio, 0.5f,
-        };
-        glBindBuffer(GL_ARRAY_BUFFER, VBO);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices3), vertices3, GL_STATIC_DRAW);
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-        
-        GLfloat vertices4[] = {
-            0.0f, 0.0f, 0.0f,   0.0f,       0.5f,       0.0f,       0.0f,       0.0f,       0.25f,
-            1.0f, 0.0f, 0.0f,    1.0f*ratio, 0.5f,       0.5f*ratio, 0.0f,       0.5f*ratio, 0.25f,
-            0.0f,  -1.0f, 0.0f, 0.0f,       1.0f,       0.0f,       0.25f,      0.0f,       0.5f,
-            1.0f,  -1.0f, 0.0f,  1.0f*ratio, 1.0f,       0.5f*ratio, 0.25f,      0.5f*ratio, 0.5f,
-        };
-        glBindBuffer(GL_ARRAY_BUFFER, VBO);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices4), vertices4, GL_STATIC_DRAW);
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-    } else {
-        GLfloat vertices[] = {
-            -1.0f, 1.0f, 0.0f,   0.0f,       0.5f,       0.0f,       0.0f,       0.0f,       0.25f,
-            1.0f, 1.0f, 0.0f,    1.0f*ratio, 0.5f,       0.5f*ratio, 0.0f,       0.5f*ratio, 0.25f,
-            -1.0f,  -1.0f, 0.0f, 0.0f,       1.0f,       0.0f,       0.25f,      0.0f,       0.5f,
-            1.0f,  -1.0f, 0.0f,  1.0f*ratio, 1.0f,       0.5f*ratio, 0.25f,      0.5f*ratio, 0.5f,
-        };
-        glBindBuffer(GL_ARRAY_BUFFER, VBO);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-    }
-
-    if (VideoRenderConfig::shareInstance()->applySticker1) {
-        static int exportframeCount1 = 1;
-        if (exportframeCount1 > 81) {
-            exportframeCount1 = 1;
-            VideoRenderConfig::shareInstance()->applySticker1 = false;
-        } else {
-            GLuint stickerTexture;
-            glGenTextures(1, &stickerTexture);
-            glBindTexture(GL_TEXTURE_2D, stickerTexture);
-            glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-            glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-            glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-            glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-//            GLubyte *spriteData = [self getBitmapImage:[NSString stringWithFormat:@"tiger_%04d.png", exportframeCount1++]];
-            GLubyte *spriteData;
-            float fw = 500, fh = 498;
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, fw, fh, 0, GL_RGBA, GL_UNSIGNED_BYTE, spriteData);
-            
-            glUseProgram(stickerProgram);
-            glBindVertexArray(stickerVAO);
-            glBindTexture(GL_TEXTURE_2D, stickerTexture);
-            glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-        }
-    } else if (VideoRenderConfig::shareInstance()->applySticker2) {
-        static int exportframeCount2 = 1;
-        if (exportframeCount2 > 100) {
-            exportframeCount2 = 1;
-            VideoRenderConfig::shareInstance()->applySticker2 = false;
-        } else {
-            GLuint stickerTexture;
-            glGenTextures(1, &stickerTexture);
-            glBindTexture(GL_TEXTURE_2D, stickerTexture);
-            glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-            glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-            glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-            glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-//            GLubyte *spriteData = [self getBitmapImage:[NSString stringWithFormat:@"airplane_%04d.png", exportframeCount2++]];
-            GLubyte *spriteData;
-            float fw = 500, fh = 498;
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, fw, fh, 0, GL_RGBA, GL_UNSIGNED_BYTE, spriteData);
-            
-            glUseProgram(stickerProgram);
-            glBindVertexArray(stickerVAO);
-            glBindTexture(GL_TEXTURE_2D, stickerTexture);
-            glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-        }
-    }
-    
-    if (!pixelData) {
-        pixelData = (GLubyte *)malloc(_backingWidth * _backingHeight * 4); // RGBA每个像素4个字节
-    }
-    memset(pixelData, 0, _backingWidth * _backingHeight * 4);
-    glReadPixels(0, 0, _backingWidth, _backingHeight, GL_RGBA, GL_UNSIGNED_BYTE, pixelData);
-
-    // 创建临时缓冲区，并将像素数据写入其中
-    GLubyte *tempBuffer = (GLubyte *)malloc(_backingWidth * _backingHeight * 4);
-    memcpy(tempBuffer, pixelData, _backingWidth * _backingHeight * 4);
-
-    // 垂直翻转像素数据
-    for (int y = 0; y < _backingHeight / 2; ++y) {
-        for (int x = 0; x < _backingWidth * 4; ++x) {
-            GLubyte temp = tempBuffer[y * _backingWidth * 4 + x];
-            tempBuffer[y * _backingWidth * 4 + x] = tempBuffer[(_backingHeight - y - 1) * _backingWidth * 4 + x];
-            tempBuffer[(_backingHeight - y - 1) * _backingWidth * 4 + x] = temp;
-        }
-    }
-
-    glDeleteTextures(1, &yuvTexture);
-    
-    // 设置转换参数
-    struct SwsContext *sws_ctx = sws_getContext(_backingWidth, _backingHeight, AV_PIX_FMT_RGBA,
-                                                _backingWidth, _backingHeight, AV_PIX_FMT_YUV420P,
-                                                 SWS_BILINEAR, NULL, NULL, NULL);
-    if (!sws_ctx) {
-        // 创建转换上下文失败，处理错误
-    }
-
-    int dstStride[AV_NUM_DATA_POINTERS] = {0};
-    dstStride[0] = _backingWidth * 4;
-
-    AVFrame *retFrame = av_frame_alloc();
-    retFrame->format = AV_PIX_FMT_YUV420P;
-    retFrame->width = frame->width;
-    retFrame->height = frame->height;
-    int ret = av_frame_get_buffer(retFrame, 0);
-    av_frame_copy_props(retFrame, frame);
-
-    // 执行转换
-    sws_scale(sws_ctx, &tempBuffer, dstStride, 0, _backingHeight,
-              retFrame->data, retFrame->linesize);
-    
-    free(tempBuffer);
-    sws_freeContext(sws_ctx);
-    
-    return retFrame;
 }

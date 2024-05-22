@@ -59,6 +59,7 @@ public:
     GLuint createProgram(const char *vertexFileName, const char *fragmentFileName);
     void displayFrame(AVFrame *frame);
     AVFrame * applyFilterToFrame(AVFrame *frame);
+    void draw(AVFrame *frame);
 };
 
 
