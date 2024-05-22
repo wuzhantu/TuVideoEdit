@@ -15,6 +15,7 @@ uniform bool applyEffect1;
 
 void main()
 {
+    // yuv420就是四个y共用一个u和一个v,所以纹理采样的时候多少有点精度问题
     float y = texture(yuvTexture, yTextureCoord).r;
     float u = texture(yuvTexture, uTextureCoord).r - 0.5;
     float v = texture(yuvTexture, vTextureCoord).r - 0.5;
