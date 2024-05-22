@@ -47,10 +47,10 @@ void VideoRender::setupProgram() {
     myProgram = createProgram(displayVertexPath, displayFragPath);
     
     GLfloat vertices[] = {
-        -1.0f, 1.0f, 0.0f, 0.0f, 0.5f,       0.0f, 0.0f,       0.0f, 0.25f,
-        1.0f, 1.0f, 0.0f,  1.0f, 0.5f,       0.5f, 0.0f,       0.5f, 0.25f,
-        -1.0f,  -1.0f, 0.0f, 0.0f, 1.0f,       0.0f, 0.25f,      0.0f, 0.5f,
-        1.0f,  -1.0f, 0.0f,  1.0f, 1.0f,       0.5f, 0.25f,      0.5f, 0.5f,
+        -1.0f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.5f,  0.0f, 0.25f,
+         1.0f, -1.0f, 0.0f, 1.0f, 1.0f, 0.5f, 0.5f,  0.5f, 0.25f,
+        -1.0f,  1.0f, 0.0f, 0.0f, 0.5f, 0.0f, 0.25f, 0.0f, 0.0f,
+         1.0f,  1.0f, 0.0f, 1.0f, 0.5f, 0.5f, 0.25f, 0.5f, 0.0f,
     };
     
     glGenVertexArrays(1, &VAO);
