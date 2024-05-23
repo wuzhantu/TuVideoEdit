@@ -335,11 +335,11 @@ void VideoRender::draw(AVFrame *frame) {
             glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
             char name[30];
-            snprintf(name, sizeof(name), "/tiger_%04d.png", frameCount1++);
+            snprintf(name, sizeof(name), "/tiger_%04d.jpg", frameCount1++);
             string imagePath = string(basePath) + string(name);
             int width = 0, height = 0, channel = 0;
-            unsigned char *imageData = stbi_load(imagePath.c_str(), &width, &height, &channel, 0);
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
+            unsigned char *imageData = stbi_load(imagePath.c_str(), &width, &height, &channel, 0); // stbi_failure_reason()
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, imageData);
             
             glUseProgram(stickerProgram);
             glBindVertexArray(stickerVAO);
@@ -362,11 +362,11 @@ void VideoRender::draw(AVFrame *frame) {
             glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
             char name[30];
-            snprintf(name, sizeof(name), "/airplane_%04d.png", frameCount2++);
+            snprintf(name, sizeof(name), "/airplane_%04d.jpg", frameCount2++);
             string imagePath = string(basePath) + string(name);
             int width, height, channel;
             unsigned char *imageData = stbi_load(imagePath.c_str(), &width, &height, &channel, 0);
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, imageData);
             
             glUseProgram(stickerProgram);
             glBindVertexArray(stickerVAO);
