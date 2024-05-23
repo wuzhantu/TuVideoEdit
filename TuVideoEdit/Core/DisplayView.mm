@@ -30,17 +30,7 @@
         self.videoScale = scale;
         [self setupContext];
         [self setupLayer];
-        
-        NSString *displayVertexPath = [[NSBundle mainBundle] pathForResource:@"display" ofType:@"vsh"];
-        NSString *displayFragPath = [[NSBundle mainBundle] pathForResource:@"display" ofType:@"fsh"];
-        NSString *stickerVertexPath = [[NSBundle mainBundle] pathForResource:@"sticker" ofType:@"vsh"];
-        NSString *stickerFragPath = [[NSBundle mainBundle] pathForResource:@"sticker" ofType:@"fsh"];
-        const char *displayVertexPathCstr = [displayVertexPath cStringUsingEncoding:NSUTF8StringEncoding];
-        const char *displayFragPathCstr = [displayFragPath cStringUsingEncoding:NSUTF8StringEncoding];
-        const char *stickerVertexPathCstr = [stickerVertexPath cStringUsingEncoding:NSUTF8StringEncoding];
-        const char *stickerFragPathCstr = [stickerFragPath cStringUsingEncoding:NSUTF8StringEncoding];
-        
-        videoRender = new VideoRender(displayVertexPathCstr, displayFragPathCstr, stickerVertexPathCstr, stickerFragPathCstr);
+        videoRender = new VideoRender([NSBundle.mainBundle.bundlePath cStringUsingEncoding:NSUTF8StringEncoding]);
         [self.myContext renderbufferStorage:GL_RENDERBUFFER fromDrawable:self.myEagLayer];
         videoRender->setupViewport();
     }

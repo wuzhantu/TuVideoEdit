@@ -38,19 +38,20 @@ public:
     GLuint myColorFrameBuffer;
     GLubyte *pixelData = nullptr;
     GLuint VAO, stickerVAO;
-    GLuint VBO;
+    GLuint VBO, stickerVBO;
     GLuint myProgram;
     GLuint stickerProgram;
     GLint _backingWidth;
     GLint _backingHeight;
     
+    const char *basePath;
     const char *displayVertexPath;
     const char *displayFragPath;
     const char *stickerVertexPath;
     const char *stickerFragPath;
     
 public:
-    VideoRender(const char *displayVertexPath, const char *displayFragPath, const char *stickerVertexPath, const char *stickerFragPath);
+    VideoRender(const char *basePath);
     void setup();
     void setupFrameBuffer();
     void setupRenderBuffer();

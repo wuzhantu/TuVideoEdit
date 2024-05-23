@@ -7,12 +7,25 @@
 
 #include "VideoRender.hpp"
 #include "VideoRenderConfig.hpp"
+#include "stb_image.h"
 
-VideoRender::VideoRender(const char *displayVertexPath, const char *displayFragPath, const char *stickerVertexPath, const char *stickerFragPath) {
-    this->displayVertexPath = displayVertexPath;
-    this->displayFragPath = displayFragPath;
-    this->stickerVertexPath = stickerVertexPath;
-    this->stickerFragPath = stickerFragPath;
+VideoRender::VideoRender(const char *basePath) {
+    
+    string *basePathStr = new string(basePath);
+    this->basePath = basePathStr->c_str();
+    
+    string *displayVertexPathStr = new string(*basePathStr + "/display.vsh");
+    this->displayVertexPath = displayVertexPathStr->c_str();
+    
+    string *displayFragPathStr = new string(*basePathStr + "/display.fsh");
+    this->displayFragPath = displayFragPathStr->c_str();
+    
+    string *stickerVertexPathStr = new string(*basePathStr + "/sticker.vsh");
+    this->stickerVertexPath = stickerVertexPathStr->c_str();
+    
+    string *stickerFragPathStr = new string(*basePathStr + "/sticker.fsh");
+    this->stickerFragPath = stickerFragPathStr->c_str();
+
     setup();
 }
 
@@ -83,7 +96,6 @@ void VideoRender::setupProgram() {
         0.5f,  -0.5f, 0.0f,  1.0f, 1.0f,
     };
     
-    GLuint stickerVBO;
     glGenVertexArrays(1, &stickerVAO);
     glGenBuffers(1, &stickerVBO);
     glBindVertexArray(stickerVAO);
@@ -321,15 +333,19 @@ void VideoRender::draw(AVFrame *frame) {
             glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
             glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
             glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-//            GLubyte *spriteData = [self getBitmapImage:[NSString stringWithFormat:@"tiger_%04d.png", frameCount1++]];
-            GLubyte *spriteData;
-            float fw = 500, fh = 498;
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, fw, fh, 0, GL_RGBA, GL_UNSIGNED_BYTE, spriteData);
+
+            char name[30];
+            snprintf(name, sizeof(name), "/tiger_%04d.png", frameCount1++);
+            string imagePath = string(basePath) + string(name);
+            int width = 0, height = 0, channel = 0;
+            unsigned char *imageData = stbi_load(imagePath.c_str(), &width, &height, &channel, 0);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
             
             glUseProgram(stickerProgram);
             glBindVertexArray(stickerVAO);
             glBindTexture(GL_TEXTURE_2D, stickerTexture);
             glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+            glDeleteTextures(1, &stickerTexture);
         }
     } else if (VideoRenderConfig::shareInstance()->applySticker2) {
         static int frameCount2 = 1;
@@ -344,15 +360,19 @@ void VideoRender::draw(AVFrame *frame) {
             glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
             glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
             glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-//            GLubyte *spriteData = [self getBitmapImage:[NSString stringWithFormat:@"airplane_%04d.png", frameCount2++]];
-            GLubyte *spriteData;
-            float fw = 500, fh = 498;
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, fw, fh, 0, GL_RGBA, GL_UNSIGNED_BYTE, spriteData);
+
+            char name[30];
+            snprintf(name, sizeof(name), "/airplane_%04d.png", frameCount2++);
+            string imagePath = string(basePath) + string(name);
+            int width, height, channel;
+            unsigned char *imageData = stbi_load(imagePath.c_str(), &width, &height, &channel, 0);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
             
             glUseProgram(stickerProgram);
             glBindVertexArray(stickerVAO);
             glBindTexture(GL_TEXTURE_2D, stickerTexture);
             glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+            glDeleteTextures(1, &stickerTexture);
         }
     }
     
