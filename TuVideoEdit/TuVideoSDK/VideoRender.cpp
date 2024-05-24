@@ -108,9 +108,6 @@ int VideoRender::setupTextProgram()
     // compile and setup the shader
     // ----------------------------
     textProgram = createProgram(textVertexPath, textFragPath);
-    GLKMatrix4 projection = GLKMatrix4MakeOrtho(0, 1172, 0, 720, 0.1, 100);
-    glUseProgram(textProgram);
-    glUniformMatrix4fv(glGetUniformLocation(textProgram, "projection"), 1, GL_FALSE, projection.m);
     
     // FreeType
     // --------
@@ -506,8 +503,8 @@ void VideoRender::drawText() {
     }
     
     string text = VideoRenderConfig::shareInstance()->text;
-    float x = -25.0f;
-    float y = -25.0f;
+    float x = _backingWidth * 0.4;
+    float y = _backingHeight * 0.4;
     float scale = 2.0f;
     vector<float> color = {0.3, 0.7f, 0.9f};
     
@@ -519,6 +516,10 @@ void VideoRender::drawText() {
     
     // activate corresponding render state
     glUseProgram(textProgram);
+    
+    GLKMatrix4 projection = GLKMatrix4MakeOrtho(0, _backingWidth, 0, _backingHeight, -1, 1);
+    glUniformMatrix4fv(glGetUniformLocation(textProgram, "projection"), 1, GL_FALSE, projection.m);
+    
     glUniform3f(glGetUniformLocation(textProgram, "textColor"), color[0], color[1], color[2]);
     glActiveTexture(GL_TEXTURE0);
     glBindVertexArray(textVAO);
@@ -536,24 +537,14 @@ void VideoRender::drawText() {
         float w = ch.Size[0] * scale;
         float h = ch.Size[1] * scale;
         // update VBO for each character
-//        float vertices[6][4] = {
-//            { xpos,     ypos + h,   0.0f, 0.0f },
-//            { xpos,     ypos,       0.0f, 1.0f },
-//            { xpos + w, ypos,       1.0f, 1.0f },
-//
-//            { xpos,     ypos + h,   0.0f, 0.0f },
-//            { xpos + w, ypos,       1.0f, 1.0f },
-//            { xpos + w, ypos + h,   1.0f, 0.0f }
-//        };
-        
         float vertices[6][4] = {
-            { xpos / 586.0f,     (ypos + h) / 360.0f,   0.0f, 0.0f },
-            { xpos / 586.0f,     ypos / 360.0f,       0.0f, 1.0f },
-            { (xpos + w) / 586.0f, ypos / 360.0f,       1.0f, 1.0f },
+            { xpos,     ypos + h,   0.0f, 0.0f },
+            { xpos,     ypos,       0.0f, 1.0f },
+            { xpos + w, ypos,       1.0f, 1.0f },
 
-            { xpos / 586.0f,     (ypos + h) / 360.0f,   0.0f, 0.0f },
-            { (xpos + w) / 586.0f, ypos / 360.0f,       1.0f, 1.0f },
-            { (xpos + w) / 586.0f, (ypos + h) / 360.0f,   1.0f, 0.0f }
+            { xpos,     ypos + h,   0.0f, 0.0f },
+            { xpos + w, ypos,       1.0f, 1.0f },
+            { xpos + w, ypos + h,   1.0f, 0.0f }
         };
         
         // render glyph texture over quad
