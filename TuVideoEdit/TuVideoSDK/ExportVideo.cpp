@@ -142,7 +142,7 @@ void ExportVideo::videoDecode() {
                     goto end;
                 }
                 
-                AVFrame *filterFrame = videoRender->applyFilterToFrame(videodec_frame);
+                AVFrame *filterFrame = videoRender->convertFrame(videodec_frame);
                 ret = avcodec_send_frame(videoenc_ctx, filterFrame);
                 if (ret < 0) {
                     cout << "video encode failed" << endl;

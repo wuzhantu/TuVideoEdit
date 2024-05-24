@@ -19,10 +19,10 @@ private:
 public:
     bool applyInversionFilter = false;
     bool applyGrayscaleFilter = false;
-    bool applySticker1 = false;
-    bool applySticker2 = false;
-    bool applyEffect1 = false;
-    bool applyEffect2 = false;
+    bool applyTigerSticker = false;
+    bool applyAirplaneSticker = false;
+    bool applyMirrorEffect = false;
+    bool applyFourGridEffect = false;
     const char *text = NULL;
     
 public:

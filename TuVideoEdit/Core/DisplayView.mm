@@ -55,7 +55,7 @@
 }
 
 - (AVFrame *)applyFilterToFrame:(AVFrame *)frame {
-    return videoRender->applyFilterToFrame(frame);
+    return videoRender->convertFrame(frame);
 }
 
 - (GLubyte *)getBitmapImage:(NSString *)imageName {

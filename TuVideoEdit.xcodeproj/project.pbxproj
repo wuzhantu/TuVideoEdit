@@ -42,10 +42,10 @@
 		43BEBE4B2BDFEDAE00B3123E /* EditViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43BEBE4A2BDFEDAE00B3123E /* EditViewController.mm */; };
 		43BEBE4E2BDFF0EC00B3123E /* ThumbCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43BEBE4D2BDFF0EC00B3123E /* ThumbCell.m */; };
 		43BEBE512BDFFF0F00B3123E /* DisplayView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43BEBE502BDFFF0F00B3123E /* DisplayView.mm */; };
-		43BEBE542BDFFFB600B3123E /* display.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 43BEBE522BDFFFB600B3123E /* display.fsh */; };
-		43BEBE552BDFFFB600B3123E /* display.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 43BEBE532BDFFFB600B3123E /* display.vsh */; };
-		43BEBFF82BE0DDFD00B3123E /* sticker.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 43BEBFF62BE0DDFD00B3123E /* sticker.vsh */; };
-		43BEBFF92BE0DDFD00B3123E /* sticker.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 43BEBFF72BE0DDFD00B3123E /* sticker.fsh */; };
+		43BEBE542BDFFFB600B3123E /* frame.fs in Resources */ = {isa = PBXBuildFile; fileRef = 43BEBE522BDFFFB600B3123E /* frame.fs */; };
+		43BEBE552BDFFFB600B3123E /* frame.vs in Resources */ = {isa = PBXBuildFile; fileRef = 43BEBE532BDFFFB600B3123E /* frame.vs */; };
+		43BEBFF82BE0DDFD00B3123E /* sticker.vs in Resources */ = {isa = PBXBuildFile; fileRef = 43BEBFF62BE0DDFD00B3123E /* sticker.vs */; };
+		43BEBFF92BE0DDFD00B3123E /* sticker.fs in Resources */ = {isa = PBXBuildFile; fileRef = 43BEBFF72BE0DDFD00B3123E /* sticker.fs */; };
 		43BEC2232BF3605700B3123E /* snow.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = 43BEC2212BF3605700B3123E /* snow.MP4 */; };
 		43BEC2262BF4DFEF00B3123E /* DecoderContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43BEC2242BF4DFEF00B3123E /* DecoderContext.cpp */; };
 		43BEC22C2BF5A2D300B3123E /* TimeLineDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43BEC22A2BF5A2D300B3123E /* TimeLineDecoder.cpp */; };
@@ -544,10 +544,10 @@
 		43BEBE4D2BDFF0EC00B3123E /* ThumbCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThumbCell.m; sourceTree = "<group>"; };
 		43BEBE4F2BDFFF0F00B3123E /* DisplayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayView.h; sourceTree = "<group>"; };
 		43BEBE502BDFFF0F00B3123E /* DisplayView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DisplayView.mm; sourceTree = "<group>"; };
-		43BEBE522BDFFFB600B3123E /* display.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = display.fsh; sourceTree = "<group>"; };
-		43BEBE532BDFFFB600B3123E /* display.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = display.vsh; sourceTree = "<group>"; };
-		43BEBFF62BE0DDFD00B3123E /* sticker.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = sticker.vsh; sourceTree = "<group>"; };
-		43BEBFF72BE0DDFD00B3123E /* sticker.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = sticker.fsh; sourceTree = "<group>"; };
+		43BEBE522BDFFFB600B3123E /* frame.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = frame.fs; sourceTree = "<group>"; };
+		43BEBE532BDFFFB600B3123E /* frame.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = frame.vs; sourceTree = "<group>"; };
+		43BEBFF62BE0DDFD00B3123E /* sticker.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = sticker.vs; sourceTree = "<group>"; };
+		43BEBFF72BE0DDFD00B3123E /* sticker.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = sticker.fs; sourceTree = "<group>"; };
 		43BEC2212BF3605700B3123E /* snow.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = snow.MP4; sourceTree = "<group>"; };
 		43BEC2242BF4DFEF00B3123E /* DecoderContext.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DecoderContext.cpp; sourceTree = "<group>"; };
 		43BEC2252BF4DFEF00B3123E /* DecoderContext.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DecoderContext.hpp; sourceTree = "<group>"; };
@@ -1396,10 +1396,10 @@
 				43CB6B8A2BF77A14001ACC60 /* TuSemaphore.cpp */,
 				43CB6BA82BFEE475001ACC60 /* stb_image.h */,
 				43CB6BA92BFEE476001ACC60 /* stb_image.cpp */,
-				43BEBE532BDFFFB600B3123E /* display.vsh */,
-				43BEBE522BDFFFB600B3123E /* display.fsh */,
-				43BEBFF62BE0DDFD00B3123E /* sticker.vsh */,
-				43BEBFF72BE0DDFD00B3123E /* sticker.fsh */,
+				43BEBE532BDFFFB600B3123E /* frame.vs */,
+				43BEBE522BDFFFB600B3123E /* frame.fs */,
+				43BEBFF62BE0DDFD00B3123E /* sticker.vs */,
+				43BEBFF72BE0DDFD00B3123E /* sticker.fs */,
 				43CB89302C004218001ACC60 /* text.vs */,
 				43CB89312C004218001ACC60 /* text.fs */,
 			);
@@ -1950,7 +1950,7 @@
 				43CB74062BFF1BAD001ACC60 /* airplane_0012.jpg in Resources */,
 				43CB740A2BFF1BAD001ACC60 /* airplane_0049.jpg in Resources */,
 				43CB73402BFF1B20001ACC60 /* tiger_0075.jpg in Resources */,
-				43BEBFF92BE0DDFD00B3123E /* sticker.fsh in Resources */,
+				43BEBFF92BE0DDFD00B3123E /* sticker.fs in Resources */,
 				43BEBCFF2BDFE57000B3123E /* Assets.xcassets in Resources */,
 				43CB893A2C004313001ACC60 /* Antonio-Regular.ttf in Resources */,
 				43CB73702BFF1B20001ACC60 /* tiger_0019.jpg in Resources */,
@@ -1991,7 +1991,7 @@
 				43CB73522BFF1B20001ACC60 /* tiger_0059.jpg in Resources */,
 				43CB74232BFF1BAD001ACC60 /* airplane_0068.jpg in Resources */,
 				43CB738C2BFF1B20001ACC60 /* tiger_0051.jpg in Resources */,
-				43BEBFF82BE0DDFD00B3123E /* sticker.vsh in Resources */,
+				43BEBFF82BE0DDFD00B3123E /* sticker.vs in Resources */,
 				43CB73572BFF1B20001ACC60 /* tiger_0015.jpg in Resources */,
 				43CB744E2BFF1BAD001ACC60 /* airplane_0035.jpg in Resources */,
 				43CB74432BFF1BAD001ACC60 /* airplane_0044.jpg in Resources */,
@@ -2002,7 +2002,7 @@
 				43CB736B2BFF1B20001ACC60 /* tiger_0020.jpg in Resources */,
 				43CB74302BFF1BAD001ACC60 /* airplane_0095.jpg in Resources */,
 				43CB73FE2BFF1BAD001ACC60 /* airplane_0038.jpg in Resources */,
-				43BEBE542BDFFFB600B3123E /* display.fsh in Resources */,
+				43BEBE542BDFFFB600B3123E /* frame.fs in Resources */,
 				43CB73822BFF1B20001ACC60 /* tiger_0080.jpg in Resources */,
 				43CB736C2BFF1B20001ACC60 /* tiger_0008.jpg in Resources */,
 				43CB73582BFF1B20001ACC60 /* tiger_0001.jpg in Resources */,
@@ -2025,7 +2025,7 @@
 				43CB74422BFF1BAD001ACC60 /* airplane_0050.jpg in Resources */,
 				43CB73482BFF1B20001ACC60 /* tiger_0077.jpg in Resources */,
 				43CB74142BFF1BAD001ACC60 /* airplane_0077.jpg in Resources */,
-				43BEBE552BDFFFB600B3123E /* display.vsh in Resources */,
+				43BEBE552BDFFFB600B3123E /* frame.vs in Resources */,
 				43CB74032BFF1BAD001ACC60 /* airplane_0039.jpg in Resources */,
 				43CB740F2BFF1BAD001ACC60 /* airplane_0076.jpg in Resources */,
 				43CB73602BFF1B20001ACC60 /* tiger_0011.jpg in Resources */,

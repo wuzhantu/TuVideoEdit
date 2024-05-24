@@ -18,12 +18,12 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
         case 0:
-            VideoRenderConfig::shareInstance()->applySticker1 = true;
-            VideoRenderConfig::shareInstance()->applySticker2 = false;
+            VideoRenderConfig::shareInstance()->applyTigerSticker = true;
+            VideoRenderConfig::shareInstance()->applyAirplaneSticker = false;
             break;
         case 1:
-            VideoRenderConfig::shareInstance()->applySticker1 = false;
-            VideoRenderConfig::shareInstance()->applySticker2 = true;
+            VideoRenderConfig::shareInstance()->applyTigerSticker = false;
+            VideoRenderConfig::shareInstance()->applyAirplaneSticker = true;
             break;
         default:
             break;

@@ -55,8 +55,8 @@ public:
     GLuint textProgram;
     
     const char *basePath;
-    const char *displayVertexPath;
-    const char *displayFragPath;
+    const char *frameVertexPath;
+    const char *frameFragPath;
     const char *stickerVertexPath;
     const char *stickerFragPath;
     const char *textVertexPath;
@@ -75,7 +75,7 @@ public:
     void setupViewport();
     GLuint createProgram(const char *vertexFileName, const char *fragmentFileName);
     void displayFrame(AVFrame *frame);
-    AVFrame * applyFilterToFrame(AVFrame *frame);
+    AVFrame * convertFrame(AVFrame *frame);
     void draw(AVFrame *frame);
     void drawFrame(AVFrame *frame);
     void drawSticker();

@@ -11,19 +11,19 @@
 @implementation EffectSelectView
 
 - (void)setupData {
-    self.iconImageNameArr = @[@"effect_mirror", @"effect_fourSplit"];
-    self.titleArr = @[@"二分", @"四分"];
+    self.iconImageNameArr = @[@"effect_mirror", @"effect_fourGrid"];
+    self.titleArr = @[@"镜像", @"四宫格"];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
         case 0:
-            VideoRenderConfig::shareInstance()->applyEffect1 = true;
-            VideoRenderConfig::shareInstance()->applyEffect2 = false;
+            VideoRenderConfig::shareInstance()->applyMirrorEffect = true;
+            VideoRenderConfig::shareInstance()->applyFourGridEffect = false;
             break;
         case 1:
-            VideoRenderConfig::shareInstance()->applyEffect1 = false;
-            VideoRenderConfig::shareInstance()->applyEffect2 = true;
+            VideoRenderConfig::shareInstance()->applyMirrorEffect = false;
+            VideoRenderConfig::shareInstance()->applyFourGridEffect = true;
             break;
         default:
             break;

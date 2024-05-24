@@ -11,7 +11,7 @@ uniform sampler2D yuvTexture;
 uniform bool applyInversionFilter;
 uniform bool applyGrayscaleFilter;
 
-uniform bool applyEffect1;
+uniform bool applyMirrorEffect;
 
 void main()
 {
@@ -26,7 +26,7 @@ void main()
 
     vec4 color = vec4(r, g, b, 1.0);
 
-    if (applyEffect1) { // 二分特效
+    if (applyMirrorEffect) { // 镜像特效
         vec2 ypos = yTextureCoord;
         if (ypos.x > 0.5) {
             ypos.x = 1.0 - ypos.x;

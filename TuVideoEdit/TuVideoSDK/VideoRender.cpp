@@ -16,16 +16,16 @@ VideoRender::VideoRender(const char *basePath) {
     string *basePathStr = new string(basePath);
     this->basePath = basePathStr->c_str();
     
-    string *displayVertexPathStr = new string(*basePathStr + "/display.vsh");
-    this->displayVertexPath = displayVertexPathStr->c_str();
+    string *frameVertexPathStr = new string(*basePathStr + "/frame.vs");
+    this->frameVertexPath = frameVertexPathStr->c_str();
     
-    string *displayFragPathStr = new string(*basePathStr + "/display.fsh");
-    this->displayFragPath = displayFragPathStr->c_str();
+    string *frameFragPathStr = new string(*basePathStr + "/frame.fs");
+    this->frameFragPath = frameFragPathStr->c_str();
     
-    string *stickerVertexPathStr = new string(*basePathStr + "/sticker.vsh");
+    string *stickerVertexPathStr = new string(*basePathStr + "/sticker.vs");
     this->stickerVertexPath = stickerVertexPathStr->c_str();
     
-    string *stickerFragPathStr = new string(*basePathStr + "/sticker.fsh");
+    string *stickerFragPathStr = new string(*basePathStr + "/sticker.fs");
     this->stickerFragPath = stickerFragPathStr->c_str();
 
     string *textVertexPathStr = new string(*basePathStr + "/text.vs");
@@ -46,7 +46,7 @@ void VideoRender::setup() {
 }
 
 void VideoRender::setupFrameProgram() {
-    frameProgram = createProgram(displayVertexPath, displayFragPath);
+    frameProgram = createProgram(frameVertexPath, frameFragPath);
     
     GLfloat vertices[] = {
         -1.0f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.5f,  0.0f, 0.25f,
@@ -295,7 +295,7 @@ void VideoRender::displayFrame(AVFrame *frame) {
     av_frame_free(&frame);
 }
 
-AVFrame * VideoRender::applyFilterToFrame(AVFrame *frame) {
+AVFrame * VideoRender::convertFrame(AVFrame *frame) {
     draw(frame);
     
     if (!pixelData) {
@@ -382,13 +382,13 @@ void VideoRender::drawFrame(AVFrame *frame) {
     
     glUniform1i(glGetUniformLocation(frameProgram, "applyInversionFilter"), VideoRenderConfig::shareInstance()->applyInversionFilter);
     glUniform1i(glGetUniformLocation(frameProgram, "applyGrayscaleFilter"), VideoRenderConfig::shareInstance()->applyGrayscaleFilter);
-    glUniform1i(glGetUniformLocation(frameProgram, "applyEffect1"), VideoRenderConfig::shareInstance()->applyEffect1);
+    glUniform1i(glGetUniformLocation(frameProgram, "applyMirrorEffect"), VideoRenderConfig::shareInstance()->applyMirrorEffect);
     
     glBindVertexArray(frameVAO);
     glBindBuffer(GL_ARRAY_BUFFER, frameVBO);
     
     GLfloat ratio = 1.0 * frame->width / frame->linesize[0];
-    if (VideoRenderConfig::shareInstance()->applyEffect2) {
+    if (VideoRenderConfig::shareInstance()->applyFourGridEffect) {
         GLfloat vertices1[] = {
             -1.0f, 0.0f, 0.0f, 0.0f,       1.0f, 0.0f,       0.5f,  0.0f,       0.25f,
              0.0f, 0.0f, 0.0f, 1.0f*ratio, 1.0f, 0.5f*ratio, 0.5f,  0.5f*ratio, 0.25f,
@@ -440,11 +440,11 @@ void VideoRender::drawFrame(AVFrame *frame) {
 
 void VideoRender::drawSticker() {
     
-    if (VideoRenderConfig::shareInstance()->applySticker1) {
+    if (VideoRenderConfig::shareInstance()->applyTigerSticker) {
         static int frameCount1 = 1;
         if (frameCount1 > 81) {
             frameCount1 = 1;
-            VideoRenderConfig::shareInstance()->applySticker1 = false;
+            VideoRenderConfig::shareInstance()->applyTigerSticker = false;
         } else {
             GLuint stickerTexture;
             glGenTextures(1, &stickerTexture);
@@ -467,11 +467,11 @@ void VideoRender::drawSticker() {
             glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
             glDeleteTextures(1, &stickerTexture);
         }
-    } else if (VideoRenderConfig::shareInstance()->applySticker2) {
+    } else if (VideoRenderConfig::shareInstance()->applyAirplaneSticker) {
         static int frameCount2 = 1;
         if (frameCount2 > 100) {
             frameCount2 = 1;
-            VideoRenderConfig::shareInstance()->applySticker2 = false;
+            VideoRenderConfig::shareInstance()->applyAirplaneSticker = false;
         } else {
             GLuint stickerTexture;
             glGenTextures(1, &stickerTexture);
