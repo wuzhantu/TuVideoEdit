@@ -38,35 +38,15 @@ VideoRender::VideoRender(const char *basePath) {
 }
 
 void VideoRender::setup() {
-    setupProgram();
+    setupFrameProgram();
+    setupStickerProgram();
     setupTextProgram();
     setupFrameBuffer();
     setupRenderBuffer();
 }
 
-void VideoRender::setupFrameBuffer() {
-    GLuint frameBuffer;
-    glGenFramebuffers(1, &frameBuffer);
-    glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
-    myColorFrameBuffer = frameBuffer;
-}
-
-void VideoRender::setupRenderBuffer() {
-    GLuint renderBuffer;
-    glGenRenderbuffers(1, &renderBuffer);
-    glBindRenderbuffer(GL_RENDERBUFFER, renderBuffer);
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, renderBuffer);
-    myColorRenderBuffer = renderBuffer;
-}
-
-void VideoRender::setupViewport() {
-    glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &_backingWidth);
-    glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &_backingHeight);
-    glViewport(0, 0, _backingWidth, _backingHeight);
-}
-
-void VideoRender::setupProgram() {
-    myProgram = createProgram(displayVertexPath, displayFragPath);
+void VideoRender::setupFrameProgram() {
+    frameProgram = createProgram(displayVertexPath, displayFragPath);
     
     GLfloat vertices[] = {
         -1.0f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.5f,  0.0f, 0.25f,
@@ -75,10 +55,10 @@ void VideoRender::setupProgram() {
          1.0f,  1.0f, 0.0f, 1.0f, 0.5f, 0.5f, 0.25f, 0.5f, 0.0f,
     };
     
-    glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, &VBO);
-    glBindVertexArray(VAO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glGenVertexArrays(1, &frameVAO);
+    glGenBuffers(1, &frameVBO);
+    glBindVertexArray(frameVAO);
+    glBindBuffer(GL_ARRAY_BUFFER, frameVBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
     
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 9, NULL);
@@ -95,7 +75,9 @@ void VideoRender::setupProgram() {
     
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-    
+}
+
+void VideoRender::setupStickerProgram() {
     stickerProgram = createProgram(stickerVertexPath, stickerFragPath);
     
     GLfloat stickerVertices[] = {
@@ -119,6 +101,127 @@ void VideoRender::setupProgram() {
     
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+int VideoRender::setupTextProgram()
+{
+    // compile and setup the shader
+    // ----------------------------
+    textProgram = createProgram(textVertexPath, textFragPath);
+    GLKMatrix4 projection = GLKMatrix4MakeOrtho(0, 1172, 0, 720, 0.1, 100);
+    glUseProgram(textProgram);
+    glUniformMatrix4fv(glGetUniformLocation(textProgram, "projection"), 1, GL_FALSE, projection.m);
+    
+    // FreeType
+    // --------
+    FT_Library ft;
+    // All functions return a value different than 0 whenever an error occurred
+    if (FT_Init_FreeType(&ft))
+    {
+        std::cout << "ERROR::FREETYPE: Could not init FreeType Library" << std::endl;
+        return -1;
+    }
+
+    // find path to font
+    std::string font_name = string(string(basePath) + "/Antonio-Bold.ttf");
+    if (font_name.empty())
+    {
+        std::cout << "ERROR::FREETYPE: Failed to load font_name" << std::endl;
+        return -1;
+    }
+    
+    // load font as face
+    FT_Face face;
+    if (FT_New_Face(ft, font_name.c_str(), 0, &face)) {
+        std::cout << "ERROR::FREETYPE: Failed to load font" << std::endl;
+        return -1;
+    }
+    else {
+        // set size to load glyphs as
+        FT_Set_Pixel_Sizes(face, 0, 48);
+
+        // disable byte-alignment restriction
+        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+
+        // load first 128 characters of ASCII set
+        for (unsigned char c = 0; c < 128; c++)
+        {
+            // Load character glyph
+            if (FT_Load_Char(face, c, FT_LOAD_RENDER))
+            {
+                std::cout << "ERROR::FREETYTPE: Failed to load Glyph" << std::endl;
+                continue;
+            }
+            // generate texture
+            unsigned int texture;
+            glGenTextures(1, &texture);
+            glBindTexture(GL_TEXTURE_2D, texture);
+            glTexImage2D(
+                GL_TEXTURE_2D,
+                0,
+                GL_LUMINANCE,
+                face->glyph->bitmap.width,
+                face->glyph->bitmap.rows,
+                0,
+                GL_LUMINANCE,
+                GL_UNSIGNED_BYTE,
+                face->glyph->bitmap.buffer
+            );
+            // set texture options
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+            // now store character for later use
+            vector<int> size = {face->glyph->bitmap.width, face->glyph->bitmap.rows};
+            vector<int> bearing = {face->glyph->bitmap_left, face->glyph->bitmap_top};
+            Character character = {
+                texture,
+                size,
+                bearing,
+                static_cast<unsigned int>(face->glyph->advance.x)
+            };
+            Characters.insert(std::pair<char, Character>(c, character));
+        }
+        glBindTexture(GL_TEXTURE_2D, 0);
+    }
+    // destroy FreeType once we're finished
+    FT_Done_Face(face);
+    FT_Done_FreeType(ft);
+
+    
+    // configure VAO/VBO for texture quads
+    // -----------------------------------
+    glGenVertexArrays(1, &textVAO);
+    glGenBuffers(1, &textVBO);
+    glBindVertexArray(textVAO);
+    glBindBuffer(GL_ARRAY_BUFFER, textVBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
+    
+    return 0;
+}
+
+void VideoRender::setupFrameBuffer() {
+    GLuint frameBuffer;
+    glGenFramebuffers(1, &frameBuffer);
+    glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
+}
+
+void VideoRender::setupRenderBuffer() {
+    GLuint renderBuffer;
+    glGenRenderbuffers(1, &renderBuffer);
+    glBindRenderbuffer(GL_RENDERBUFFER, renderBuffer);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, renderBuffer);
+}
+
+void VideoRender::setupViewport() {
+    glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &_backingWidth);
+    glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &_backingHeight);
+    glViewport(0, 0, _backingWidth, _backingHeight);
 }
 
 GLuint VideoRender::createProgram(const char *vertexFileName, const char *fragmentFileName) {
@@ -246,6 +349,12 @@ AVFrame * VideoRender::applyFilterToFrame(AVFrame *frame) {
 }
 
 void VideoRender::draw(AVFrame *frame) {
+    drawFrame(frame);
+    drawSticker();
+    drawText();
+}
+
+void VideoRender::drawFrame(AVFrame *frame) {
     if (!frame) return;
     
     int frameWidth = frame->width;
@@ -270,16 +379,16 @@ void VideoRender::draw(AVFrame *frame) {
     glTexSubImage2D(GL_TEXTURE_2D, 0, 0, frameHeight / 2, frame->linesize[1], frameHeight / 2, GL_LUMINANCE, GL_UNSIGNED_BYTE, frame->data[1]);
     glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, frame->linesize[2], frameHeight / 2, GL_LUMINANCE, GL_UNSIGNED_BYTE, frame->data[2]);
     
-    glUseProgram(myProgram);
+    glUseProgram(frameProgram);
     
     glBindTexture(GL_TEXTURE_2D, yuvTexture);
     
-    glUniform1i(glGetUniformLocation(myProgram, "applyInversionFilter"), VideoRenderConfig::shareInstance()->applyInversionFilter);
-    glUniform1i(glGetUniformLocation(myProgram, "applyGrayscaleFilter"), VideoRenderConfig::shareInstance()->applyGrayscaleFilter);
-    glUniform1i(glGetUniformLocation(myProgram, "applyEffect1"), VideoRenderConfig::shareInstance()->applyEffect1);
+    glUniform1i(glGetUniformLocation(frameProgram, "applyInversionFilter"), VideoRenderConfig::shareInstance()->applyInversionFilter);
+    glUniform1i(glGetUniformLocation(frameProgram, "applyGrayscaleFilter"), VideoRenderConfig::shareInstance()->applyGrayscaleFilter);
+    glUniform1i(glGetUniformLocation(frameProgram, "applyEffect1"), VideoRenderConfig::shareInstance()->applyEffect1);
     
-    glBindVertexArray(VAO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBindVertexArray(frameVAO);
+    glBindBuffer(GL_ARRAY_BUFFER, frameVBO);
     
     GLfloat ratio = 1.0 * frame->width / frame->linesize[0];
     if (VideoRenderConfig::shareInstance()->applyEffect2) {
@@ -330,6 +439,9 @@ void VideoRender::draw(AVFrame *frame) {
     }
     
     glDeleteTextures(1, &yuvTexture);
+}
+
+void VideoRender::drawSticker() {
     
     if (VideoRenderConfig::shareInstance()->applySticker1) {
         static int frameCount1 = 1;
@@ -386,127 +498,32 @@ void VideoRender::draw(AVFrame *frame) {
             glDeleteTextures(1, &stickerTexture);
         }
     }
-    
-    if (VideoRenderConfig::shareInstance()->text) {
-        drawText(string(VideoRenderConfig::shareInstance()->text), -25.0f, -25.0f, 2.0f, vector<float>{0.5, 0.8f, 0.2f}); //vector<float>{0.3, 0.7f, 0.9f}
-    }
 }
 
-int VideoRender::setupTextProgram()
-{
+void VideoRender::drawText() {
+    if (!VideoRenderConfig::shareInstance()->text) {
+        return;
+    }
+    
+    string text = VideoRenderConfig::shareInstance()->text;
+    float x = -25.0f;
+    float y = -25.0f;
+    float scale = 2.0f;
+    vector<float> color = {0.3, 0.7f, 0.9f};
+    
     // OpenGL state
     // ------------
     glEnable(GL_CULL_FACE);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
-    // compile and setup the shader
-    // ----------------------------
-    textProgram = createProgram(textVertexPath, textFragPath);
-    GLKMatrix4 projection = GLKMatrix4MakeOrtho(0, 1172, 0, 720, 0.1, 100);
-    glUseProgram(textProgram);
-    glUniformMatrix4fv(glGetUniformLocation(textProgram, "projection"), 1, GL_FALSE, projection.m);
-    
-    // FreeType
-    // --------
-    FT_Library ft;
-    // All functions return a value different than 0 whenever an error occurred
-    if (FT_Init_FreeType(&ft))
-    {
-        std::cout << "ERROR::FREETYPE: Could not init FreeType Library" << std::endl;
-        return -1;
-    }
-
-    // find path to font
-    std::string font_name = string(string(basePath) + "/Antonio-Bold.ttf");
-    if (font_name.empty())
-    {
-        std::cout << "ERROR::FREETYPE: Failed to load font_name" << std::endl;
-        return -1;
-    }
-    
-    // load font as face
-    FT_Face face;
-    if (FT_New_Face(ft, font_name.c_str(), 0, &face)) {
-        std::cout << "ERROR::FREETYPE: Failed to load font" << std::endl;
-        return -1;
-    }
-    else {
-        // set size to load glyphs as
-        FT_Set_Pixel_Sizes(face, 0, 48);
-
-        // disable byte-alignment restriction
-        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-
-        // load first 128 characters of ASCII set
-        for (unsigned char c = 0; c < 128; c++)
-        {
-            // Load character glyph
-            if (FT_Load_Char(face, c, FT_LOAD_RENDER))
-            {
-                std::cout << "ERROR::FREETYTPE: Failed to load Glyph" << std::endl;
-                continue;
-            }
-            // generate texture
-            unsigned int texture;
-            glGenTextures(1, &texture);
-            glBindTexture(GL_TEXTURE_2D, texture);
-            glTexImage2D(
-                GL_TEXTURE_2D,
-                0,
-                GL_LUMINANCE,
-                face->glyph->bitmap.width,
-                face->glyph->bitmap.rows,
-                0,
-                GL_LUMINANCE,
-                GL_UNSIGNED_BYTE,
-                face->glyph->bitmap.buffer
-            );
-            // set texture options
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-            // now store character for later use
-            vector<int> size = {face->glyph->bitmap.width, face->glyph->bitmap.rows};
-            vector<int> bearing = {face->glyph->bitmap_left, face->glyph->bitmap_top};
-            Character character = {
-                texture,
-                size,
-                bearing,
-                static_cast<unsigned int>(face->glyph->advance.x)
-            };
-            Characters.insert(std::pair<char, Character>(c, character));
-        }
-        glBindTexture(GL_TEXTURE_2D, 0);
-    }
-    // destroy FreeType once we're finished
-    FT_Done_Face(face);
-    FT_Done_FreeType(ft);
-
-    
-    // configure VAO/VBO for texture quads
-    // -----------------------------------
-    glGenVertexArrays(1, &textVAO);
-    glGenBuffers(1, &textVBO);
-    glBindVertexArray(textVAO);
-    glBindBuffer(GL_ARRAY_BUFFER, textVBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindVertexArray(0);
-    
-    return 0;
-}
-
-void VideoRender::drawText(string text, float x, float y, float scale, vector<float> color) {
     // activate corresponding render state
     glUseProgram(textProgram);
     glUniform3f(glGetUniformLocation(textProgram, "textColor"), color[0], color[1], color[2]);
     glActiveTexture(GL_TEXTURE0);
     glBindVertexArray(textVAO);
 
+    
     // iterate through all characters
     std::string::const_iterator c;
     for (c = text.begin(); c != text.end(); c++)
@@ -553,4 +570,7 @@ void VideoRender::drawText(string text, float x, float y, float scale, vector<fl
     }
     glBindVertexArray(0);
     glBindTexture(GL_TEXTURE_2D, 0);
+    
+    glDisable(GL_CULL_FACE);
+    glDisable(GL_BLEND);
 }

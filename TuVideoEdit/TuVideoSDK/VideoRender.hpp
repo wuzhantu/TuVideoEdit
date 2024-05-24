@@ -44,17 +44,15 @@ struct Character {
 
 class VideoRender {
 public:
-    GLuint myColorRenderBuffer;
-    GLuint myColorFrameBuffer;
-    GLubyte *pixelData = nullptr;
-    GLuint VAO, VBO;
-    GLuint stickerVAO, stickerVBO;
-    GLuint textVAO, textVBO;
-    GLuint myProgram;
-    GLuint stickerProgram;
-    GLuint textProgram;
     GLint _backingWidth;
     GLint _backingHeight;
+    GLubyte *pixelData = nullptr;
+    GLuint frameVAO, frameVBO;
+    GLuint stickerVAO, stickerVBO;
+    GLuint textVAO, textVBO;
+    GLuint frameProgram;
+    GLuint stickerProgram;
+    GLuint textProgram;
     
     const char *basePath;
     const char *displayVertexPath;
@@ -69,17 +67,19 @@ public:
 public:
     VideoRender(const char *basePath);
     void setup();
+    void setupFrameProgram();
+    void setupStickerProgram();
+    int setupTextProgram();
     void setupFrameBuffer();
     void setupRenderBuffer();
     void setupViewport();
-    void setupProgram();
     GLuint createProgram(const char *vertexFileName, const char *fragmentFileName);
     void displayFrame(AVFrame *frame);
     AVFrame * applyFilterToFrame(AVFrame *frame);
     void draw(AVFrame *frame);
-    
-    int setupTextProgram();
-    void drawText(string text, float x, float y, float scale, vector<float> color);
+    void drawFrame(AVFrame *frame);
+    void drawSticker();
+    void drawText();
 };
 
 
