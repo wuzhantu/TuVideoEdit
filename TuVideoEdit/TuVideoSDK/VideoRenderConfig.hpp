@@ -23,6 +23,7 @@ public:
     bool applySticker2 = false;
     bool applyEffect1 = false;
     bool applyEffect2 = false;
+    const char *text = NULL;
     
 public:
     static VideoRenderConfig* shareInstance() {

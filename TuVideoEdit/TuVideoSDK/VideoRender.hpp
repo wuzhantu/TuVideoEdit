@@ -79,7 +79,7 @@ public:
     void draw(AVFrame *frame);
     
     int setupTextProgram();
-    void drawText(std::string text, float x, float y, float scale, vector<float> color);
+    void drawText(string text, float x, float y, float scale, vector<float> color);
 };
 
 

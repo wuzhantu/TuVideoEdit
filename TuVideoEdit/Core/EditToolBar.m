@@ -11,6 +11,7 @@
 #import "StickerSelectView.h"
 #import "FilterSelectView.h"
 #import "EffectSelectView.h"
+#import "TextInputView.h"
 
 @interface EditToolBar ()<UICollectionViewDelegate, UICollectionViewDataSource>
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -19,9 +20,17 @@
 @property (nonatomic, strong) StickerSelectView *stickerSelectView;
 @property (nonatomic, strong) FilterSelectView *filterSelectView;
 @property (nonatomic, strong) EffectSelectView *effectSelectView;
+@property (nonatomic, strong) TextInputView *textInputView;
 @end
 
 @implementation EditToolBar
+
+- (TextInputView *)textInputView {
+    if (!_textInputView) {
+        _textInputView = [[TextInputView alloc] initWithFrame:CGRectMake(0, UIScreen.mainScreen.bounds.size.height, UIScreen.mainScreen.bounds.size.width, 50)];
+    }
+    return _textInputView;
+}
 
 - (StickerSelectView *)stickerSelectView {
     if (!_stickerSelectView) {
@@ -96,6 +105,9 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
+        case 1:
+            [self.textInputView show];
+            break;
         case 2:
             [self.stickerSelectView show];
             break;

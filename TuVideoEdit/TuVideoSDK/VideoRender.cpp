@@ -387,8 +387,9 @@ void VideoRender::draw(AVFrame *frame) {
         }
     }
     
-    drawText("This is sample text", 25.0f, 25.0f, 1.0f, vector<float>{0.5, 0.8f, 0.2f});
-    drawText("(C) LearnOpenGL.com", 240.0f, 170.0f, 0.5f, vector<float>{0.3, 0.7f, 0.9f});
+    if (VideoRenderConfig::shareInstance()->text) {
+        drawText(string(VideoRenderConfig::shareInstance()->text), -25.0f, -25.0f, 2.0f, vector<float>{0.5, 0.8f, 0.2f}); //vector<float>{0.3, 0.7f, 0.9f}
+    }
 }
 
 int VideoRender::setupTextProgram()
@@ -499,7 +500,7 @@ int VideoRender::setupTextProgram()
     return 0;
 }
 
-void VideoRender::drawText(std::string text, float x, float y, float scale, vector<float> color) {
+void VideoRender::drawText(string text, float x, float y, float scale, vector<float> color) {
     // activate corresponding render state
     glUseProgram(textProgram);
     glUniform3f(glGetUniformLocation(textProgram, "textColor"), color[0], color[1], color[2]);

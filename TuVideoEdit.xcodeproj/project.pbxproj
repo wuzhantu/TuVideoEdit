@@ -253,6 +253,7 @@
 		43CB893C2C004313001ACC60 /* Antonio-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 43CB89372C004313001ACC60 /* Antonio-Light.ttf */; };
 		43CB893D2C004313001ACC60 /* OCRAEXT.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 43CB89382C004313001ACC60 /* OCRAEXT.TTF */; };
 		43CB893E2C004313001ACC60 /* Antonio-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 43CB89392C004313001ACC60 /* Antonio-Bold.ttf */; };
+		43CB89412C0061DD001ACC60 /* TextInputView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43CB89402C0061DD001ACC60 /* TextInputView.mm */; };
 		F1C3AAE82BF8A4CF00A10825 /* xiaolin.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = F1C3AAE72BF8A4CF00A10825 /* xiaolin.MP4 */; };
 /* End PBXBuildFile section */
 
@@ -855,6 +856,8 @@
 		43CB89372C004313001ACC60 /* Antonio-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Antonio-Light.ttf"; sourceTree = "<group>"; };
 		43CB89382C004313001ACC60 /* OCRAEXT.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = OCRAEXT.TTF; sourceTree = "<group>"; };
 		43CB89392C004313001ACC60 /* Antonio-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Antonio-Bold.ttf"; sourceTree = "<group>"; };
+		43CB893F2C0061DD001ACC60 /* TextInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextInputView.h; sourceTree = "<group>"; };
+		43CB89402C0061DD001ACC60 /* TextInputView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TextInputView.mm; sourceTree = "<group>"; };
 		F1C3AAE72BF8A4CF00A10825 /* xiaolin.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = xiaolin.MP4; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1364,6 +1367,8 @@
 				43CB6BA32BFCB6D5001ACC60 /* EffectSelectView.mm */,
 				43CB6B992BFCA915001ACC60 /* EditSelectCell.h */,
 				43CB6B9A2BFCA915001ACC60 /* EditSelectCell.m */,
+				43CB893F2C0061DD001ACC60 /* TextInputView.h */,
+				43CB89402C0061DD001ACC60 /* TextInputView.mm */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -2081,6 +2086,7 @@
 				43BEBCF42BDFE56F00B3123E /* AppDelegate.m in Sources */,
 				43CB6B8C2BF77A14001ACC60 /* TuSemaphore.cpp in Sources */,
 				43CB6BA72BFCBF90001ACC60 /* VideoRenderConfig.cpp in Sources */,
+				43CB89412C0061DD001ACC60 /* TextInputView.mm in Sources */,
 				43CB6BA12BFCB56A001ACC60 /* FilterSelectView.mm in Sources */,
 				43CB6B892BF7650B001ACC60 /* TuTimer.cpp in Sources */,
 				43BEBD052BDFE57100B3123E /* main.m in Sources */,
