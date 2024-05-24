@@ -517,7 +517,7 @@ void VideoRender::drawText() {
     // activate corresponding render state
     glUseProgram(textProgram);
     
-    GLKMatrix4 projection = GLKMatrix4MakeOrtho(0, _backingWidth, 0, _backingHeight, -1, 1);
+    GLKMatrix4 projection = GLKMatrix4MakeOrtho(0, _backingWidth, 0, _backingHeight, 0, 1); // nearZ和farZ表示距离摄像机的距离？
     glUniformMatrix4fv(glGetUniformLocation(textProgram, "projection"), 1, GL_FALSE, projection.m);
     
     glUniform3f(glGetUniformLocation(textProgram, "textColor"), color[0], color[1], color[2]);
