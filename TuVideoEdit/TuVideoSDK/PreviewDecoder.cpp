@@ -20,6 +20,10 @@ void PreviewDecoder::setupVideoFFmpeg() {
 }
 
 void PreviewDecoder::setupAudioFFmpeg() {
+    
+#ifdef __ANDROID__
+
+#elif defined(__APPLE__)
     seekAudioPts = -1;
     
     sourceId = 0;
@@ -72,6 +76,8 @@ void PreviewDecoder::setupAudioFFmpeg() {
     if (!audioPkt) {
         cout << "create audio packet failed" << endl;
     }
+#endif
+    
 }
 
 void PreviewDecoder::videoPreviewDecode(int previewRow) {
@@ -275,7 +281,11 @@ void PreviewDecoder::audioPlayDecode() {
                 ret = swr_convert(pswr, aSwrOutFrame->data, (int)dstnbSamples, (const uint8_t **)audiodec_frame->data, audiodec_frame->nb_samples);
                 int writingSize = av_samples_get_buffer_size(aSwrOutFrame->linesize, outChanel, ret, oformat, 1);
                 
+#ifdef __ANDROID__
+
+#elif defined(__APPLE__)
                 playpcm(sourceId, AL_FORMAT_STEREO16, audiodec_ctx->sample_rate, aSwrOutFrame->data[0], writingSize);
+#endif
                 
                 av_frame_unref(audiodec_frame);
                 av_frame_unref(aSwrOutFrame);
@@ -289,6 +299,9 @@ end:
     audioLock.unlock();
 }
 
+#ifdef __ANDROID__
+
+#elif defined(__APPLE__)
 int PreviewDecoder::al_context_create(ALCdevice **pdevice, ALCcontext **pcontext, ALuint *sourceId) {
     //播放源的位置
     ALfloat position[] = { 0.0f,0.0f,0.0f };
@@ -321,6 +334,7 @@ int PreviewDecoder::al_context_create(ALCdevice **pdevice, ALCcontext **pcontext
     
     return 0;
 }
+#endif
 
 void PreviewDecoder::cleanAllVideoBuffer() {
     videoCondition.lock();
@@ -334,6 +348,9 @@ void PreviewDecoder::cleanAllVideoBuffer() {
 }
 
 void PreviewDecoder::cleanAllAudioBuffer() {
+#ifdef __ANDROID__
+
+#elif defined(__APPLE__)
     ALint queued = 0;
     alGetSourcei(sourceId, AL_BUFFERS_QUEUED, &queued);
     if (queued > 0) {
@@ -341,10 +358,14 @@ void PreviewDecoder::cleanAllAudioBuffer() {
         alSourceUnqueueBuffers(sourceId, queued, queuedBufPtr);
         alDeleteBuffers(queued, queuedBufPtr);
     }
+#endif
 }
 
-void PreviewDecoder::playpcm(ALuint sourceId, ALenum format, ALsizei rate, uint8_t *pbuffer, int buffersize) {
+#ifdef __ANDROID__
 
+#elif defined(__APPLE__)
+void PreviewDecoder::playpcm(ALuint sourceId, ALenum format, ALsizei rate, uint8_t *pbuffer, int buffersize) {
+    
     if (isAudioPause) {
         return;
     }
@@ -372,12 +393,16 @@ void PreviewDecoder::playpcm(ALuint sourceId, ALenum format, ALsizei rate, uint8
         });
     }
 }
+#endif
 
 void PreviewDecoder::timerAction() {
     if (isAudioPause) {
         return;
     }
 
+#ifdef __ANDROID__
+
+#elif defined(__APPLE__)
     audioCount++;
     ALint processed = 0;
     alGetSourcei(sourceId, AL_BUFFERS_PROCESSED, &processed);
@@ -387,6 +412,8 @@ void PreviewDecoder::timerAction() {
         alDeleteBuffers(processed, processedBufPtr);
         audioSemap.notify();
     }
+#endif
+    
 }
 
 void PreviewDecoder::updateFrame() {
@@ -482,9 +509,15 @@ void PreviewDecoder::setPause(bool pause) {
         audioSemap.notify();
         
         seekAudioPts = -1;
+        
+#ifdef __ANDROID__
+
+#elif defined(__APPLE__)
         alSourcePause(sourceId);
         alSourceRewind(sourceId);
-    //    alSourceStop(sourceId);
+        //    alSourceStop(sourceId);
+#endif
+        
         
         audioTimer.stop();
     } else {

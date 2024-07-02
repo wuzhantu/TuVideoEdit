@@ -48,7 +48,6 @@ public:
     condition_variable cv;
     TuTimer audioTimer;
     int64_t audioCount;
-    ALuint sourceId;
     TuTimer mDispalyLink;
     int64_t seekAudioPts;
     const char *inputFileName;
@@ -75,6 +74,12 @@ public:
     int outChanel;
     std::function<void(AVFrame *)>renderVideoBlock;
     
+#ifdef __ANDROID__
+
+#elif defined(__APPLE__)
+    ALuint sourceId;
+#endif
+    
 public:
     PreviewDecoder(const char *inputFileName, std::function<void(AVFrame *)>renderVideoBlock);
     void setupVideoFFmpeg();
@@ -82,14 +87,20 @@ public:
     void videoPreviewDecode(int previewRow);
     void videoPlayDecode();
     void audioPlayDecode();
-    int al_context_create(ALCdevice **pdevice, ALCcontext **pcontext, ALuint *sourceId);
     void cleanAllVideoBuffer();
     void cleanAllAudioBuffer();
-    void playpcm(ALuint sourceId, ALenum format, ALsizei rate, uint8_t *pbuffer, int buffersize);
     void setPause(bool pause);
     
     void timerAction();
     void updateFrame();
+    
+#ifdef __ANDROID__
+
+#elif defined(__APPLE__)
+    int al_context_create(ALCdevice **pdevice, ALCcontext **pcontext, ALuint *sourceId);
+    void playpcm(ALuint sourceId, ALenum format, ALsizei rate, uint8_t *pbuffer, int buffersize);
+#endif
+    
 };
 
 #endif /* PreviewDecoder_hpp */
