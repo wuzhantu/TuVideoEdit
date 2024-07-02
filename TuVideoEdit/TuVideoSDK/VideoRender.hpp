@@ -19,8 +19,8 @@
 #include <map>
 
 #ifdef __ANDROID__
-#include <GLES2/gl2.h>
-#include <GLES2/gl2ext.h>
+#include <GLES3/gl3.h>
+#include <GLES3/gl3ext.h>
 #elif defined(__APPLE__)
 #import <OpenGLES/ES3/gl.h>
 #import <OpenGLES/ES3/glext.h>
