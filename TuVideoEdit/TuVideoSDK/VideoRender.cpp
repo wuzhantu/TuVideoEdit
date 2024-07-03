@@ -517,8 +517,12 @@ void VideoRender::drawText() {
     // activate corresponding render state
     glUseProgram(textProgram);
     
+#ifdef __ANDROID__
+
+#elif defined(__APPLE__)
     GLKMatrix4 projection = GLKMatrix4MakeOrtho(0, _backingWidth, 0, _backingHeight, 0, 1); // nearZ和farZ表示距离摄像机的距离？
     glUniformMatrix4fv(glGetUniformLocation(textProgram, "projection"), 1, GL_FALSE, projection.m);
+#endif
     
     glUniform3f(glGetUniformLocation(textProgram, "textColor"), color[0], color[1], color[2]);
     glActiveTexture(GL_TEXTURE0);
