@@ -170,7 +170,7 @@ int VideoRender::setupTextProgram()
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
             // now store character for later use
-            vector<int> size = {face->glyph->bitmap.width, face->glyph->bitmap.rows};
+            vector<unsigned int> size = {face->glyph->bitmap.width, face->glyph->bitmap.rows};
             vector<int> bearing = {face->glyph->bitmap_left, face->glyph->bitmap_top};
             Character character = {
                 texture,

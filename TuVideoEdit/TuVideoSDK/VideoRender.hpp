@@ -37,7 +37,7 @@ using namespace std;
 
 struct Character {
     unsigned int TextureID; // ID handle of the glyph texture
-    vector<int>   Size;      // Size of glyph
+    vector<unsigned int>   Size;      // Size of glyph
     vector<int>   Bearing;   // Offset from baseline to left/top of glyph
     unsigned int Advance;   // Horizontal offset to advance to next glyph
 };
