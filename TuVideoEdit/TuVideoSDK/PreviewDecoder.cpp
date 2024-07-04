@@ -21,12 +21,8 @@ void PreviewDecoder::setupVideoFFmpeg() {
 
 void PreviewDecoder::setupAudioFFmpeg() {
     
-#ifdef __ANDROID__
-
-#elif defined(__APPLE__)
     seekAudioPts = -1;
     
-    sourceId = 0;
     audioIndex = -1;
     
     audioifmt = NULL;
@@ -61,23 +57,27 @@ void PreviewDecoder::setupAudioFFmpeg() {
         cout << "audiodecoder open failed" << endl;
     }
     
-    oformat = AV_SAMPLE_FMT_S16;
-    int outLayout = AV_CH_LAYOUT_STEREO;
-    orate = 44100;
-    pswr = NULL;
-    ALCdevice *pdevice = NULL;
-    ALCcontext *pcontext = NULL;
-    outChanel = av_get_channel_layout_nb_channels(outLayout);
-    ret = al_context_create(&pdevice, &pcontext, &sourceId);
-    pswr = swr_alloc_set_opts(pswr, outLayout, oformat, orate, audiodec_ctx->channel_layout, audiodec_ctx->sample_fmt, audiodec_ctx->sample_rate, 0, 0);
-    ret = swr_init(pswr);
-    
     audioPkt = av_packet_alloc();
     if (!audioPkt) {
         cout << "create audio packet failed" << endl;
     }
-#endif
     
+    oformat = AV_SAMPLE_FMT_S16;
+    int outLayout = AV_CH_LAYOUT_STEREO;
+    orate = 44100;
+    pswr = NULL;
+    outChanel = av_get_channel_layout_nb_channels(outLayout);
+    pswr = swr_alloc_set_opts(pswr, outLayout, oformat, orate, audiodec_ctx->channel_layout, audiodec_ctx->sample_fmt, audiodec_ctx->sample_rate, 0, 0);
+    ret = swr_init(pswr);
+    
+#ifdef __ANDROID__
+    createEngine();
+#elif defined(__APPLE__)
+    sourceId = 0;
+    ALCdevice *pdevice = NULL;
+    ALCcontext *pcontext = NULL;
+    ret = al_context_create(&pdevice, &pcontext, &sourceId);
+#endif
 }
 
 void PreviewDecoder::videoPreviewDecode(int previewRow) {
@@ -282,7 +282,8 @@ void PreviewDecoder::audioPlayDecode() {
                 int writingSize = av_samples_get_buffer_size(aSwrOutFrame->linesize, outChanel, ret, oformat, 1);
                 
 #ifdef __ANDROID__
-
+                audioSemap.wait();
+                (*bufferQueue)->Enqueue(bufferQueue, aSwrOutFrame->data[0], writingSize);
 #elif defined(__APPLE__)
                 playpcm(sourceId, AL_FORMAT_STEREO16, audiodec_ctx->sample_rate, aSwrOutFrame->data[0], writingSize);
 #endif
@@ -362,6 +363,115 @@ void PreviewDecoder::cleanAllAudioBuffer() {
 }
 
 #ifdef __ANDROID__
+static void playerCallback(SLAndroidSimpleBufferQueueItf bq, void *context) {
+    PreviewDecoder *previewDecoder = (PreviewDecoder *)context;
+    previewDecoder->audioSemap.notify();
+}
+
+void PreviewDecoder::createEngine() {
+    SLresult result;
+
+    // Create engine
+    result = slCreateEngine(&engineObject, 0, NULL, 0, NULL, NULL);
+    if (result != SL_RESULT_SUCCESS) {
+        cout << "slCreateEngine failed" << endl;
+        return;
+    }
+
+    // Realize the engine
+    result = (*engineObject)->Realize(engineObject, SL_BOOLEAN_FALSE);
+    if (result != SL_RESULT_SUCCESS) {
+        cout << "Engine realization failed" << endl;
+        return;
+    }
+
+    // Get the engine interface, which is needed in order to create other objects
+    result = (*engineObject)->GetInterface(engineObject, SL_IID_ENGINE, &engineEngine);
+    if (result != SL_RESULT_SUCCESS) {
+        cout << "Engine interface creation failed" << endl;
+        return;
+    }
+
+    // Create output mix
+    result = (*engineEngine)->CreateOutputMix(engineEngine, &outputMixObject, 0, NULL, NULL);
+    if (result != SL_RESULT_SUCCESS) {
+        cout << "Output mix creation failed" << endl;
+        return;
+    }
+
+    // Realize the output mix
+    result = (*outputMixObject)->Realize(outputMixObject, SL_BOOLEAN_FALSE);
+    if (result != SL_RESULT_SUCCESS) {
+        cout << "Output mix realization failed" << endl;
+        return;
+    }
+
+    // Configure audio source
+    SLDataLocator_AndroidSimpleBufferQueue loc_bufq = {SL_DATALOCATOR_ANDROIDSIMPLEBUFFERQUEUE, 2};
+    SLDataFormat_PCM format_pcm = {
+            SL_DATAFORMAT_PCM,
+            2,
+            SL_SAMPLINGRATE_44_1,
+            SL_PCMSAMPLEFORMAT_FIXED_16,
+            SL_PCMSAMPLEFORMAT_FIXED_16,
+            SL_SPEAKER_FRONT_LEFT | SL_SPEAKER_FRONT_RIGHT,
+            SL_BYTEORDER_LITTLEENDIAN
+    };
+    SLDataSource audioSrc = {&loc_bufq, &format_pcm};
+
+    // Configure audio sink
+    SLDataLocator_OutputMix loc_outmix = {SL_DATALOCATOR_OUTPUTMIX, outputMixObject};
+    SLDataSink audioSnk = {&loc_outmix, NULL};
+
+    // Create audio player
+    const SLInterfaceID ids[1] = {SL_IID_ANDROIDSIMPLEBUFFERQUEUE};
+    const SLboolean req[1] = {SL_BOOLEAN_TRUE};
+    result = (*engineEngine)->CreateAudioPlayer(engineEngine, &playerObject, &audioSrc, &audioSnk, 1, ids, req);
+    if (result != SL_RESULT_SUCCESS) {
+        cout << "Audio player creation failed" << endl;
+        return;
+    }
+
+    // Realize the player
+    result = (*playerObject)->Realize(playerObject, SL_BOOLEAN_FALSE);
+    if (result != SL_RESULT_SUCCESS) {
+        cout << "Player realization failed" << endl;
+        return;
+    }
+
+    // Get the play interface
+    result = (*playerObject)->GetInterface(playerObject, SL_IID_PLAY, &playerPlay);
+    if (result != SL_RESULT_SUCCESS) {
+        cout << "Play interface creation failed" << endl;
+        return;
+    }
+
+    // Get the buffer queue interface
+    result = (*playerObject)->GetInterface(playerObject, SL_IID_ANDROIDSIMPLEBUFFERQUEUE, &bufferQueue);
+    if (result != SL_RESULT_SUCCESS) {
+        cout << "Buffer queue interface creation failed" << endl;
+        return;
+    }
+
+    // Register callback on the buffer queue
+    result = (*bufferQueue)->RegisterCallback(bufferQueue, playerCallback, this);
+    if (result != SL_RESULT_SUCCESS) {
+        cout << "Buffer queue callback registration failed" << endl;
+        return;
+    }
+
+    // Set the player's state to playing
+    result = (*playerPlay)->SetPlayState(playerPlay, SL_PLAYSTATE_PLAYING);
+    if (result != SL_RESULT_SUCCESS) {
+        cout << "Failed to set play state" << endl;
+        return;
+    }
+
+    // Start playback by enqueueing an initial buffer
+    playerCallback(bufferQueue, this);
+
+    cout << "Engine and output mix created successfully" << endl;
+}
 
 #elif defined(__APPLE__)
 void PreviewDecoder::playpcm(ALuint sourceId, ALenum format, ALsizei rate, uint8_t *pbuffer, int buffersize) {

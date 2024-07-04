@@ -18,7 +18,8 @@
 #include <mutex>
 
 #ifdef __ANDROID__
-
+#include <SLES/OpenSLES.h>
+#include <SLES/OpenSLES_Android.h>
 #elif defined(__APPLE__)
 #import <OpenAL/al.h>
 #import <OpenAL/alc.h>
@@ -75,7 +76,12 @@ public:
     std::function<void(AVFrame *)>renderVideoBlock;
     
 #ifdef __ANDROID__
-
+    SLObjectItf engineObject = NULL;
+    SLEngineItf engineEngine = NULL;
+    SLObjectItf outputMixObject = NULL;
+    SLObjectItf playerObject = NULL;
+    SLPlayItf playerPlay = NULL;
+    SLAndroidSimpleBufferQueueItf bufferQueue = NULL;
 #elif defined(__APPLE__)
     ALuint sourceId;
 #endif
@@ -95,7 +101,7 @@ public:
     void updateFrame();
     
 #ifdef __ANDROID__
-
+    void createEngine();
 #elif defined(__APPLE__)
     int al_context_create(ALCdevice **pdevice, ALCcontext **pcontext, ALuint *sourceId);
     void playpcm(ALuint sourceId, ALenum format, ALsizei rate, uint8_t *pbuffer, int buffersize);
