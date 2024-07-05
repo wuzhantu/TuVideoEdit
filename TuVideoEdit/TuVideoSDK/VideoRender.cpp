@@ -41,8 +41,10 @@ void VideoRender::setup() {
     setupFrameProgram();
     setupStickerProgram();
     setupTextProgram();
+#ifdef __APPLE__
     setupFrameBuffer();
     setupRenderBuffer();
+#endif
 }
 
 void VideoRender::setupFrameProgram() {
@@ -202,6 +204,7 @@ int VideoRender::setupTextProgram()
     return 0;
 }
 
+#ifdef __APPLE__
 void VideoRender::setupFrameBuffer() {
     GLuint frameBuffer;
     glGenFramebuffers(1, &frameBuffer);
@@ -214,6 +217,7 @@ void VideoRender::setupRenderBuffer() {
     glBindRenderbuffer(GL_RENDERBUFFER, renderBuffer);
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, renderBuffer);
 }
+#endif
 
 void VideoRender::setupViewport() {
     glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &_backingWidth);

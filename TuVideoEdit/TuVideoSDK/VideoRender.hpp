@@ -70,8 +70,10 @@ public:
     void setupFrameProgram();
     void setupStickerProgram();
     int setupTextProgram();
+#ifdef __APPLE__
     void setupFrameBuffer();
     void setupRenderBuffer();
+#endif
     void setupViewport();
     GLuint createProgram(const char *vertexFileName, const char *fragmentFileName);
     void displayFrame(AVFrame *frame);
