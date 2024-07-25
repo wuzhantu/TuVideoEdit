@@ -74,7 +74,7 @@ public:
     void setupFrameBuffer();
     void setupRenderBuffer();
 #endif
-    void setupViewport();
+    void setupViewport(int width = 0, int height = 0);
     GLuint createProgram(const char *vertexFileName, const char *fragmentFileName);
     void displayFrame(AVFrame *frame);
     AVFrame * convertFrame(AVFrame *frame);

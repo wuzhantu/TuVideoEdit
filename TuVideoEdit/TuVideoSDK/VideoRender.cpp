@@ -219,10 +219,17 @@ void VideoRender::setupRenderBuffer() {
 }
 #endif
 
-void VideoRender::setupViewport() {
+void VideoRender::setupViewport(int width, int height) {
+    
+#ifdef __ANDROID__
+    glViewport(0, 0, width, height);
+    _backingWidth = width;
+    _backingHeight = height;
+#elif defined(__APPLE__)
     glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &_backingWidth);
     glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &_backingHeight);
     glViewport(0, 0, _backingWidth, _backingHeight);
+#endif
 }
 
 GLuint VideoRender::createProgram(const char *vertexFileName, const char *fragmentFileName) {
