@@ -24,9 +24,9 @@ extern "C" {
 
 using namespace std;
 
-@interface EditViewController ()<UICollectionViewDelegate, UICollectionViewDataSource>
+@interface EditViewController ()<UICollectionViewDelegate, UICollectionViewDataSource, GLKViewDelegate>
 @property (nonatomic, strong) UICollectionView *thumbCollectionView;
-@property (nonatomic, strong) DisplayView *displayView;
+@property (nonatomic, strong) GLKView *displayView;
 @property (nonatomic, weak) UIButton *playBtn;
 @property (nonatomic, strong) EditToolBar *editToolBar;
 @end
@@ -40,6 +40,8 @@ using namespace std;
     PreviewDecoder *previewDecoder;
     TimeLineDecoder *timeLineDecoder;
     ExportVideo *exportVideo;
+    AVFrame *display_frame;
+    VideoRender *videoRender;
 }
 
 - (void)viewDidLoad {
@@ -52,7 +54,7 @@ using namespace std;
     const char *inputFileName = [self.inputFileName cStringUsingEncoding:NSUTF8StringEncoding];
     previewDecoder = new PreviewDecoder(inputFileName, [weakSelf](AVFrame *display_frame) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [weakSelf.displayView displayFrame:display_frame]; // 播放
+            [weakSelf displayFrame:display_frame]; // 播放
         });
     });
     
@@ -99,9 +101,17 @@ using namespace std;
     CGFloat videoPixelHeight = videosize.height;
     CGFloat videoHeight = 240;
     CGFloat videoWidth = videoPixelWidth / videoPixelHeight * videoHeight;
-    self.displayView = [[DisplayView alloc] initWithFrame:CGRectMake((screenWidth - videoWidth) * 0.5, 140, videoWidth, videoHeight) videoScale:videoPixelHeight / videoHeight];
-    self.displayView.backgroundColor = UIColor.whiteColor;
+    
+    EAGLRenderingAPI api = kEAGLRenderingAPIOpenGLES3;
+    EAGLContext *myContext = [[EAGLContext alloc] initWithAPI:api];
+    [EAGLContext setCurrentContext:myContext];
+    self.displayView = [[GLKView alloc] initWithFrame:CGRectMake((screenWidth - videoWidth) * 0.5, 140, videoWidth, videoHeight) context:myContext];
+    self.displayView.delegate = self;
+    self.displayView.contentScaleFactor = videoPixelHeight / videoHeight;
     [self.view addSubview:self.displayView];
+    
+    videoRender = new VideoRender([NSBundle.mainBundle.bundlePath cStringUsingEncoding:NSUTF8StringEncoding]);
+    videoRender->setupViewport(videoPixelWidth, videoPixelHeight);
     
     UIButton *playBtn = [[UIButton alloc] initWithFrame:CGRectMake((screenWidth - 80) * 0.5, 430, 80, 40)];
     [playBtn setImage:[UIImage imageNamed:@"video_pause"] forState:UIControlStateNormal];
@@ -149,7 +159,7 @@ using namespace std;
     NSString *documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject;
     const char *outputPath = [[documentPath stringByAppendingPathComponent:@"output.mp4"] cStringUsingEncoding:NSUTF8StringEncoding];
     exportVideo = new ExportVideo(inputFileName, outputPath);
-    exportVideo->videoRender = self.displayView->videoRender;
+    exportVideo->videoRender = videoRender;
     exportVideo->videoDecode();
 }
 
@@ -171,7 +181,19 @@ using namespace std;
     });
 }
 
-#pragma mark - delegate
+- (void)displayFrame:(AVFrame *)frame {
+    display_frame = frame;
+    [self.displayView setNeedsDisplay];
+}
+
+#pragma mark - GLKViewDelegate
+- (void)glkView:(GLKView *)view drawInRect:(CGRect)rect {
+    if (display_frame) {
+        videoRender->displayFrame(display_frame);
+    }
+}
+
+#pragma mark - UICollectionViewDelegate, UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return 242;
 }
