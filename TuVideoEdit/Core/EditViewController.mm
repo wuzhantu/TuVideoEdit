@@ -183,7 +183,7 @@ using namespace std;
 
 - (void)displayFrame:(AVFrame *)frame {
     display_frame = frame;
-    [self.displayView setNeedsDisplay];
+    [self.displayView display];
 }
 
 #pragma mark - GLKViewDelegate
