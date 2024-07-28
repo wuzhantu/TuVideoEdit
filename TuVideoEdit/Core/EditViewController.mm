@@ -21,11 +21,13 @@ extern "C" {
 #include "PreviewDecoder.hpp"
 #include "TimeLineDecoder.hpp"
 #include "ExportVideo.hpp"
+#include "DecoderContextPool.hpp"
 
 using namespace std;
 
 @interface EditViewController ()<UICollectionViewDelegate, UICollectionViewDataSource, GLKViewDelegate>
 @property (nonatomic, strong) UICollectionView *thumbCollectionView;
+@property (nonatomic, strong) CADisplayLink *displayLink;
 @property (nonatomic, strong) GLKView *displayView;
 @property (nonatomic, weak) UIButton *playBtn;
 @property (nonatomic, strong) EditToolBar *editToolBar;
@@ -102,6 +104,12 @@ using namespace std;
     CGFloat videoHeight = 240;
     CGFloat videoWidth = videoPixelWidth / videoPixelHeight * videoHeight;
     
+    CADisplayLink *displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(updateFrame)];
+    [displayLink addToRunLoop:NSRunLoop.mainRunLoop forMode:NSRunLoopCommonModes];
+    displayLink.preferredFramesPerSecond = [self getfps];
+    [displayLink setPaused:YES];
+    self.displayLink = displayLink;
+    
     EAGLRenderingAPI api = kEAGLRenderingAPIOpenGLES3;
     EAGLContext *myContext = [[EAGLContext alloc] initWithAPI:api];
     [EAGLContext setCurrentContext:myContext];
@@ -153,6 +161,7 @@ using namespace std;
     if (!self.playBtn.selected) {
         self.playBtn.selected = YES;
         previewDecoder->setPause(true);
+        [self.displayLink setPaused:true];
     }
     
     const char *inputFileName = [self.inputFileName cStringUsingEncoding:NSUTF8StringEncoding];
@@ -167,6 +176,7 @@ using namespace std;
     
     self.playBtn.selected = !self.playBtn.isSelected;
     previewDecoder->setPause(self.playBtn.isSelected);
+    [self.displayLink setPaused:self.playBtn.isSelected];
 
     if (self.playBtn.selected) {
         return;
@@ -179,6 +189,10 @@ using namespace std;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0), ^{
         self->previewDecoder->audioPlayDecode();
     });
+}
+
+- (void)updateFrame {
+    previewDecoder->updateFrame();
 }
 
 - (void)displayFrame:(AVFrame *)frame {
@@ -222,6 +236,7 @@ using namespace std;
     if (!self.playBtn.selected) {
         self.playBtn.selected = YES;
         previewDecoder->setPause(true);
+        [self.displayLink setPaused:true];
     }
     
     if (seekRow != lastSeekRow) {
@@ -314,28 +329,18 @@ using namespace std;
 }
 
 - (CGSize)getVideoSize {
-    CGSize size = CGSizeZero;
-    
-    AVFormatContext *videoifmt = NULL;
     const char *inputFileName = [self.inputFileName cStringUsingEncoding:NSUTF8StringEncoding];
-    int ret = avformat_open_input(&videoifmt, inputFileName, NULL, NULL);
-    if (ret < 0) {
-        NSLog(@"open inputfile failed");
-        return size;
-    }
-    
-    int videoIndex = av_find_best_stream(videoifmt, AVMEDIA_TYPE_VIDEO, -1, -1, NULL, 0);
-    if (videoIndex < 0) {
-        NSLog(@"not find input video stream");
-        return size;
-    }
-    
-    AVStream *videoStram = videoifmt->streams[videoIndex];
-    AVCodecParameters *videoCodecpar = videoStram->codecpar;
-    size = CGSizeMake(videoCodecpar->width, videoCodecpar->height);
-    avformat_close_input(&videoifmt);
-    
+    DecoderContext *decoderCtx = DecoderContextPool::shareInstance()->getDecoderCtx(inputFileName);
+    AVCodecParameters *videoCodecpar = decoderCtx->videoStram->codecpar;
+    CGSize size = CGSizeMake(videoCodecpar->width, videoCodecpar->height);
     return size;
+}
+
+- (int)getfps {
+    const char *inputFileName = [self.inputFileName cStringUsingEncoding:NSUTF8StringEncoding];
+    DecoderContext *decoderCtx = DecoderContextPool::shareInstance()->getDecoderCtx(inputFileName);
+    int fps = decoderCtx->videoStram->r_frame_rate.num / decoderCtx->videoStram->r_frame_rate.den;
+    return fps;
 }
 
 - (void)refreshCellsWithStart:(int)startRow end:(int)endRow {

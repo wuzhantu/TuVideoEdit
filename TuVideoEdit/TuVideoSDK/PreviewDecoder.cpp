@@ -612,7 +612,7 @@ void PreviewDecoder::setPause(bool pause) {
     
     if (pause) {
         isVideoPause = true;
-        mDispalyLink.stop();
+//        mDispalyLink.stop();
         cv.notify_all();
         
         isAudioPause = true;
@@ -637,12 +637,12 @@ void PreviewDecoder::setPause(bool pause) {
         if (isFirstPlay) {
             DecoderContext *decoderCtx = DecoderContextPool::shareInstance()->getDecoderCtx(inputFileName);
             int fps = decoderCtx->videoStram->r_frame_rate.num / decoderCtx->videoStram->r_frame_rate.den;
-            mDispalyLink.setInterval(1000 / fps);
+//            mDispalyLink.setInterval(1000 / fps);
             isFirstPlay = false;
         }
-        mDispalyLink.start([this]() {
-            this->updateFrame();
-        });
+//        mDispalyLink.start([this]() {
+//            this->updateFrame();
+//        });
         
         cleanAllVideoBuffer();
         cleanAllAudioBuffer();
