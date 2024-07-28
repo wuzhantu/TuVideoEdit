@@ -388,50 +388,32 @@ void VideoRender::drawFrame(AVFrame *frame) {
     glBindBuffer(GL_ARRAY_BUFFER, frameVBO);
     
     GLfloat ratio = 1.0 * frame->width / frame->linesize[0];
+    
+    // 这里重置vertices是为了裁剪掉frame多余的空白区域
+    GLfloat vertices[] = {
+        -1.0f, -1.0f, 0.0f, 0.0f,       1.0f, 0.0f,       0.5f,  0.0f,       0.25f,
+         1.0f, -1.0f, 0.0f, 1.0f*ratio, 1.0f, 0.5f*ratio, 0.5f,  0.5f*ratio, 0.25f,
+        -1.0f,  1.0f, 0.0f, 0.0f,       0.5f, 0.0f,       0.25f, 0.0f,       0.0f,
+         1.0f,  1.0f, 0.0f, 1.0f*ratio, 0.5f, 0.5f*ratio, 0.25f, 0.5f*ratio, 0.0f,
+    };
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    
     if (VideoRenderConfig::shareInstance()->applyFourGridEffect) {
-        GLfloat vertices1[] = {
-            -1.0f, 0.0f, 0.0f, 0.0f,       1.0f, 0.0f,       0.5f,  0.0f,       0.25f,
-             0.0f, 0.0f, 0.0f, 1.0f*ratio, 1.0f, 0.5f*ratio, 0.5f,  0.5f*ratio, 0.25f,
-            -1.0f, 1.0f, 0.0f, 0.0f,       0.5f, 0.0f,       0.25f, 0.0f,       0.0f,
-             0.0f, 1.0f, 0.0f, 1.0f*ratio, 0.5f, 0.5f*ratio, 0.25f, 0.5f*ratio, 0.0f,
-        };
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices1), vertices1, GL_STATIC_DRAW);
+        
+        GLint halfWidth = _backingWidth / 2;
+        GLint halfHeight = _backingHeight / 2;
+        
+        glViewport(0, halfHeight, halfWidth, halfHeight);
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+        glViewport(halfWidth, halfHeight, halfWidth, halfHeight);
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+        glViewport(0, 0, halfWidth, halfHeight);
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+        glViewport(halfWidth, 0, halfWidth, halfHeight);
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
         
-        GLfloat vertices2[] = {
-            0.0f, 0.0f, 0.0f, 0.0f,       1.0f, 0.0f,       0.5f,  0.0f,       0.25f,
-            1.0f, 0.0f, 0.0f, 1.0f*ratio, 1.0f, 0.5f*ratio, 0.5f,  0.5f*ratio, 0.25f,
-            0.0f, 1.0f, 0.0f, 0.0f,       0.5f, 0.0f,       0.25f, 0.0f,       0.0f,
-            1.0f, 1.0f, 0.0f, 1.0f*ratio, 0.5f, 0.5f*ratio, 0.25f, 0.5f*ratio, 0.0f,
-        };
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices2), vertices2, GL_STATIC_DRAW);
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-        
-        GLfloat vertices3[] = {
-            -1.0f, -1.0f, 0.0f, 0.0f,       1.0f, 0.0f,       0.5f,  0.0f,       0.25f,
-             0.0f, -1.0f, 0.0f, 1.0f*ratio, 1.0f, 0.5f*ratio, 0.5f,  0.5f*ratio, 0.25f,
-            -1.0f,  0.0f, 0.0f, 0.0f,       0.5f, 0.0f,       0.25f, 0.0f,       0.0f,
-             0.0f,  0.0f, 0.0f, 1.0f*ratio, 0.5f, 0.5f*ratio, 0.25f, 0.5f*ratio, 0.0f,
-        };
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices3), vertices3, GL_STATIC_DRAW);
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-        
-        GLfloat vertices4[] = {
-            0.0f, -1.0f, 0.0f, 0.0f,       1.0f, 0.0f,       0.5f,  0.0f,       0.25f,
-            1.0f, -1.0f, 0.0f, 1.0f*ratio, 1.0f, 0.5f*ratio, 0.5f,  0.5f*ratio, 0.25f,
-            0.0f,  0.0f, 0.0f, 0.0f,       0.5f, 0.0f,       0.25f, 0.0f,       0.0f,
-            1.0f,  0.0f, 0.0f, 1.0f*ratio, 0.5f, 0.5f*ratio, 0.25f, 0.5f*ratio, 0.0f,
-        };
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices4), vertices4, GL_STATIC_DRAW);
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+        glViewport(0, 0, _backingWidth, _backingHeight); //为了不影响后面贴纸文字的添加需要还原
     } else {
-        GLfloat vertices[] = {
-            -1.0f, -1.0f, 0.0f, 0.0f,       1.0f, 0.0f,       0.5f,  0.0f,       0.25f,
-             1.0f, -1.0f, 0.0f, 1.0f*ratio, 1.0f, 0.5f*ratio, 0.5f,  0.5f*ratio, 0.25f,
-            -1.0f,  1.0f, 0.0f, 0.0f,       0.5f, 0.0f,       0.25f, 0.0f,       0.0f,
-             1.0f,  1.0f, 0.0f, 1.0f*ratio, 0.5f, 0.5f*ratio, 0.25f, 0.5f*ratio, 0.0f,
-        };
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     }
     
