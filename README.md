@@ -6,3 +6,5 @@
 
 
 ![7341716376219_ pic](https://github.com/wuzhantu/TuVideoEdit/assets/15224179/6e0ca8b6-26c8-4f89-a6da-dd6279d0afca)
+
+Android版本：https://github.com/wuzhantu/WuVideoEdit
