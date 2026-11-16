@@ -248,6 +248,7 @@ using namespace std;
     
     __weak EditViewController *weakSelf = self;
     
+    // 当前位置离已解码区间的左边界不到 60 格，而且左边还没到 0。于是再往左解 30 格，范围是 [decodedStartRow - 30, decodedStartRow - 1]，解完把左边界左移 30。
     if (decodedStartRow + 60 > seekRow && decodedStartRow > 0) {
         int start = MAX(self->decodedStartRow - 30, 0);
         int end = decodedStartRow - 1;
@@ -264,6 +265,7 @@ using namespace std;
         decodedStartRow = MAX(self->decodedStartRow - 30, 0);
     }
 
+    // 当前位置离已解码区间的右边界不到 60 格，而且右边还没到最后一格。于是再往右解 30 格，范围是 [decodedEndRow + 1, decodedEndRow + 30]，上限 241，然后把右边界右移 30。
     if (seekRow + 60 > decodedEndRow && decodedEndRow < 241) {
         int start = self->decodedEndRow + 1;
         int end = MIN(self->decodedEndRow + 30, 241);
